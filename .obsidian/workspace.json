@@ -1,0 +1,244 @@
+{
+  "main": {
+    "id": "14a27ffcea404291",
+    "type": "split",
+    "children": [
+      {
+        "id": "b641fedac8743da6",
+        "type": "tabs",
+        "dimension": 55.69823434991974,
+        "children": [
+          {
+            "id": "fb08f6fcfda1f1e4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part3-并发编程/14-线程池.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "14-线程池"
+            }
+          }
+        ]
+      },
+      {
+        "id": "81a137d94c9223cb",
+        "type": "tabs",
+        "dimension": 44.301765650080256,
+        "children": [
+          {
+            "id": "c141ee3c97213525",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6853ad9bf3dea096",
+    "type": "split",
+    "children": [
+      {
+        "id": "de596051405a5b5e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b4d1a89786461ecf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "26dab8c4498f9323",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "666f8a90341338fa",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 237.5
+  },
+  "right": {
+    "id": "098b4bc6812c5b3e",
+    "type": "split",
+    "children": [
+      {
+        "id": "d4d68dcff071d734",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "90bdd0d32b081626",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "02-面向对象 的反向链接列表"
+            }
+          },
+          {
+            "id": "b7711579826f3eda",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "02-面向对象 的出链列表"
+            }
+          },
+          {
+            "id": "a9b33545876cc7f5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "fa7ecbc2e475dc8d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "72f72cab331866bf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "02-面向对象 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "fb08f6fcfda1f1e4",
+  "lastOpenFiles": [
+    "java-knowledge-graph-v2/Part3-并发编程/15-并发容器.md",
+    "~$库系统与应用实验报告（2025-2026-2）.doc",
+    "数据库系统与应用实验报告（2025-2026-2）.doc",
+    "java-knowledge-graph-v2/Part4-锁机制/18-锁分类与锁升级.md",
+    "java-knowledge-graph-v2/Part3-并发编程/12-synchronized与CAS.md",
+    "java-knowledge-graph-v2/Part4-锁机制/19-各类锁对比.md",
+    "java-knowledge-graph-v2/Part6-存储层/27-MySQL-存储引擎与索引.md",
+    "java-knowledge-graph-v2/Part6-存储层/28-MySQL-事务与MVCC.md",
+    "java-knowledge-graph-v2/Part6-存储层/29-MySQL-锁与调优.md",
+    "java-knowledge-graph-v2/Part5-Spring/26-循环依赖.md",
+    "java-knowledge-graph-v2/Part5-Spring/25-事务.md",
+    "java-knowledge-graph-v2/Part5-Spring/24-SpringBoot.md",
+    "java-knowledge-graph-v2/Part5-Spring/23-SpringMVC.md",
+    "java-knowledge-graph-v2/Part7-中间件/35-Kafka架构.md",
+    "java-knowledge-graph-v2/Part8-架构/39-限流熔断降级.md",
+    "java-knowledge-graph-v2/Part8-架构/40-分布式理论与事务.md",
+    "java-knowledge-graph-v2/Part8-架构/41-系统设计.md",
+    "java-knowledge-graph-v2/00-java.md",
+    "java-knowledge-graph-v2/Part3-并发编程/11-JMM与volatile.md",
+    "java-knowledge-graph-v2/Part3-并发编程/14-线程池.md",
+    "java-knowledge-graph-v2/Part1-Java基础/01-数据类型与String.md",
+    "Agent/7-项目表达.md",
+    "Agent/5-RAG与Memory.md",
+    "Agent/0-AI基础知识详解.md",
+    "java-knowledge-graph-v3/Stage2-核心深度/M6-Spring深度.md",
+    "java-knowledge-graph-v3/Stage2-核心深度/M3-并发与锁深度.md",
+    "java-knowledge-graph-v3/Stage2-核心深度/M2-JVM深度.md",
+    "个人简历.pdf",
+    "java-knowledge-graph",
+    "Agent与AI工程化/Agent与AI工程化",
+    "Agent与AI工程化/知识图谱",
+    "Agent",
+    "java面试指北",
+    "java-knowledge-graph-v3/Stage6-图谱融合",
+    "java-knowledge-graph-v3/Stage5-面试体系"
+  ]
+}
