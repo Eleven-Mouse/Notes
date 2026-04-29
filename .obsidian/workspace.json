@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java-knowledge-graph-v2/Part3-并发编程/11-JMM与volatile.md",
+                "file": "java-knowledge-graph-v2/Part3-并发编程/10-线程基础.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "11-JMM与volatile"
+              "title": "10-线程基础"
             }
           }
         ]
@@ -217,23 +217,24 @@
   },
   "active": "86bbc7a08397ca09",
   "lastOpenFiles": [
-    "java-knowledge-graph-v2/Part3-并发编程/10-线程基础.md",
+    "java-knowledge-graph-v2/Part3-并发编程/14-线程池.md",
+    "java-knowledge-graph-v2/Part3-并发编程/13-AQS与Lock.md",
+    "java-knowledge-graph-v2/Part3-并发编程/11-JMM与volatile.md",
     "java-knowledge-graph-v2/Part3-并发编程/15-并发容器.md",
+    "java-knowledge-graph-v2/Part3-并发编程/16-ThreadLocal.md",
+    "java-knowledge-graph-v2/Part4-锁机制/18-锁分类与锁升级.md",
+    "java-knowledge-graph-v2/Part3-并发编程/12-synchronized与CAS.md",
+    "java-knowledge-graph-v2/Part3-并发编程/10-线程基础.md",
     "java-knowledge-graph-v2/Part1-Java基础/05-异常体系与注解.md",
     "java-knowledge-graph-v2/Part4-锁机制/19-各类锁对比.md",
     "java-knowledge-graph-v2/Part1-Java基础/03-泛型与反射.md",
     "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
     "未命名.canvas",
-    "java-knowledge-graph-v2/Part3-并发编程/16-ThreadLocal.md",
-    "java-knowledge-graph-v2/Part3-并发编程/13-AQS与Lock.md",
-    "java-knowledge-graph-v2/Part3-并发编程/12-synchronized与CAS.md",
-    "java-knowledge-graph-v2/Part4-锁机制/18-锁分类与锁升级.md",
     "java-knowledge-graph-v2/Part4-锁机制/20-分布式锁.md",
     "java-knowledge-graph-v2/Part1-Java基础/01-数据类型与String.md",
     "java-knowledge-graph-v2/Part1-Java基础/04-集合框架.md",
     "java-knowledge-graph-v2/Part2-JVM/06-内存结构.md",
     "hhh.md",
-    "java-knowledge-graph-v2/Part3-并发编程/14-线程池.md",
     "~$库系统与应用实验报告（2025-2026-2）.doc",
     "数据库系统与应用实验报告（2025-2026-2）.doc",
     "java-knowledge-graph-v2/Part6-存储层/27-MySQL-存储引擎与索引.md",
@@ -245,7 +246,6 @@
     "java-knowledge-graph-v2/Part5-Spring/23-SpringMVC.md",
     "java-knowledge-graph-v2/Part7-中间件/35-Kafka架构.md",
     "java-knowledge-graph-v2/Part8-架构/39-限流熔断降级.md",
-    "java-knowledge-graph-v2/Part8-架构/40-分布式理论与事务.md",
     "个人简历.pdf",
     "java-knowledge-graph",
     "Agent与AI工程化/Agent与AI工程化",
