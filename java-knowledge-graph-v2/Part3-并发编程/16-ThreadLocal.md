@@ -59,8 +59,8 @@ Thread 对象
     │               ├── Entry extends WeakReference<ThreadLocal<?>>
     │               │       │
     │               │       ├── key   = ThreadLocal 对象（弱引用）←┐
-    │               │       └── value = 线程私有数据（强引用）     │
-    │               │                                             │
+    │               │       └── value = 线程私有数据（强引用）      │
+    │               │                                            │
     │               └── ... 更多 Entry                            │
     │                                                             │
     └── ...                                                       │
@@ -76,7 +76,7 @@ ThreadLocal 对象 ───────────────弱引用──�
 
 ---
 
-### 2.3 ThreadLocal get/set/remove 流程
+### 2.3 ThreadLocal  get/set/remove 流程
 
 #### set 流程
 ```
