@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java-knowledge-graph-v2/Part2-JVM/08-垃圾回收.md",
+                "file": "Agent/1-Agent基础认知.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "08-垃圾回收"
+              "title": "1-Agent基础认知"
             }
           }
         ]
@@ -215,11 +215,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "86bbc7a08397ca09",
+  "active": "c141ee3c97213525",
   "lastOpenFiles": [
+    "Agent/1-Agent基础认知.md",
+    "Agent/0-AI基础知识详解.md",
+    "java-knowledge-graph-v2/Part2-JVM/08-垃圾回收.md",
     "java-knowledge-graph-v2/Part2-JVM/06-内存结构.md",
     "java-knowledge-graph-v2/Part2-JVM/07-类加载机制.md",
-    "java-knowledge-graph-v2/Part2-JVM/08-垃圾回收.md",
     "java-knowledge-graph-v2/Part3-并发编程/11-JMM与volatile.md",
     "java-knowledge-graph-v2/Part3-并发编程/10-线程基础.md",
     "java-knowledge-graph-v2/Part3-并发编程/14-线程池.md",
@@ -244,8 +246,6 @@
     "java-knowledge-graph-v2/Part6-存储层/29-MySQL-锁与调优.md",
     "java-knowledge-graph-v2/Part5-Spring/26-循环依赖.md",
     "java-knowledge-graph-v2/Part5-Spring/25-事务.md",
-    "java-knowledge-graph-v2/Part5-Spring/24-SpringBoot.md",
-    "java-knowledge-graph-v2/Part5-Spring/23-SpringMVC.md",
     "个人简历.pdf",
     "java-knowledge-graph",
     "Agent与AI工程化/Agent与AI工程化",
