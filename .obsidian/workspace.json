@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Agent/0-AI基础知识详解.md",
+                "file": "Agent/2-Agent架构拆解.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-AI基础知识详解"
+              "title": "2-Agent架构拆解"
             }
           }
         ]
@@ -217,10 +217,11 @@
   },
   "active": "86bbc7a08397ca09",
   "lastOpenFiles": [
-    "Agent/4-Agent进阶.md",
+    "Agent/5-多Agent系统.md",
     "Agent/2-Agent核心机制.md",
     "Agent/1-Agent基础认知.md",
     "Agent/0-AI基础知识详解.md",
+    "Agent/4-Agent进阶.md",
     "java-knowledge-graph-v2/Part2-JVM/08-垃圾回收.md",
     "java-knowledge-graph-v2/Part2-JVM/06-内存结构.md",
     "java-knowledge-graph-v2/Part2-JVM/07-类加载机制.md",
@@ -245,7 +246,6 @@
     "数据库系统与应用实验报告（2025-2026-2）.doc",
     "java-knowledge-graph-v2/Part6-存储层/27-MySQL-存储引擎与索引.md",
     "java-knowledge-graph-v2/Part6-存储层/28-MySQL-事务与MVCC.md",
-    "java-knowledge-graph-v2/Part6-存储层/29-MySQL-锁与调优.md",
     "个人简历.pdf",
     "java-knowledge-graph",
     "Agent与AI工程化/Agent与AI工程化",
