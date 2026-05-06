@@ -1,526 +1,700 @@
-# Stage 3：LangChain 全链路（详细版）
+# 第三阶段：LangChain 架构拆解
 
-> 目标：面试时能讲"我用 LangChain 做过什么"，讲清每个模块的原理、版本演进和工程坑。
+> **目标：** 理解 LangChain 的设计思想，不只是会用，更要懂为什么这样设计。
+> **学完本阶段，你应该能看懂 LangChain 源码，并知道它背后每个设计决策的原因。**
 
 ---
 
 ## 1. LangChain 是什么
 
-### 1.1 一句话定义
+### 1.1 一句话概括
 
-> **LangChain 是一个 LLM 应用编排框架，本质是"把 LLM 调用 + 工具 + 记忆 + 数据源 串起来的胶水层"。**
+> **LangChain 是一个"Agent 编排框架"——它帮你把 LLM + Tools + Memory 串起来，让开发 Agent 变得像搭积木一样。**
 
-### 1.2 为什么要用 LangChain（先理解痛点）
+### 1.2 为什么需要框架
+
+在第二阶段我们已经手写了 Agent，你会发现核心逻辑其实就几十行。那为什么还需要 LangChain？
 
 ```
-没有 LangChain 时，你做一个 Agent 需要自己写：
+手写 Agent 的痛点：
+1. 每次都要写 Tool 解析逻辑（正则 / JSON 解析）
+2. Memory 管理要自己实现（滑动窗口、摘要压缩）
+3. 不同 LLM 的 API 格式不一样（OpenAI vs Claude vs 本地模型）
+4. 错误处理很繁琐（工具不存在、参数错误、LLM 格式不对）
+5. 调试困难（不知道 LLM 中间在想什么）
 
-1. LLM 调用封装（处理不同模型的API差异）
-2. Prompt 模板管理（字符串拼接 + 变量注入）
-3. 对话历史管理（截断、摘要、Token计数）
-4. 工具调用的 ReAct 循环（while + JSON解析 + 错误处理）
-5. RAG 检索流程（文档分片 + Embedding + 向量库 + 拼接）
-6. 链式调用编排（上一个组件的输出 = 下一个组件的输入）
+LangChain 做的事：
+1. 统一的工具调用接口（不管底层是 OpenAI 还是 Claude）
+2. 内置 Memory 管理（多种策略）
+3. 内置 Agent 类型（ReAct、Plan-Execute 等）
+4. 内置调试和日志（LangSmith）
+5. 丰富的工具生态（搜索、数据库、代码执行...）
 
-→ 这些都是重复的"样板代码"，LangChain 帮你统一封装了
+本质：LangChain 把你在第二阶段手写的那些"胶水代码"标准化了。
 ```
 
-### 1.3 Java 类比
+### 1.3 LangChain 的设计哲学
 
-> **LangChain 之于 LLM 应用，就像 Spring Boot 之于 Java 后端。**
-> Spring Boot 把 IOC + AOP + Web + 数据源编排在一起；
-> LangChain 把 LLM + Tool + Memory + Retriever 编排在一起。
+```
+LangChain 的核心设计思想：
+
+1. 模块化（Modularity）
+   → 每个组件（LLM / Tool / Memory / Chain）都是独立的，可以单独替换
+
+2. 可组合性（Composability）
+   → 组件之间通过统一接口连接，像乐高一样拼装
+
+3. 抽象但不隐藏（Transparent Abstraction）
+   → 封装了复杂性，但你仍然能看到和控制底层细节
+
+类比：
+  LangChain 之于 Agent 开发 ≈ Spring 之于后端开发
+  → Spring 封装了依赖注入、AOP、MVC，但你不理解原理也能用
+  → 但理解原理后，你才能用好、排查问题、做架构设计
+```
 
 ---
 
-## 2. LangChain 核心模块全景
+## 2. LangChain 核心模块
 
 ```
-┌────────────────────────────────────────────────────────────┐
-│                  LangChain 模块全景图                        │
-│                                                             │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │               核心层（langchain-core）                  │  │
-│  │  Model │ Prompt │ Output Parser │ LCEL（管道语法）     │  │
-│  └──────────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │               Agent 层（langchain）                     │  │
-│  │  Agents │ Chains │ Memory │ Tools                     │  │
-│  └──────────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │               数据层（langchain-community）             │  │
-│  │  Retriever │ Document Loaders │ Vector Stores         │  │
-│  └──────────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │               编排层（langgraph）                       │  │
-│  │  StateGraph（有状态图编排，支持分支/循环/并行）          │  │
-│  └──────────────────────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │               可观测性（langsmith）                     │  │
-│  │  Tracing │ Evaluation │ Dataset Management            │  │
-│  └──────────────────────────────────────────────────────┘  │
-└────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                LangChain 核心架构                         │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │                 Chains（链）                       │    │
+│  │  把多个组件串成一条流水线                            │    │
+│  │  LLMChain = PromptTemplate + LLM + OutputParser  │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │                 Agents（智能体）                    │    │
+│  │  能自主决策的执行单元                               │    │
+│  │  AgentExecutor = Agent + Tools + 循环逻辑          │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │                 Tools（工具）                       │    │
+│  │  标准化的外部能力接口                               │    │
+│  │  name + description + func + args_schema          │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │                 Memory（记忆）                      │    │
+│  │  多种记忆策略                                      │    │
+│  │  Buffer / Summary / VectorStore                   │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │              PromptTemplate（模板）                 │    │
+│  │  参数化的 Prompt 管理                               │    │
+│  │  变量替换 + 格式控制                                │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+│  ┌──────────────────────────────────────────────────┐    │
+│  │            OutputParsers（输出解析）                │    │
+│  │  把 LLM 的文本输出转成结构化数据                     │    │
+│  │  JSON 解析 / 列表提取 / Pydantic 模型              │    │
+│  └──────────────────────────────────────────────────┘    │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
 ```
 
-### 2.1 Model（模型层）
+### 2.1 PromptTemplate——Prompt 的模板引擎
 
-**是什么：** 对不同 LLM 的统一封装，一套接口可以切换底层模型。
-
-**Java 类比：** JDBC——统一接口，底层可以接 MySQL / PostgreSQL / Oracle。
+**本质：** PromptTemplate 就是一个字符串模板引擎，类似 Python 的 `str.format()`，但专门为 LLM Prompt 设计。
 
 ```python
-from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
+"""
+PromptTemplate：把 Prompt 从硬编码变成可复用的模板
+"""
 
-# 换模型只改这一行
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
-# llm = ChatAnthropic(model="claude-sonnet-4-20250514")
+from langchain.prompts import PromptTemplate, ChatPromptTemplate
 
-# 调用方式完全一致
-response = llm.invoke("什么是JVM？")
-```
+# ---- 基础用法 ----
 
-**Model 层的两个核心抽象：**
+# 硬编码的 Prompt（不好维护）
+prompt = f"请用{style}风格，翻译以下文本：{text}"
 
-| 抽象 | 说明 | Java 类比 |
-|------|------|----------|
-| `BaseLLM` | 纯文本输入输出 | `HttpClient` |
-| `BaseChatModel` | 消息列表输入（支持 system/user/assistant/tool 角色） | `HttpClient` + 结构化请求体 |
-
-### 2.2 Prompt Template（提示词模板）
-
-**是什么：** 管理 Prompt 的模板引擎，支持变量注入和消息组合。
-
-**Java 类比：** Thymeleaf / `String.format()`
-
-```python
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-
-# 基础模板
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "你是一个{role}，擅长{skill}。回答要简洁。"),
-    ("human", "{question}")
-])
-
-# 带历史对话的模板（Memory 集成）
-prompt_with_history = ChatPromptTemplate.from_messages([
-    ("system", "你是一个客服助手"),
-    MessagesPlaceholder("history"),  # 对话历史占位符
-    ("human", "{question}")
-])
-```
-
-### 2.3 Output Parser（输出解析器）
-
-**是什么：** 把 LLM 的文本输出转换成结构化数据。
-
-```python
-from langchain_core.output_parsers import StrOutputParser, JsonOutputParser
-
-# 简单文本解析
-str_parser = StrOutputParser()
-
-# JSON 解析（自动在 Prompt 中加入 JSON 格式要求）
-class OrderInfo(BaseModel):
-    order_id: str = Field(description="订单号")
-    status: str = Field(description="订单状态")
-
-json_parser = JsonOutputParser(pydantic_object=OrderInfo)
-
-# 使用
-chain = prompt | llm | json_parser
-result = chain.invoke({"question": "查一下订单123456"})
-# result = {"order_id": "123456", "status": "已发货"}
-```
-
-### 2.4 LCEL（LangChain Expression Language）—— 核心！
-
-**是什么：** LangChain v0.2 引入的管道语法，用 `|` 操作符串联组件。
-
-```python
-# LCEL 管道语法
-chain = prompt | llm | output_parser
-
-# 等价于 Java：
-# String result = outputParser.parse(llm.invoke(prompt.format(params)))
-```
-
-**LCEL 的三大能力：**
-
-| 能力 | 说明 | Java 类比 |
-|------|------|----------|
-| **Streaming** | 流式输出，边生成边返回 | `Flux<String>` (WebFlux) |
-| **Batch** | 批量处理多个输入 | `parallelStream()` |
-| **Async** | 异步执行 | `CompletableFuture` |
-
-```python
-# 流式输出
-for chunk in chain.stream({"question": "什么是JVM？"}):
-    print(chunk, end="", flush=True)
-
-# 批量处理
-results = chain.batch([
-    {"question": "什么是JVM？"},
-    {"question": "什么是GC？"},
-])
-
-# 异步
-result = await chain.ainvoke({"question": "什么是JVM？"})
-```
-
-**LCEL 的 Runnable 接口（类比 Java 的 Function）：**
-
-```java
-// Java 等价抽象
-@FunctionalInterface
-public interface Runnable<I, O> {
-    O invoke(I input);
-    default Flux<O> stream(I input) { ... }
-    default List<O> batch(List<I> inputs) { ... }
-}
-```
-
-### 2.5 Chains（链）
-
-**是什么：** 将多个组件串起来，形成处理流水线。
-
-**版本演进（面试展示知识面）：**
-
-| 版本 | 方式 | 状态 |
-|------|------|------|
-| v0.1 | `LLMChain(llm=llm, prompt=prompt)` | **已废弃** |
-| v0.2+ | LCEL: `prompt \| llm \| parser` | **推荐** |
-| v0.3+ | LangGraph `StateGraph` 做复杂编排 | **最新** |
-
-**常见 Chain 类型：**
-
-| Chain | 用途 | Java 类比 |
-|-------|------|----------|
-| LLM Chain | 基础 LLM 调用 | 单次 Service 调用 |
-| Sequential Chain | 多个 Chain 串行 | 责任链 |
-| Router Chain | 根据输入选择子链 | `@RequestMapping` 路由 |
-
-### 2.6 Agents（智能体）
-
-**是什么：** LangChain 中的 Agent 实现，内置了 ReAct 循环。
-
-```python
-from langchain.agents import create_tool_calling_agent, AgentExecutor
-
-# 定义工具
-@tool
-def query_order(order_id: str) -> str:
-    """根据订单号查询订单详情"""
-    return orderService.query(order_id)
-
-@tool
-def query_logistics(order_id: str) -> str:
-    """查询订单的物流信息"""
-    return logisticsService.track(order_id)
-
-tools = [query_order, query_logistics]
-
-# 创建 Agent
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "你是客服助手，可以查询订单和物流"),
-    ("human", "{input}"),
-    ("placeholder", "{agent_scratchpad}"),  # Agent 中间步骤
-])
-
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(
-    agent=agent,
-    tools=tools,
-    verbose=True,               # 打印每步日志
-    max_iterations=8,           # 最大迭代次数
-    handle_parsing_errors=True  # 解析错误自动处理
+# 用 PromptTemplate（可复用、可管理）
+template = PromptTemplate.from_template(
+    "请用{style}风格，翻译以下文本：{text}"
 )
 
-result = agent_executor.invoke({"input": "查一下订单123456到哪了"})
+# 使用
+prompt = template.format(style="幽默", text="Hello World")
+print(prompt)
+# → "请用幽默风格，翻译以下文本：Hello World"
+
+# ---- ChatPromptTemplate（对话场景更常用）----
+
+chat_template = ChatPromptTemplate.from_messages([
+    ("system", "你是一个{role}，擅长{skill}"),
+    ("human", "{input}")
+])
+
+messages = chat_template.format_messages(
+    role="Python 专家",
+    skill="代码审查",
+    input="帮我看看这段代码有没有 bug"
+)
 ```
 
-**AgentExecutor 关键参数：**
+**为什么需要 PromptTemplate？**
 
-| 参数 | 说明 | 推荐值 |
-|------|------|--------|
-| `max_iterations` | 最大循环次数 | 5~10 |
-| `max_execution_time` | 最大执行时间 | 60s |
-| `handle_parsing_errors` | 解析错误处理 | True |
-| `verbose` | 详细日志 | 开发True/生产False |
-| `return_intermediate_steps` | 返回中间步骤 | 调试时True |
+```
+1. 可复用：同一个模板，不同参数 → 不同 Prompt
+2. 可管理：Prompt 集中管理，不用散落在代码各处
+3. 可测试：可以单独测试 Prompt 模板，不用调 LLM
+4. 可版本化：Prompt 可以独立版本控制
 
-### 2.7 Memory（记忆）
-
-**Memory 类型详解：**
-
-| 类型 | Token 消耗 | 适合场景 | Java 类比 |
-|------|----------|---------|----------|
-| `ConversationBufferMemory` | 高（全量） | 短对话 | `ArrayList<Message>` |
-| `ConversationBufferWindowMemory` | 低 | 长对话 | `RingBuffer` |
-| `ConversationSummaryMemory` | 中 | 需要完整上下文 | Redis存摘要 |
-| `VectorStoreRetrieverMemory` | 低 | 跨会话长期记忆 | ES 语义检索 |
-
-```python
-from langchain.memory import ConversationBufferWindowMemory
-
-memory = ConversationBufferWindowMemory(k=5, return_messages=True)
-# 只保留最近 5 轮对话，类比 Java 的 RingBuffer
+类比：
+  PromptTemplate 之于 Prompt ≈ SQL 模板引擎 之于 SQL
+  把硬编码的字符串变成参数化的模板
 ```
 
-### 2.8 Retriever（检索器—— RAG 核心）
+### 2.2 OutputParser——把 LLM 输出变成结构化数据
+
+**本质：** LLM 返回的是字符串，OutputParser 把它解析成 Python 对象。
 
 ```python
-from langchain_community.vectorstores import Milvus
-from langchain_openai import OpenAIEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+"""
+OutputParser：把 LLM 的文本输出转成结构化数据
+"""
 
-# RAG 完整流程
-# 1. 分片
-splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
-chunks = splitter.split_documents(docs)
+from langchain.output_parsers import PydanticOutputParser
+from pydantic import BaseModel, Field
 
-# 2. 向量化并存储
-vectorstore = Milvus.from_documents(chunks, OpenAIEmbeddings())
+# 定义期望的输出结构
+class MovieRecommendation(BaseModel):
+    title: str = Field(description="电影名称")
+    year: int = Field(description="上映年份")
+    reason: str = Field(description="推荐理由")
+    rating: float = Field(description="评分 1-10")
 
-# 3. 创建检索器
-retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": 5})
+# 创建解析器
+parser = PydanticOutputParser(pydantic_object=MovieRecommendation)
+
+# parser 会自动生成格式说明，拼入 Prompt
+format_instructions = parser.get_format_instructions()
+print(format_instructions)
+# → "请按以下 JSON 格式输出：{"title": ..., "year": ..., ...}"
+
+# 使用
+llm_output = '{"title": "盗梦空间", "year": 2010, "reason": "烧脑", "rating": 9.3}'
+result = parser.parse(llm_output)
+print(result.title)    # "盗梦空间"
+print(result.year)     # 2010
+print(result.rating)   # 9.3
+```
+
+**为什么需要 OutputParser？**
+
+```
+因为 LLM 输出的是文本，但程序需要结构化数据。
+
+流程：
+  程序定义结构 → OutputParser 生成格式说明 → 拼入 Prompt → LLM 按格式输出 → Parser 解析回 Python 对象
+
+类比：
+  OutputParser ≈ JSON.parse()，但多了"告诉 LLM 怎么输出"的部分
+```
+
+### 2.3 Chains——组件的流水线
+
+**本质：** Chain 就是把多个组件串成一条流水线——上一个的输出是下一个的输入。
+
+```
+┌──────────────────────────────────────────────────────────┐
+│                  Chain 的本质                              │
+│                                                          │
+│  最基础的 Chain：LLMChain                                  │
+│                                                          │
+│  PromptTemplate → LLM → OutputParser                     │
+│       ↓             ↓          ↓                         │
+│  组装 Prompt    调LLM拿结果  解析成结构化数据               │
+│                                                          │
+│  更复杂的 Chain：SequentialChain                          │
+│                                                          │
+│  Chain1 → Chain2 → Chain3 → ... → 最终结果               │
+│  (翻译)   (摘要)   (分析)                                 │
+│                                                          │
+│  本质就是 Pipeline 模式 / 责任链模式                       │
+└──────────────────────────────────────────────────────────┘
+```
+
+```python
+"""
+Chain：把组件串成流水线
+"""
+
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain_openai import ChatOpenAI
+
+# 创建 LLM
+llm = ChatOpenAI(model="gpt-4o", temperature=0)
+
+# 创建 Prompt 模板
+prompt = PromptTemplate.from_template(
+    "请用{style}风格，总结以下文本的要点：\n\n{text}"
+)
+
+# 创建 Chain（把 Prompt + LLM 串起来）
+chain = LLMChain(llm=llm, prompt=prompt)
+
+# 运行（自动走完 Prompt → LLM → 输出 的流水线）
+result = chain.run(style="简洁", text="LangChain 是一个...")
+print(result)
+```
+
+**LLMChain 内部执行流程：**
+
+```
+1. 接收参数：style="简洁", text="LangChain 是一个..."
+2. PromptTemplate 处理：替换变量 → 生成完整 Prompt
+3. 调 LLM：把 Prompt 发给 GPT-4o
+4. 返回 LLM 的输出
+
+就这几步。本质就是一个封装了 Prompt + LLM 的函数调用。
+```
+
+### 2.4 Tools——标准化的工具接口
+
+**本质：** Tool 把一个 Python 函数包装成 LLM 能理解的"工具描述"。
+
+```python
+"""
+Tools：把 Python 函数包装成 LLM 能调用的工具
+"""
+
+from langchain.tools import tool
+from pydantic import BaseModel, Field
+
+# ---- 方式 1：用装饰器（最简单）----
+
+@tool
+def search_web(query: str) -> str:
+    """在互联网上搜索信息。当需要查找最新信息时使用。"""
+    return f"搜索结果：{query} 的相关信息..."
+
+@tool
+def calculate(expression: str) -> str:
+    """执行数学计算。支持加减乘除和括号。"""
+    try:
+        return str(eval(expression, {"__builtins__": {}}, {}))
+    except Exception as e:
+        return f"计算错误：{e}"
+
+# LangChain 自动从函数签名和 docstring 生成工具描述
+print(search_web.name)         # "search_web"
+print(search_web.description)  # "在互联网上搜索信息..."
+print(search_web.args)         # {"query": {"type": "string"}}
+
+
+# ---- 方式 2：用 Pydantic 定义参数（更精确）----
+
+class WeatherInput(BaseModel):
+    city: str = Field(description="城市名，如'北京'")
+    date: str = Field(default="today", description="日期，默认今天")
+
+@tool("get_weather", args_schema=WeatherInput)
+def get_weather(city: str, date: str = "today") -> str:
+    """查询指定城市和日期的天气。当用户问天气相关问题时使用。"""
+    return f"{city} {date}: 晴 25°C"
+
+# 这样 LLM 就知道每个参数的含义和类型
+
+
+# ---- 工具列表（传给 Agent 用）----
+tools = [search_web, calculate, get_weather]
+```
+
+**Tool 的设计原理：**
+
+```
+Tool 包装了三个信息：
+
+1. name：工具名（给 LLM 看的标识符）
+   → "search_web"
+
+2. description：描述（告诉 LLM 这个工具能做什么、什么时候该用）
+   → "在互联网上搜索信息。当需要查找最新信息时使用。"
+
+3. args_schema：参数定义（告诉 LLM 需要传什么参数）
+   → {"query": {"type": "string", "description": "搜索关键词"}}
+
+为什么需要这三个？
+→ 因为它们会被拼入 Prompt，LLM 根据这些信息决定：
+   1. 要不要用这个工具（看 description）
+   2. 怎么传参数（看 args_schema）
+```
+
+### 2.5 Memory——对话记忆管理
+
+```python
+"""
+LangChain Memory：多种记忆策略
+"""
+
+from langchain.memory import (
+    ConversationBufferMemory,      # 全量记忆
+    ConversationBufferWindowMemory, # 滑动窗口
+    ConversationSummaryMemory,      # 摘要压缩
+    VectorStoreRetrieverMemory,     # 向量检索
+)
+from langchain_openai import ChatOpenAI
+
+llm = ChatOpenAI(model="gpt-4o")
+
+# ---- 1. 全量记忆（最简单，但浪费 Token）----
+memory1 = ConversationBufferMemory()
+memory1.save_context({"input": "你好"}, {"output": "你好！"})
+memory1.save_context({"input": "我叫小明"}, {"output": "你好小明！"})
+print(memory1.load_memory_variables({}))
+# → 包含所有对话历史
+
+# ---- 2. 滑动窗口（只保留最近 K 轮）----
+memory2 = ConversationBufferWindowMemory(k=2)
+# 只保留最近 2 轮对话，超出的自动丢弃
+# 适合：长对话、Token 预算有限的场景
+
+# ---- 3. 摘要压缩（调 LLM 生成摘要）----
+memory3 = ConversationSummaryMemory(llm=llm)
+# 把旧对话压缩成摘要，节省 Token
+# 适合：超长对话
+
+# ---- 4. 向量检索记忆 ----
+# memory4 = VectorStoreRetrieverMemory(retriever=vectorstore.as_retriever())
+# 用语义相似度检索相关记忆
+# 适合：跨会话的长期记忆
 ```
 
 ---
 
-## 3. LangChain 执行流程（面试必讲）
+## 3. AgentExecutor——LangChain 的心脏
 
-### 3.1 Agent 完整调用链路
+### 3.1 AgentExecutor 是什么
+
+AgentExecutor 是 LangChain 中最核心的类——它就是那个 "while 循环"。
 
 ```
-用户输入："帮我查一下订单123456的物流状态"
-        │
-        ▼
-┌──────────────────────────────────────────────────┐
-│  1. Prompt Template                                │
-│     System指令 + 工具描述 + Memory + 用户输入      │
-│     + agent_scratchpad（中间步骤占位符）            │
-└──────────────────┬───────────────────────────────┘
-                   ▼
-┌──────────────────────────────────────────────────┐
-│  2. LLM 决策（第 1 次 API 调用）                    │
-│     返回 tool_calls: query_logistics({orderId})    │
-└──────────────────┬───────────────────────────────┘
-                   ▼
-┌──────────────────────────────────────────────────┐
-│  3. AgentExecutor 执行工具                         │
-│     Observation: "顺丰SF1234，已到北京分拣中心"      │
-└──────────────────┬───────────────────────────────┘
-                   ▼
-┌──────────────────────────────────────────────────┐
-│  4. LLM 决策（第 2 次 API 调用）                    │
-│     判断信息已足够 → Final Answer                   │
-└──────────────────┬───────────────────────────────┘
-                   ▼
-┌──────────────────────────────────────────────────┐
-│  5. Memory 更新 + 返回给用户                        │
-└──────────────────────────────────────────────────┘
+AgentExecutor = Agent + Tools + Memory + while 循环
+
+它做的事情和我们在第二阶段手写的一样：
+1. 把 Prompt + 工具描述 + Memory 拼好，发给 LLM
+2. 解析 LLM 的回复（调工具 or 最终回答）
+3. 如果调工具：执行 → 结果加入上下文 → 回到第 1 步
+4. 如果最终回答：返回
+
+区别是：AgentExecutor 做了大量工程化处理（错误重试、超时控制、回调等）
+```
+
+### 3.2 AgentExecutor 的内部执行流程
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│              AgentExecutor 内部执行流程                        │
+│                                                              │
+│  1. 初始化                                                    │
+│     ├── 加载 Agent（决定用哪种 Agent 类型：ReAct / OpenAI 等） │
+│     ├── 加载 Tools（注册工具列表）                             │
+│     └── 加载 Memory（初始化记忆）                              │
+│                                                              │
+│  2. 进入主循环（最多 max_iterations 次）                       │
+│     │                                                        │
+│     ├── 2.1 构建 Prompt                                      │
+│     │   ├── System Prompt（角色设定）                         │
+│     │   ├── Tool 描述（告诉 LLM 有哪些工具）                   │
+│     │   ├── Memory 上下文（对话历史）                          │
+│     │   ├── 用户输入                                          │
+│     │   └── Agent Scratchpad（之前步骤的记录）                 │
+│     │                                                        │
+│     ├── 2.2 调 LLM                                           │
+│     │   └── 返回 AgentAction（调工具）或 AgentFinish（完成）   │
+│     │                                                        │
+│     ├── 2.3 如果是 AgentAction（要调工具）                     │
+│     │   ├── 查找 Tool（根据名字）                              │
+│     │   ├── 校验参数                                          │
+│     │   ├── 执行 Tool                                         │
+│     │   ├── 记录结果到 Scratchpad                              │
+│     │   └── 回到 2.1（继续循环）                               │
+│     │                                                        │
+│     ├── 2.4 如果是 AgentFinish（任务完成）                     │
+│     │   ├── 保存到 Memory                                     │
+│     │   └── 返回最终结果                                       │
+│     │                                                        │
+│     └── 2.5 如果出错                                          │
+│         ├── 记录错误                                          │
+│         ├── 如果有 handle_parsing_errors → 继续               │
+│         └── 否则 → 抛异常                                     │
+│                                                              │
+│  3. 后处理                                                    │
+│     ├── 更新 Memory                                           │
+│     └── 触发回调（callbacks）                                  │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 3.3 完整的 LangChain Agent 示例
+
+```python
+"""
+完整的 LangChain Agent 示例
+展示：自定义 Tool + 构建 Agent + 执行任务
+"""
+
+from langchain.agents import (
+    AgentExecutor,
+    create_openai_tools_agent,
+)
+from langchain.tools import tool
+from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_openai import ChatOpenAI
+from langchain.memory import ConversationBufferMemory
+from pydantic import BaseModel, Field
+
+
+# ============================================================
+# 第一步：定义工具
+# ============================================================
+
+class SearchInput(BaseModel):
+    query: str = Field(description="搜索关键词")
+
+@tool("search", args_schema=SearchInput)
+def search(query: str) -> str:
+    """在互联网上搜索信息。当需要查找最新信息、事实、数据时使用此工具。"""
+    search_db = {
+        "LangChain": "LangChain 是用于构建 LLM 应用的开源框架，2022 年发布，支持 Python 和 JavaScript",
+        "Python": "Python 是一种高级编程语言，广泛用于 AI/ML、Web 开发、数据科学",
+        "Agent": "AI Agent 是能自主决策和调用工具的智能系统",
+    }
+    for key, val in search_db.items():
+        if key.lower() in query.lower():
+            return val
+    return f"搜索 '{query}' 未找到相关结果"
+
+
+class CalculatorInput(BaseModel):
+    expression: str = Field(description="数学表达式，如 '2+3*4'")
+
+@tool("calculator", args_schema=CalculatorInput)
+def calculator(expression: str) -> str:
+    """执行数学计算。当需要进行加减乘除等运算时使用此工具。"""
+    try:
+        allowed = set("0123456789+-*/.() ")
+        if not all(c in allowed for c in expression):
+            return "错误：表达式包含不允许的字符"
+        return str(eval(expression, {"__builtins__": {}}, {}))
+    except Exception as e:
+        return f"计算错误：{e}"
+
+
+class WeatherInput(BaseModel):
+    city: str = Field(description="城市名")
+
+@tool("get_weather", args_schema=WeatherInput)
+def get_weather(city: str) -> str:
+    """查询指定城市的天气。当用户询问天气、温度、是否下雨时使用此工具。"""
+    weather_data = {
+        "北京": "小雨 15°C 湿度80% 东北风3级",
+        "上海": "晴 22°C 湿度45% 东南风2级",
+        "深圳": "多云 28°C 湿度70% 南风1级",
+    }
+    return weather_data.get(city, f"{city}: 暂无天气数据")
+
+
+# ============================================================
+# 第二步：构建 Agent
+# ============================================================
+
+def create_agent():
+    """创建一个完整的 LangChain Agent"""
+
+    # 1. LLM
+    llm = ChatOpenAI(
+        model="gpt-4o",
+        temperature=0,  # Agent 场景用 0，减少随机性
+    )
+
+    # 2. 工具列表
+    tools = [search, calculator, get_weather]
+
+    # 3. Prompt（必须包含 agent_scratchpad）
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", """你是一个智能助手，可以使用工具来帮助用户。
+
+规则：
+1. 先思考，再行动
+2. 如果需要实时信息，使用搜索工具
+3. 如果需要计算，使用计算器
+4. 如果需要天气，使用天气查询
+5. 给出回答时要有理有据"""),
+        MessagesPlaceholder("chat_history"),  # 对话历史（Memory）
+        ("human", "{input}"),
+        MessagesPlaceholder("agent_scratchpad"),  # Agent 的推理记录
+    ])
+
+    # 4. Memory
+    memory = ConversationBufferMemory(
+        memory_key="chat_history",
+        return_messages=True,
+    )
+
+    # 5. 创建 Agent
+    agent = create_openai_tools_agent(
+        llm=llm,
+        tools=tools,
+        prompt=prompt,
+    )
+
+    # 6. 创建 AgentExecutor（核心：把 Agent + Tools + Memory 串起来）
+    agent_executor = AgentExecutor(
+        agent=agent,
+        tools=tools,
+        memory=memory,
+        verbose=True,           # 打印详细日志
+        max_iterations=6,       # 最多循环 6 次
+        handle_parsing_errors=True,  # 解析错误时不崩溃
+    )
+
+    return agent_executor
+
+
+# ============================================================
+# 第三步：使用 Agent
+# ============================================================
+
+# agent = create_agent()
+#
+# # 测试 1：简单查询（可能直接回答，不调工具）
+# result = agent.invoke({"input": "什么是 Python？"})
+#
+# # 测试 2：需要调工具
+# result = agent.invoke({"input": "北京天气怎么样？适合户外运动吗？"})
+#
+# # 测试 3：需要计算
+# result = agent.invoke({"input": "帮我算一下 (123 + 456) * 2"})
+#
+# # 测试 4：有记忆的对话
+# result1 = agent.invoke({"input": "我叫小明"})
+# result2 = agent.invoke({"input": "我叫什么？"})  # 应该记住"小明"
+```
+
+### 3.4 LangChain Agent 执行时发生了什么（一步步）
+
+```
+用户输入："北京天气怎么样？"
+
+第 1 步：AgentExecutor 拼装 Prompt
+  System: "你是一个智能助手..."
+  Tool 描述: "search: 搜索信息..."
+           "calculator: 数学计算..."
+           "get_weather: 查询天气..."
+  Chat History: （空，第一次对话）
+  Human: "北京天气怎么样？"
+  Agent Scratchpad: （空，第一步）
+
+第 2 步：发给 LLM
+  LLM 看到 Prompt，分析：
+  - 用户问天气 → 应该用 get_weather 工具
+  - 城市是"北京"
+
+第 3 步：LLM 返回工具调用
+  tool_calls: [{
+    "function": {
+      "name": "get_weather",
+      "arguments": "{\"city\": \"北京\"}"
+    }
+  }]
+
+第 4 步：AgentExecutor 执行工具
+  result = get_weather(city="北京")
+  → "小雨 15°C 湿度80% 东北风3级"
+
+第 5 步：把工具结果加入 Prompt，再次调 LLM
+  Agent Scratchpad: "调用了 get_weather('北京') → 小雨 15°C..."
+
+第 6 步：LLM 看到工具结果，生成最终回答
+  "北京今天小雨，气温 15°C，湿度较高。建议带伞出门，不太适合户外活动。"
+
+第 7 步：AgentExecutor 返回结果，更新 Memory
 ```
 
 ---
 
-## 4. LangGraph（LangChain 的升级版编排）
-
-### 4.1 为什么需要 LangGraph
+## 4. LangChain 的设计哲学总结
 
 ```
-LangChain 的局限：
-  Chain 是线性的：A → B → C → D
-  不能：条件分支、循环、并行、状态共享
+为什么 LangChain 要这样设计？
 
-LangGraph 的能力：
-  用图（Graph）抽象编排：
-  - 节点（Node）：一个处理步骤
-  - 边（Edge）：步骤之间的跳转
-  - 条件边：根据结果走不同路径
-  - 状态（State）：节点间共享数据
+1. PromptTemplate
+   Why: Prompt 是 LLM 应用的"代码"，需要版本管理、复用、测试
+   How: 参数化模板，把变量从 Prompt 中分离
+
+2. OutputParser
+   Why: LLM 输出是文本，程序需要结构化数据
+   How: 在 Prompt 中告诉格式要求，解析输出
+
+3. Chain
+   Why: 单次 LLM 调用不够用，需要多步处理
+   How: Pipeline 模式，串联多个组件
+
+4. Tool
+   Why: LLM 只能"说"，需要标准化的"做"的接口
+   How: 把函数包装成 LLM 能理解的描述
+
+5. Memory
+   Why: LLM 无状态，需要外部上下文管理
+   How: 多种策略（全量/窗口/摘要/向量）
+
+6. AgentExecutor
+   Why: Agent 的循环逻辑是通用的，不应每次重写
+   How: 标准化的 while 循环 + 错误处理 + 回调
+
+一句话总结：
+  LangChain 的本质就是把"手写 Agent 的胶水代码"标准化成可复用的模块。
+  它不是魔法，是你第二阶段手写的那些代码的工程化版本。
 ```
 
-| 维度 | LangChain | LangGraph |
+---
+
+## 5. LangChain vs 手写 Agent：什么时候用什么
+
+| 场景 | 手写 Agent | LangChain |
 |------|-----------|-----------|
-| 编排方式 | 线性管道 | 图（有环有向图） |
-| 条件分支 | 不支持 | 支持 |
-| 循环 | 不支持 | 支持（Agent Loop） |
-| 状态管理 | 无 | State 对象 |
-| 并行 | 不支持 | 支持 |
-| Java 类比 | 责任链模式 | 工作流引擎（Activiti） |
+| 学习/理解原理 | 最好 | 太抽象，不利于理解 |
+| 简单原型 | 够用 | 可能过度 |
+| 多工具 + 复杂 Prompt | 代码量大 | 内置支持，方便 |
+| 需要调试/观测 | 自己写日志 | LangSmith 集成 |
+| 需要换 LLM 提供商 | 改代码 | 换一行配置 |
+| 生产环境 | 自己造轮子风险高 | 生态成熟 |
 
-```python
-from langgraph.graph import StateGraph, END
-
-class AgentState(TypedDict):
-    messages: list
-    next_action: str
-
-# 构建图
-graph = StateGraph(AgentState)
-graph.add_node("intent", intent_recognition)
-graph.add_node("order_agent", order_agent)
-graph.add_node("logistics_agent", logistics_agent)
-
-graph.add_conditional_edges("intent", route_intent)  # 条件路由
-graph.add_edge("order_agent", END)
-graph.add_edge("logistics_agent", END)
-
-app = graph.compile()
-```
+**建议：先手写理解原理（已完成），再用框架提高效率。**
 
 ---
 
-## 5. LangChain 版本演进（面试展示技术视野）
+## 6. 常见误区
 
-| 版本 | 时间 | 核心变化 | 面试怎么讲 |
-|------|------|---------|----------|
-| v0.1 | 2023.10 | 初始版本，`LLMChain` | "最早用过，API已废弃" |
-| v0.1.x | 2024.01 | LCEL 引入 `|` 管道语法 | "开始用LCEL重构" |
-| v0.2 | 2024.05 | `langchain-core` 拆分，`Runnable` 统一 | "核心稳定，推荐版本" |
-| v0.3 | 2024.10 | 弃用旧API，`langgraph` 成熟 | "迁移到LangGraph编排" |
-| v0.3.x | 2025+ | MCP 集成，`Structured Output` | "最新版本，生产级" |
-
----
-
-## 6. LangChain 的坑（面试加分）
-
-### 坑 1：版本迭代太快
-
-> **问题：** v0.1 的 `LLMChain` 在 v0.2 标记 deprecated，v0.3 移除。
-> **解决：** 锁定版本 + 只看官方文档 + 关注 Changelog。
-
-### 坑 2：Agent 执行不稳定
-
-> **问题：** 同样输入有时 2 步完成，有时 5 步或死循环。
-> **解决：** `max_iterations=8` + 死循环检测 + Fallback 机制。
-
-### 坑 3：Memory 超 Token
-
-> **问题：** 长对话 Prompt 超出上下文窗口。
-> **解决：** 滑动窗口（最近 10 轮）+ 摘要压缩（旧对话用 LLM 总结）。
-
-### 坑 4：调试困难
-
-> **问题：** 多轮 LLM 调用，出错不知道哪一步。
-> **解决：** `verbose=True` + LangSmith 全链路 Tracing。
-
-### 坑 5：Python 生态 vs Java 后端
-
-> **问题：** LangChain 是 Python，公司后端是 Java。
-> **解决方案：**
-> - 方案 A：LangChain 部署为独立微服务，Java 通过 HTTP 调用
-> - 方案 B：用 LangChain4j（Java 版 LangChain）
-> - 方案 C：Spring AI（Spring 官方 AI 框架）
+| 误区 | 真相 |
+|------|------|
+| "LangChain 是 Agent 的唯一选择" | 还有 LangGraph、CrewAI、AutoGen 等框架 |
+| "用了 LangChain 就不需要理解原理" | 不理解原理出问题时完全无法排查 |
+| "Chain 已经过时了，都用 LCEL" | LCEL（LangChain Expression Language）是新的组合方式，但 Chain 的设计思想不变 |
+| "LangChain 性能很好" | LangChain 的抽象层有性能开销，极致优化场景可能需要手写 |
+| "AgentExecutor 能处理所有情况" | 复杂工作流需要 LangGraph |
 
 ---
 
-## 7. LangChain4j / Spring AI（Java 候选人必知）
+## 👉 这一阶段你应该掌握的能力
 
-### 7.1 LangChain4j
-
-```java
-// LangChain4j —— 声明式 AI Service
-interface CustomerServiceAgent {
-    @SystemMessage("你是客服助手，可以查询订单和物流信息")
-    String chat(@UserMessage String userMessage);
-}
-
-CustomerServiceAgent agent = AiServices.builder(CustomerServiceAgent.class)
-    .chatLanguageModel(chatModel)
-    .tools(orderQueryTool, logisticsTool)
-    .chatMemory(MessageWindowChatMemory.withMaxMessages(20))
-    .build();
-
-String answer = agent.chat("查一下订单123456的物流");
-```
-
-### 7.2 Spring AI
-
-```java
-@RestController
-public class AgentController {
-
-    private final ChatClient chatClient;
-
-    public AgentController(ChatClient.Builder builder) {
-        this.chatClient = builder
-            .defaultSystem("你是客服助手")
-            .defaultFunctions("queryOrder", "queryLogistics")
-            .build();
-    }
-
-    @GetMapping("/chat")
-    public String chat(@RequestParam String message) {
-        return chatClient.prompt().user(message).call().content();
-    }
-}
-```
-
-### 7.3 面试怎么选型
-
-| 框架 | 语言 | 优势 | 适用场景 |
-|------|------|------|---------|
-| LangChain | Python | 生态最全、社区最大 | AI 编排微服务 |
-| LangChain4j | Java | Java 原生 | Java 团队快速上手 |
-| Spring AI | Java | Spring 生态无缝 | 已有 Spring Boot 项目 |
-| LangGraph | Python | 复杂编排、状态管理 | 复杂 Agent 工作流 |
-
-> **面试说法：** "如果团队纯 Java，推荐 LangChain4j 或 Spring AI。如果 Agent 逻辑复杂（Multi-Agent），建议 LangChain + LangGraph 独立微服务，Java 后端 API 调用。"
+1. **理解 LangChain 的六大核心模块**：PromptTemplate / OutputParser / Chain / Tool / Memory / AgentExecutor
+2. **知道每个模块为什么这样设计**：解决什么问题、核心抽象是什么
+3. **能用 LangChain 构建一个完整的 Agent**：自定义 Tool + 构建 Agent + 执行任务
+4. **能追踪 AgentExecutor 的内部执行流程**：Prompt 拼装 → LLM 调用 → 工具执行 → 循环
+5. **能在手写和框架之间做选择**：简单场景手写，复杂场景用框架
 
 ---
 
-## 8. 面试实战
-
-### 【面试回答（标准版）】—— 30 秒口语化
-
-> LangChain 是 LLM 应用的编排框架，类似 AI 领域的 Spring Boot。
->
-> 核心模块：Model 统一封装 LLM、Prompt Template 管理提示词、Chains 串联处理流程（LCEL 管道语法）、Agents 实现 ReAct 循环、Tools 注册外部工具、Memory 管理对话上下文。
->
-> 我用 LangChain 搭建了客服 Agent，流程是 Prompt 拼接 → Agent 决策 → 工具调用 → 结果回传。踩过的坑：版本兼容、Agent 不稳定（限制迭代次数）、Memory 超 Token（滑动窗口+摘要压缩）。
->
-> 复杂场景用 LangGraph（StateGraph 图编排，类比 Activiti 工作流引擎）。Java 项目可选 LangChain4j 或 Spring AI。
-
-### 【面试官可能追问】
-
-**追问 1：LangChain 和直接调 OpenAI API 有什么区别？**
-
-> 直接调 API 是单次请求-响应。用 LangChain 的理由：工具调用编排、多模型切换、记忆管理、RAG 检索、可观测性。
-> 但如果需求很简单，不需要 LangChain。**不要为了用框架而用框架。**
-
-**追问 2：Chain 和 Agent 有什么区别？**
-
-> Chain = 固定流程（类比 if-else 硬编码），Agent = LLM 动态决策（类比把 if-else 替换成 LLM 路由）。
-> 选择原则：能用 Chain 的优先用 Chain（稳定、低成本），Chain 搞不定的才上 Agent。
-
-**追问 3：你对 LangGraph 了解吗？**
-
-> LangGraph 是 LangChain 团队的新一代编排框架，用图抽象：支持条件分支、循环、并行、状态管理。
-> 类比到 Java：LangChain 像责任链模式，LangGraph 像 BPMN 工作流引擎（Activiti）。
-> 简单场景用 LCEL，复杂编排用 LangGraph StateGraph。
-
-**追问 4：为什么选 Python LangChain 而不是 Java 的 LangChain4j？**
-
-> 三个原因：Python 生态更全（新模型/工具优先支持）、迭代更快、架构解耦（Agent 层独立微服务）。
-> 当然纯 Java 团队用 LangChain4j/Spring AI 也合理。
-
-### 【常见错误】
-
-| 错误说法 | 正确说法 |
-|---------|---------|
-| "LangChain 是 AI 模型" | "LangChain 是编排框架" |
-| "用了 LangChain 就不用写代码" | "减少样板代码，但核心工作仍在" |
-| "所有项目都该用 LangChain" | "根据复杂度选择，简单场景直接调 API" |
-| "LangChain 只能配合 OpenAI" | "统一接口，底层模型可插拔" |
-
----
-
-## 9. 一句话总结（背诵用）
-
-> **LangChain 是 LLM 应用的编排框架（AI 领域的 Spring Boot），核心是 LCEL 管道语法串联组件，Chain 做固定流程、Agent 做动态决策，LangGraph 做复杂工作流编排（类比 Activiti），Java 项目可选 LangChain4j 或 Spring AI。**
-
----
-
-> **Stage 3（详细版）结束。**
+> **下一阶段预告：** 第四阶段将深入 Agent 的进阶能力——多工具协作、RAG + Agent、Chain of Thought、Reflection Agent，包含完整的实战案例。
