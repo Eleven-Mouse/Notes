@@ -294,67 +294,14 @@ style: |
 
 ---
 
-### 语言与框架层
-
-| 技术 | 说明 |
-|---|---|
-| `Java` | 中国互联网后端绝对主流，短期不会变 |
-| `Spring / SpringMVC / Spring Boot 3` | 企业级Java事实标准，Boot 3拥抱Java 17+ |
-| `Spring AI` | Spring生态AI能力官方支持，迟早要碰 |
-| `Maven` | 项目构建与依赖管理，基本功 |
-
----
-
-### 数据层
-
-| 技术 | 说明 |
-|---|---|
-| `JDBC / MyBatis` | 数据访问层，MyBatis在国内企业仍是主流ORM |
-| `MySQL` | 关系型数据库标配，索引/事务/锁——面试必问 |
-| `PostgreSQL` | 越来越多企业迁移，AI向量检索场景有优势 |
-| `Redis` | **不是加分项，是基本技能** |
-
-**Redis**：缓存、分布式锁、排行榜、消息队列——高并发场景必用
-**面试不问Redis，基本等于没面**
-
----
-
-### 消息队列 & 架构层
-
-**消息队列**（至少精通一个）
-
-- `RocketMQ` / `RabbitMQ` / `Kafka`
-- 微服务异步通信、削峰填谷、数据解耦全靠它
-
-**架构层**
-
-- `DDD`（领域驱动设计）—— 阿里、美团、京东大规模实践，至少懂聚合根、限界上下文、四层架构
-- `微服务` —— 服务注册发现、配置中心、网关、链路追踪
-
----
-
-### 后端也要会的
-
-**前端基础**
-- `Vue / React` —— 全栈化趋势下，搭管理后台、改前端页面是常态
-
-**AI开发**
-- `LangChain / LangGraph` —— AI Agent开发核心框架（后面详讲）
-
-**基础设施**
-- `Nginx` —— 反向代理、负载均衡，线上部署绕不开
-
----
-
-### 后端路线全景
+### Java后端技术栈全景
 
 ```
 Java
- ├── Spring / SpringMVC / Spring Boot 3 / Spring AI
- ├── Maven
+ ├── Spring / SpringMVC / Spring Boot 3 / Spring AI / Maven
  ├── JDBC / MyBatis
- ├── MySQL / PostgreSQL / Redis
- ├── RocketMQ / RabbitMQ / Kafka
+ ├── MySQL / PostgreSQL / Redis（基本技能，不是加分项）
+ ├── RocketMQ / RabbitMQ / Kafka（至少精通一个）
  ├── DDD / 微服务
  ├── Vue / React（基础）
  ├── LangChain / LangGraph
@@ -373,68 +320,14 @@ Java
 
 ---
 
-### 前端基础 & 框架
-
-**基础层**
-
-| 技术 | 说明 |
-|---|---|
-| `HTML / CSS / JavaScript` | 地基，跳不过去 |
-| `TypeScript` | 大厂前端 **90%+ 在用TS**，不学进不了门 |
-
-**框架层**
-
-| 技术 | 说明 |
-|---|---|
-| `Vue / React` | 国内Vue更大，海外React更多，至少精通一个 |
-| `Next.js` | React全栈框架，SSR/SSG/ISR，全栈化核心 |
-
----
-
-### 工程化 & 全栈方向
-
-**工程化**
-
-- `Webpack` —— 存量项目大量存在
-- `Vite` —— 已经成为主流
-- `Rollup / Rolldown` —— Rolldown用Rust重写，2026年值得关注
-- `Bun.js` —— 新一代JS运行时，性能强
-
-**全栈方向**
-
-- `Node.js / Express / Hono` —— 前端做后端的首选
-- `MongoDB / MySQL / PostgreSQL` —— 数据库是全栈化关键
-- `Prisma / TypeORM` —— Prisma类型安全做得很好，非常流行
-
----
-
-### 可视化 / 跨端 / AI
-
-**可视化 & 3D**
-
-- `ECharts / D3.js` —— 数据可视化，B端产品标配
-- `Three.js` —— 3D场景，数字孪生/3D展示有需求
-
-**跨端**
-
-- `Flutter` —— 跨平台移动端，一套代码跑iOS + Android
-- `Electron` —— 桌面应用开发（VS Code就是Electron做的）
-
-**AI开发**
-
-- `LangChain / LangGraph` —— 前端也需要构建AI应用的能力
-
----
-
-### 前端路线全景
+### 前端技术栈全景
 
 ```
 HTML / CSS / JS / TypeScript
  ├── Vue / React / Next.js
  ├── Webpack / Vite / Rollup / Rolldown / Bun.js
  ├── Node.js / Express / Hono
- ├── MongoDB / MySQL / PostgreSQL
- ├── Prisma / TypeORM
+ ├── MongoDB / MySQL / PostgreSQL / Prisma / TypeORM
  ├── ECharts / D3.js / Three.js
  ├── Flutter / Electron
  └── LangChain / LangGraph
