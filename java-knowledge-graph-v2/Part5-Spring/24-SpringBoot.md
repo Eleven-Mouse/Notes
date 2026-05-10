@@ -1,5 +1,4 @@
 
-> **优先级：** ⭐⭐⭐⭐⭐ | **面试频率：** 🔥🔥🔥🔥🔥
 > **一句话总结：** SpringBoot 的核心是自动装配，理解 spring.factories + @Conditional + Starter 机制就掌握了面试主动权。
 
 ---
