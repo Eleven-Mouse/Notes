@@ -3,26 +3,24 @@ marp: true
 theme: uncover
 paginate: false
 style: |
-  /* === 全局基础 === */
   section {
     font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
     color: #111827;
     font-size: 26px;
     padding: 60px 80px;
     letter-spacing: 0.02em;
+    background: #ffffff;
   }
-
-  /* === 标题层级 === */
   h1 {
     color: #111827;
-    font-size: 38px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 700;
     letter-spacing: -0.02em;
   }
   h2 {
     color: #111827;
-    font-size: 34px;
-    font-weight: 600;
+    font-size: 36px;
+    font-weight: 700;
     letter-spacing: -0.01em;
   }
   h3 {
@@ -30,19 +28,15 @@ style: |
     font-size: 28px;
     font-weight: 500;
   }
-
-  /* === 文字样式 === */
   strong {
     color: #111827;
     font-weight: 600;
   }
   em {
-    color: #06b6d4;
+    color: #1d4ed8;
     font-style: normal;
     font-weight: 600;
   }
-
-  /* === 代码 === */
   code {
     background: #f1f5f9;
     color: #334155;
@@ -51,16 +45,12 @@ style: |
     font-family: 'JetBrains Mono', 'SF Mono', monospace;
     font-size: 20px;
   }
-
-  /* === 引用块 === */
   blockquote {
-    border-left: 3px solid #06b6d4;
+    border-left: 3px solid #1d4ed8;
     padding-left: 20px;
-    color: #374151;
+    color: #6b7280;
     font-size: 22px;
   }
-
-  /* === 列表 === */
   ul, ol {
     margin-left: 0;
     padding-left: 24px;
@@ -69,8 +59,6 @@ style: |
     margin-bottom: 10px;
     line-height: 1.6;
   }
-
-  /* === 表格 === */
   table {
     width: 100%;
     font-size: 22px;
@@ -89,82 +77,13 @@ style: |
     border-bottom: 1px solid #e5e7eb;
     color: #374151;
   }
-
-  /* === 深色页面 === */
-  section.dark {
-    background: #0f172a;
-    color: #e2e8f0;
-  }
-  section.dark h1, section.dark h2, section.dark h3 {
-    color: #f1f5f9;
-  }
-  section.dark strong {
-    color: #f1f5f9;
-  }
-  section.dark em {
-    color: #06b6d4;
-  }
-  section.dark code {
-    background: #1e293b;
-    color: #94a3b8;
-  }
-  section.dark td {
-    border-bottom-color: #1e293b;
-    color: #94a3b8;
-  }
-  section.dark th {
-    background: #1e293b;
-    color: #f1f5f9;
-  }
-  section.dark blockquote {
-    border-left-color: #06b6d4;
-    color: #94a3b8;
-  }
-
-  /* === 居中页面 === */
   section.center {
     text-align: center;
     justify-content: center;
   }
-
-  /* === 大数字 === */
-  .big {
-    font-size: 100px;
-    font-weight: 700;
-    line-height: 1;
-    color: #f1f5f9;
-  }
-  .big-red {
-    font-size: 80px;
-    font-weight: 700;
-    line-height: 1;
-    color: #dc2626;
-  }
-  .big-num {
-    font-size: 72px;
-    font-weight: 700;
-    line-height: 1;
-    color: #f97316;
-  }
-
-  /* === 小字注释 === */
   .note {
     font-size: 14px;
-    color: #64748b;
-  }
-  section.dark .note {
-    color: #475569;
-  }
-
-  /* === 标签 === */
-  .tag {
-    display: inline-block;
-    background: #1e293b;
-    color: #06b6d4;
-    padding: 3px 10px;
-    border-radius: 4px;
-    font-size: 18px;
-    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    color: #9ca3af;
   }
 ---
 
@@ -202,17 +121,13 @@ style: |
 
 ---
 
-<!-- _class: dark center -->
+<!-- _class: center -->
 
 ## AI到底改变了什么？
 
 ---
 
-<!-- _class: dark center -->
-
-<!-- _paginate: false -->
-
-<br>
+<!-- _class: center -->
 
 **84%**
 
@@ -225,8 +140,6 @@ style: |
 <span class="note">— Stack Overflow 2025 全球开发者调查</span>
 
 ---
-
-<!-- _class: dark -->
 
 ### 过去 vs 现在
 
@@ -241,13 +154,11 @@ style: |
 
 ---
 
-<!-- _class: dark center -->
+<!-- _class: center -->
 
-<br>
+AI代码重大缺陷概率 **×1.7**
 
-AI代码重大缺陷概率 · **×1.7**
-
-安全漏洞 · **×2.74**
+安全漏洞 **×2.74**
 
 <br>
 
@@ -257,8 +168,6 @@ AI代码重大缺陷概率 · **×1.7**
 你写得快了，但你需要 <em>更强的判断力</em>
 
 ---
-
-<!-- _class: dark -->
 
 ### 裁掉的是什么人？
 
@@ -275,7 +184,7 @@ AI相关岗位招聘量快速增长
 
 ---
 
-<!-- _class: dark center -->
+<!-- _class: center -->
 
 AI取代的是
 
@@ -447,15 +356,13 @@ HTML / CSS / JS / TypeScript
 
 ---
 
-<!-- _class: dark center -->
+<!-- _class: center -->
 
 ## AI / Agent
 
 ### 未来开发最重要的能力之一
 
 ---
-
-<!-- _class: dark -->
 
 ### 不是"调API"，是"构建AI工作流"
 
@@ -473,8 +380,6 @@ HTML / CSS / JS / TypeScript
 
 ---
 
-<!-- _class: dark -->
-
 ### Agent 四大核心
 
 | | 作用 | 比喻 |
@@ -485,8 +390,6 @@ HTML / CSS / JS / TypeScript
 | **ReAct** | 思考→执行→再决策 | Agent的 **决策模式** |
 
 ---
-
-<!-- _class: dark -->
 
 ### 核心框架 & 技术
 
@@ -501,8 +404,6 @@ HTML / CSS / JS / TypeScript
 - `OCR` —— 文档智能处理基础能力
 
 ---
-
-<!-- _class: dark -->
 
 ### Agent 示例：智能客服
 
@@ -519,7 +420,7 @@ HTML / CSS / JS / TypeScript
 
 ---
 
-<!-- _class: dark center -->
+<!-- _class: center -->
 
 未来两年
 
