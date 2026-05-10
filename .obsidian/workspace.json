@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Agent/0-AI基础知识详解.md",
+                "file": "AI时代互联网岗位变革与大学生应对.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-AI基础知识详解"
+              "title": "AI时代互联网岗位变革与大学生应对"
             }
           }
         ]
@@ -55,21 +55,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "666f8a90341338fa",
+            "id": "b4d1a89786461ecf",
             "type": "leaf",
             "state": {
-              "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "书签"
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
             }
-          }
-        ]
-      },
-      {
-        "id": "bbee728de92dfe3f",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "26dab8c4498f9323",
             "type": "leaf",
@@ -88,16 +85,13 @@
             }
           },
           {
-            "id": "b4d1a89786461ecf",
+            "id": "666f8a90341338fa",
             "type": "leaf",
             "state": {
-              "type": "file-explorer",
-              "state": {
-                "sortOrder": "alphabetical",
-                "autoReveal": false
-              },
-              "icon": "lucide-folder-closed",
-              "title": "文件列表"
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
             }
           }
         ]
@@ -221,9 +215,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "666f8a90341338fa",
+  "active": "c141ee3c97213525",
   "lastOpenFiles": [
     "AI时代互联网岗位变革与大学生应对.md",
+    "Agent/0-AI基础知识详解.md",
     "_pdf2_b64.txt",
     "_pdf1_b64.txt",
     "ai-ppt-20260510.html",
@@ -255,7 +250,6 @@
     "java-knowledge-graph-v2/Part6-存储层/33-MyBatis-核心.md",
     "java-knowledge-graph-v2/Part6-存储层/32-Redis-缓存问题.md",
     "java-knowledge-graph-v2/Part6-存储层/31-Redis-持久化与集群.md",
-    "java-knowledge-graph-v2/Part6-存储层/29-MySQL-锁与调优.md",
     "未命名.canvas",
     "~$库系统与应用实验报告（2025-2026-2）.doc",
     "数据库系统与应用实验报告（2025-2026-2）.doc",
