@@ -1,225 +1,312 @@
 ---
 marp: true
 theme: uncover
-paginate: true
+paginate: false
 style: |
+  /* === 全局基础 === */
   section {
-    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
-    color: #1a202c;
-    font-size: 28px;
-    padding: 40px 60px;
+    font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+    color: #111827;
+    font-size: 26px;
+    padding: 60px 80px;
+    letter-spacing: 0.02em;
   }
+
+  /* === 标题层级 === */
   h1 {
-    color: #1a365d;
-    font-size: 42px;
-    text-align: center;
+    color: #111827;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
   h2 {
-    color: #1a365d;
-    font-size: 36px;
+    color: #111827;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
   h3 {
-    color: #2b6cb0;
-    font-size: 30px;
+    color: #374151;
+    font-size: 28px;
+    font-weight: 500;
   }
+
+  /* === 文字样式 === */
   strong {
-    color: #1a365d;
+    color: #111827;
+    font-weight: 600;
   }
   em {
-    color: #e53e3e;
+    color: #06b6d4;
     font-style: normal;
-    font-weight: bold;
+    font-weight: 600;
   }
+
+  /* === 代码 === */
   code {
-    background: #edf2f7;
-    color: #2d3748;
+    background: #f1f5f9;
+    color: #334155;
     padding: 2px 8px;
     border-radius: 4px;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 20px;
+  }
+
+  /* === 引用块 === */
+  blockquote {
+    border-left: 3px solid #06b6d4;
+    padding-left: 20px;
+    color: #374151;
     font-size: 22px;
   }
-  section.cover {
-    text-align: center;
-    justify-content: center;
-  }
-  section.chapter {
-    text-align: center;
-    justify-content: center;
-  }
-  section.chapter h2 {
-    font-size: 48px;
-    color: #1a365d;
-    border-bottom: 3px solid #3182ce;
-    display: inline-block;
-    padding-bottom: 16px;
-  }
-  ul {
+
+  /* === 列表 === */
+  ul, ol {
     margin-left: 0;
     padding-left: 24px;
   }
   li {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    line-height: 1.6;
   }
+
+  /* === 表格 === */
   table {
     width: 100%;
-    font-size: 24px;
+    font-size: 22px;
     border-collapse: collapse;
-    margin: 16px 0;
+    margin: 20px 0;
   }
   th {
-    background: #1a365d;
+    background: #111827;
     color: white;
-    padding: 12px 16px;
+    padding: 10px 16px;
     text-align: left;
+    font-weight: 500;
   }
   td {
-    padding: 10px 16px;
-    border-bottom: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
   }
-  blockquote {
-    border-left: 4px solid #3182ce;
-    padding-left: 20px;
-    color: #4a5568;
-    font-size: 24px;
+
+  /* === 深色页面 === */
+  section.dark {
+    background: #0f172a;
+    color: #e2e8f0;
   }
-  .data {
-    color: #e53e3e;
-    font-size: 48px;
-    font-weight: bold;
+  section.dark h1, section.dark h2, section.dark h3 {
+    color: #f1f5f9;
+  }
+  section.dark strong {
+    color: #f1f5f9;
+  }
+  section.dark em {
+    color: #06b6d4;
+  }
+  section.dark code {
+    background: #1e293b;
+    color: #94a3b8;
+  }
+  section.dark td {
+    border-bottom-color: #1e293b;
+    color: #94a3b8;
+  }
+  section.dark th {
+    background: #1e293b;
+    color: #f1f5f9;
+  }
+  section.dark blockquote {
+    border-left-color: #06b6d4;
+    color: #94a3b8;
+  }
+
+  /* === 居中页面 === */
+  section.center {
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* === 大数字 === */
+  .big {
+    font-size: 100px;
+    font-weight: 700;
+    line-height: 1;
+    color: #f1f5f9;
+  }
+  .big-red {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1;
+    color: #dc2626;
+  }
+  .big-num {
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    color: #f97316;
+  }
+
+  /* === 小字注释 === */
+  .note {
+    font-size: 14px;
+    color: #64748b;
+  }
+  section.dark .note {
+    color: #475569;
+  }
+
+  /* === 标签 === */
+  .tag {
+    display: inline-block;
+    background: #1e293b;
+    color: #06b6d4;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
   }
 ---
 
-<!-- _class: cover -->
+<!-- _class: center -->
 
-# AI时代下，互联网行业岗位的变革<br>与大学生的应对
+# AI时代下
 
-**演讲人：XXX**
+### 互联网行业岗位的变革与大学生的应对
 
-2026年5月12日
+<br>
 
----
-
----
-
-<!-- _class: cover -->
-
-### 今天讲什么？
-
-1. AI到底改变了什么
-2. 程序员工作重心的变化
-3. 全栈化趋势
-4. Java后端学习路线
-5. 前端学习路线
-6. 开发者基础能力
-7. AI / Agent 核心能力
-8. 现实问题与竞争
-9. 实习投递黄金时间
-10. 实习经验分享
+**XXX** · 2026.05.12
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 一、开场
+不贩卖焦虑
 
-行业正在发生什么？
+也不无脑吹AI
 
----
-
-### 行业正在结构性变化
-
-- 大厂裁员、HC缩减、AI要取代程序员……
-- 有些是真的，有些被放大了
-- 但有一点是确定的：
-
-> **这个行业正在发生一次结构性的变化，而且这个变化比大多数人感知到的要深**
+只讲我看到的 **真实变化**
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 二、AI到底改变了什么？
+这个行业正在发生一次
+
+**结构性的变化**
+
+而且这个变化
+
+比大多数人感知到的要深
+
+---
+
+<!-- _class: dark center -->
+
+## AI到底改变了什么？
 
 ---
 
-### 数据说话
+<!-- _class: dark center -->
 
-**Stack Overflow 2025 全球开发者调查**
+<!-- _paginate: false -->
 
-- **84%** 的开发者已在日常工作中使用 AI 工具
-- **51%** 的专业开发者 <em>每天在用</em>
-- 主力工具：ChatGPT（82%）、GitHub Copilot（68%）
+<br>
 
-**这不是未来趋势——这就是现在的日常**
+**84%**
+
+的开发者已在日常工作中使用AI工具
+
+**51%** 的专业开发者——每天在用
+
+<br>
+
+<span class="note">— Stack Overflow 2025 全球开发者调查</span>
 
 ---
+
+<!-- _class: dark -->
 
 ### 过去 vs 现在
 
 | | 过去 | 现在 |
 |---|---|---|
-| **写代码** | 70% 时间 | 30% 时间 |
-| **理解业务** | 30% 时间 | 70% 时间 |
+| **写代码** | **70%** 时间 | 30% 时间 |
+| **理解业务** | 30% 时间 | **70%** 时间 |
 | **工具** | 手写 + Stack Overflow | Cursor / Copilot / Claude Code |
-| **产出** | 半天写完接口 | 半小时出初版 |
+
+**编码的门槛在下降**
+<em>"知道该写什么代码"的门槛在上升</em>
 
 ---
 
-### AI代码的质量问题
+<!-- _class: dark center -->
 
-**AI生成的代码并不总是可靠的：**
+<br>
 
-- **66%** 的开发者认为AI代码"看起来对，但总觉得哪里不对"
-- AI代码重大缺陷概率是人类的 **1.7倍**
-- 安全漏洞更是 **2.74倍**
+AI代码重大缺陷概率 · **×1.7**
 
-> 你写得快了，但你需要更强的判断力
+安全漏洞 · **×2.74**
+
+<br>
+
+66% 的开发者认为：
+"看起来对，但总觉得哪里不对"
+
+你写得快了，但你需要 <em>更强的判断力</em>
 
 ---
+
+<!-- _class: dark -->
 
 ### 裁掉的是什么人？
 
-| 被裁掉的 | 更值钱的 |
+| 被淘汰的 | 更值钱的 |
 |---|---|
 | 只会写代码 | 理解业务 |
 | 不理解业务 | 能做架构决策 |
-| 没有架构思维 | 能用AI提升效率 |
 | 只会执行需求 | 能独立解决问题 |
 
-**AI相关岗位招聘量在快速增长** —— 字节招AI Agent实习生，腾讯实习生日薪提高近50%
+<br>
+
+AI相关岗位招聘量快速增长
+腾讯实习生日薪提高近 <em>50%</em> 抢AI人才
 
 ---
 
-### AI取代程序员？
+<!-- _class: dark center -->
 
-**"AI取代程序员"这句话，只说对了一半。**
+AI取代的是
 
-准确的说法：
+### "只会写代码的程序员"
 
-> **AI取代的是"只会写代码的程序员"**
->
-> **"能理解业务、能设计方案、能用AI提升效率的工程师"，反而更值钱了**
+<br>
 
----
+能理解业务、能设计方案、能用AI提升效率的工程师
 
-<!-- _class: chapter -->
-
-## 三、程序员的工作重心变了
+<em>反而更值钱了</em>
 
 ---
 
-### 核心变化
+<!-- _class: center -->
 
-**程序员这个岗位没有消失，但重心发生了巨大偏移**
+## 程序员的工作重心
+## 发生了什么变化？
 
-```
-过去                    现在
-┌──────────┐           ┌──────────┐
-│70% 写代码│           │ 70% 理解业务│
-│30% 想业务│           │ 30% 写代码  │
-└──────────┘           └──────────┘
-```
+---
 
-**编码门槛在下降，"知道该写什么代码"的门槛在上升**
+<!-- _class: center -->
+
+程序员这个岗位没有消失
+
+但它的 <em>重心</em> 发生了巨大偏移
+
+<br>
+
+过去：70% 写代码 → 30% 想业务
+
+现在：30% 写代码 → **70% 理解业务**
 
 ---
 
@@ -227,28 +314,30 @@ style: |
 
 - 这个业务场景的 <em>边界条件</em> 是什么？
 - 高并发下这个设计 <em>会不会崩</em>？
-- 用户实际使用的时候，这个交互 <em>合理吗</em>？
+- 用户实际使用时，这个交互 <em>合理吗</em>？
 - <em>数据一致性</em> 怎么保证？
-- 微服务之间怎么拆分才不会变成 <em>分布式大泥球</em>？
+- 微服务怎么拆才不会变成 <em>分布式大泥球</em>？
 
-> 只有理解业务、理解系统、理解用户的工程师才知道答案
+> 只有理解业务、理解系统、理解用户的人才知道
 
 ---
 
 ### 未来程序员最重要的 6 大能力
 
-1. **业务理解力** —— 快速理解业务场景，给出合适技术方案
-2. **产品思维** —— 站在用户角度思考问题
+1. **业务理解力** —— 快速理解业务场景，给出技术方案
+2. **产品思维** —— 站在用户角度思考
 3. **系统设计能力** —— 设计可扩展、可维护的架构
 4. **AI协同开发** —— 高效和AI协作，不被牵着走
 5. **全栈能力** —— 一个人跑通前端→后端→部署
-6. **Agent能力** —— 构建AI工作流，而非只调用API
+6. **Agent能力** —— 构建AI工作流，而非只调API
+
+> 学校不会教你，但企业需要你
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 四、为什么走向全栈化？
+## 为什么岗位在走向全栈化？
 
 ---
 
@@ -265,84 +354,74 @@ style: |
 
 ### 全栈化的三大原因
 
-**1. AI工具降低了跨领域学习成本**
-后端用AI写Vue页面已不难，前端用AI写Spring Boot接口也搞得定
+**01** AI降低了跨领域学习成本
+后端用AI写Vue页面已不难
 
-**2. 企业需要"能独立完成完整业务链路的人"**
-沟通成本最低，不需要前后端来回对接、反复联调
+**02** 企业需要能独立完成完整业务链路的人
+沟通成本最低，不需要反复联调
 
-**3. 岗位HC在减少，一人多能成趋势**
-以前：3前端 + 5后端 + 1运维 → 现在：2全栈 + 1后端 + AI工具
-
----
-
-### 不能有明显短板
-
-> 前端、后端、数据库、AI、部署、运维——都要有基础认知
-
-你不需要每个都是专家，但你不能有明显短板
-
-当你能独立完成一个完整项目的时候——
-
-**你的价值就不再是一个"螺丝钉"，而是一个"能解决问题的人"**
+**03** 岗位HC在减少，一人多能成趋势
+3前端 + 5后端 + 1运维 → 2全栈 + 1后端 + AI
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 五、Java后端学习路线
+你不需要每个都是专家
+
+<br>
+
+**但你不能有明显短板**
 
 ---
 
-### Java后端技术栈全景
+<!-- _class: center -->
+
+## 具体学什么？
+
+---
+
+### Java后端技术栈
 
 ```
 Java
- ├── Spring / SpringMVC / Spring Boot 3 / Spring AI / Maven
+ ├── Spring / Spring Boot 3 / Spring AI / Maven
  ├── JDBC / MyBatis
  ├── MySQL / PostgreSQL / Redis（基本技能，不是加分项）
- ├── RocketMQ / RabbitMQ / Kafka（至少精通一个）
+ ├── RocketMQ / RabbitMQ / Kafka
  ├── DDD / 微服务
  ├── Vue / React（基础）
  ├── LangChain / LangGraph
  └── Nginx / Docker / Linux
 ```
 
-> 面试官看的是：你能不能把这些技术串起来，做出一个完整项目
+> 面试官看的是：能不能串起来做完整项目
 
 ---
 
-<!-- _class: chapter -->
-
-## 六、前端学习路线
-
-已经不是"切页面"了
-
----
-
-### 前端技术栈全景
+### 前端技术栈
 
 ```
 HTML / CSS / JS / TypeScript
  ├── Vue / React / Next.js
  ├── Webpack / Vite / Rollup / Rolldown / Bun.js
  ├── Node.js / Express / Hono
- ├── MongoDB / MySQL / PostgreSQL / Prisma / TypeORM
+ ├── MongoDB / MySQL / PostgreSQL / Prisma
  ├── ECharts / D3.js / Three.js
  ├── Flutter / Electron
  └── LangChain / LangGraph
 ```
 
-> 一个能做前端、能写接口、能做可视化、能搭AI应用的前端工程师
-> ——**这是企业抢着要的人**
+> 前端正在变得工程化、全栈化、AI化
+> 能做前端 + 写接口 + 可视化 + AI应用 → **企业抢着要**
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 七、基础能力
+## 容易被忽视的
 
-未来开发者的基础设施
+## 基础设施能力
 
 ---
 
@@ -350,266 +429,242 @@ HTML / CSS / JS / TypeScript
 
 | 能力 | 为什么必须 |
 |---|---|
-| `Docker / Docker Compose` | 开发/测试/线上几乎全用Docker，不会很难受 |
-| `Linux` | 后端服务器OS，基本操作是底线 |
+| `Docker / Docker Compose` | 开发/测试/线上几乎全用Docker |
+| `Linux` | 服务器基本操作是底线 |
 | `HTTP` | 搞Web不懂HTTP？职业生涯会很短 |
-| `TCP / UDP` | 传输层协议，网络编程和性能优化必备 |
-| `QUIC` | HTTP/3底层协议，下一代网络标准 |
-
----
-
-### 底层原理才是护城河
+| `TCP / UDP` | 网络编程和性能优化必备 |
+| `QUIC` | HTTP/3底层协议，下一代标准 |
 
 > 框架是工具，底层原理才是护城河
 
-- 不会Docker → 项目部署不了
-- 不会Linux → 出了问题连日志都看不懂
-- 不懂HTTP → 性能优化无从下手
+---
 
-**这些不是加分项——就像会写代码但不会用电脑一样荒谬**
+<!-- _class: center -->
+
+这些不是加分项
+
+**是基础设施**
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: dark center -->
 
-## 八、AI / Agent 核心能力
+## AI / Agent
 
-未来开发最重要的能力之一
+### 未来开发最重要的能力之一
 
 ---
+
+<!-- _class: dark -->
 
 ### 不是"调API"，是"构建AI工作流"
 
 大多数人理解的AI开发：
 
 ```
-调用OpenAI接口 → 传prompt → 拿到返回结果
+调API → 传Prompt → 拿结果
 ```
 
-**这只是最基础的使用。**
+这只是最基础的使用
+
+<br>
 
 真正的AI开发——构建一个 **Agent 系统**
 
 ---
 
-### Agent 四大核心概念
+<!-- _class: dark -->
 
-| 概念 | 作用 | 比喻 |
+### Agent 四大核心
+
+| | 作用 | 比喻 |
 |---|---|---|
-| `LLM` 大语言模型 | 理解和生成语言 | Agent的 **大脑** |
-| `Tools` 工具调用 | 调用外部API/数据库/代码 | Agent的 **手** |
-| `Memory` 记忆 | 短期+长期上下文记忆 | Agent的 **记忆** |
-| `ReAct` 推理+行动 | 思考→执行→再决策 | Agent的 **决策模式** |
+| **LLM** | 理解和生成语言 | Agent的 **大脑** |
+| **Tools** | 调用外部API/数据库/代码 | Agent的 **手** |
+| **Memory** | 短期+长期上下文记忆 | Agent的 **记忆** |
+| **ReAct** | 思考→执行→再决策 | Agent的 **决策模式** |
 
 ---
+
+<!-- _class: dark -->
 
 ### 核心框架 & 技术
 
 **框架**
-
-- `LangChain` —— AI应用开发事实标准，组合LLM/工具/记忆/链式调用
-- `LangGraph` —— Agent编排框架，构建有状态的、多Agent协作工作流
-  - Klarna、Replit、Elastic 在用
-  - 支持 Deep Agents（子Agent协调）
+- `LangChain` —— AI应用开发事实标准
+- `LangGraph` —— Agent编排，多Agent协作工作流（Klarna、Replit在用）
 
 **技术**
-
-- `RAG`（检索增强生成）—— 基于自有数据回答问题
-- `Chroma` —— 向量数据库，RAG的核心基础设施
-- `MCP`（Model Context Protocol）—— AI连接外部工具的新协议
+- `RAG` —— 基于自有数据回答问题
+- `Chroma` —— 向量数据库，RAG的基础设施
+- `MCP` —— AI连接外部工具的新协议
 - `OCR` —— 文档智能处理基础能力
 
 ---
 
-### Agent 示例：智能客服系统
+<!-- _class: dark -->
 
-**以前做客服系统** → 写前端 + 后端 + 数据库 + 规则引擎 + 工单系统
+### Agent 示例：智能客服
 
-**现在构建一个Agent** →
-- 理解用户问题（LLM）
-- 查知识库找答案（RAG）
-- 调用订单系统查物流（Tools）
-- 记住之前聊了什么（Memory）
-- 自己拆解复杂问题（ReAct）
-- 处理不了转人工（流程编排）
+以前 → 写前端 + 后端 + 数据库 + 规则引擎 + 工单系统
 
-**这不是未来，这是现在正在发生的事**
+**现在构建一个Agent**
 
----
-
-### Agent 的重要性
-
-> 未来两年，"能构建AI应用"会像"能写SQL"一样
-> 成为开发者的基本技能
-
-字节、阿里、腾讯、美团，都在组建 Agent 开发团队
-
-**LangChain 和 LangGraph —— 不是"选学"，是"必学"**
+- 理解用户问题 `LLM`
+- 查知识库找答案 `RAG`
+- 调用订单查物流 `Tools`
+- 记住之前聊了什么 `Memory`
+- 自己拆解复杂问题 `ReAct`
+- 处理不了转人工 `流程编排`
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: dark center -->
 
-## 九、现实问题
+未来两年
 
-学完这些就一定能找到好实习吗？
+<em>"能构建AI应用"</em> 会像 <em>"能写SQL"</em> 一样
 
----
+成为开发者的基本技能
 
-### 现实：不够
+<br>
 
-- 你看了Spring Boot，别人也在看
-- 你学了LangChain，别人也在学
-- 一个大厂实习岗位，投递量 **几百到上千份简历**
+**LangChain 和 LangGraph**
 
-> 你以为你学了很多，但在HR眼里，你可能只是几百份差不多的简历中的一份
-
-**技术是敲门砖，差异化才是让你进门的东西**
+不是"选学"，是 <em>必学</em>
 
 ---
 
-### 什么是差异化？
+<!-- _class: center -->
 
-- **真实项目经验** —— 不是教程Todo List，是从0到1做出来能运行的项目
-- **GitHub开源贡献** —— 哪怕小项目，证明你在真实地做事
-- **技术博客** —— 把学过的东西讲清楚，本身就是能力
-- **实习经历** —— 哪怕小公司实习，也比没有强一百倍
-- **AI Agent项目** —— 能拿出一个像样的Agent项目，面试官会眼前一亮
+## 学完这些
+
+## 就一定能找到好实习吗？
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 十、实习投递黄金时间
+**不够**
+
+<br>
+
+一个大厂实习岗位，投递量几百到上千份简历
+
+你以为你学了很多，但在HR眼里
+
+你可能只是几百份差不多的简历中的一份
+
+<br>
+
+很残酷，但这是事实
 
 ---
 
-### 时间线在提前
+### 技术是敲门砖，差异化才是让你进门的东西
+
+- **真实项目经验** —— 从0到1做出来的，不是教程Todo List
+- **GitHub开源** —— 哪怕小项目，证明你在真实地做事
+- **技术博客** —— 能把东西讲清楚，本身就是能力
+- **实习经历** —— 哪怕小公司，比没有强一百倍
+- **AI Agent项目** —— 拿出一个像样的Agent项目，面试官眼前一亮
+
+---
+
+<!-- _class: center -->
+
+## 实习投递的黄金时间
+
+---
+
+### 暑期实习时间线在提前
 
 | | 过去 | 现在 |
 |---|---|---|
 | 暑期实习启动 | 6月集中招聘 | **3-4月就开始** |
 | 春招启动 | 3月 | **2月陆续开始** |
 
-字节、腾讯、阿里、美团——春招季2月就陆续开始
+<br>
+
+**6-8月才开始准备？**
+好岗位招满了 · HC用完了 · HR看不过来了 · **非常被动**
+
+<br>
+
+> 不要等"准备好了再投"
+> 你永远不会觉得自己"准备好了"
 
 ---
 
-### 6-8月才开始准备？
+<!-- _class: center -->
 
-- 好岗位已经招满了
-- HC已经用完了
-- 简历HR都看不过来了
-- 你在和没投出去的人抢剩下的一点点岗位
-
-**非常被动。**
-
-> 不要等"准备好了再投"——你永远不会觉得自己"准备好了"
-
-**边投边准备，在实战中调整。面试面多了，你就知道企业要什么了**
+## 实习经验分享
 
 ---
 
-<!-- _class: chapter -->
+### Vibe Coding
 
-## 十一、实习经验分享
+用自然语言描述需求，让AI生成代码
 
----
+2025年Y Combinator冬季batch：**25%** 创业公司代码库 **95%+** AI生成
 
-### 一定要熟练使用AI
-
-**Vibe Coding** —— 用自然语言描述需求，让AI生成代码
-
-- 2025年 Y Combinator 冬季batch：**25%** 创业公司代码库 **95%+ AI生成**
 - 写接口 → AI生成初版 → 你审查修改
-- 写测试 → AI生成测试用例
-- Debug → 错误信息丢给AI分析原因
+- 写测试 → AI生成用例
+- Debug → 错误信息丢给AI
+- 写文档 → AI生成框架
 
-**AI能帮你省掉大量重复性工作**
+<br>
 
----
-
-### 但是——不能变成"离开AI什么都不会"
-
-**METR随机对照实验结果：**
-有经验的开发者使用AI工具后，反而 <em>比不用时慢了19%</em>
-
-**CodeRabbit分析：**
-AI参与代码重大缺陷概率是人类写的 **1.7倍**
-
-> AI是你的工具，不是你的拐杖
-> 如果你连AI生成的代码是对是错都判断不了，问题不在AI，在你自己
+> AI是工具，不是拐杖
+> 离开AI什么都不会 → 问题不在AI，在你自己
 
 ---
 
 ### 学校不教的东西
 
-实习最大的冲击不是技术难，而是——**这些东西学校根本没教过**
+- **DDD四层架构** —— 学校Controller-Service-Dao三层 vs 企业四层
+- **企业级工程化** —— Git工作流 / CI-CD / 灰度发布 / 监控告警
+- **微服务治理** —— 服务发现 / 负载均衡 / 熔断降级 / 分布式事务
+- **大规模系统设计** —— 百万QPS / 数据一致性 / 缓存击穿
 
-- **DDD四层架构** —— 用户接口层/应用层/领域层/基础设施层
-- **企业级工程化** —— Git工作流/CI-CD/灰度发布/监控告警
-- **微服务治理** —— 服务发现/负载均衡/熔断降级/分布式事务
-- **大规模系统设计** —— 百万QPS/数据一致性/缓存击穿
+<br>
 
-> 在学校学的是基础，在企业学的是实战。两个都重要，缺一个都不行
-
----
+实习才是真正学习的开始
 
 ### 生活建议
 
-**租房不要太远**
-- 通勤超过半小时会非常痛苦
-- 尽量步行或骑车能到
-- 省下的时间和精力远比房租差价值
-
-**规律作息**
-- 身体是你最核心的生产力工具
-
-**心态**
-- 每天问自己：今天我学到了什么昨天不会的东西？
-- 答案是"没有" → 你需要调整了
+- 租房不要离公司太远，通勤 > 30min 会非常痛苦
+- 规律作息，身体是最核心的生产力工具
+- 每天问自己：今天学到了什么昨天不会的东西？
 
 ---
 
-<!-- _class: chapter -->
+<!-- _class: center -->
 
-## 十二、结尾
+你今天学的框架，三年后可能就被替代了
 
----
+<br>
 
-### 核心竞争力
+但有一样东西不会被替代
 
-技术栈会过时，框架会更迭，但有一样东西不会被替代——
+<br>
 
-- **你解决实际问题的能力**
-- **你快速学习新东西的能力**
-- **你理解业务、理解用户、理解系统的能力**
+**解决实际问题的能力**
 
-> 这些能力，才是你真正的核心竞争力
+**快速学习新东西的能力**
 
----
+**理解业务、理解用户、理解系统的能力**
 
-### 不要焦虑，但要清醒
+<br>
 
-> 不要焦虑，但要清醒
-> 不要盲从，但要行动
-> 不要等着别人告诉你该学什么
-> 自己去探索、去动手、去做项目
+不要焦虑，但要清醒
 
----
+不要盲从，但要行动
 
-### 简历参考
+<br>
 
-PPT最后放了我的简历和学长的简历
+<em>你可以比我们做得更好</em>
 
-**不是说我们有多厉害，而是给大家一个参考——一个真实的前辈走到了哪里，做了什么**
+<br>
 
-**你可以比我们做得更好。**
-
----
-
-<!-- _class: cover -->
-
-# 谢谢大家
-
-**Q&A**
+最后放了我的简历和学长的简历，供大家参考
