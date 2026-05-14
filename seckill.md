@@ -1,6 +1,4 @@
-
- ---
- # MyBatis-Plus 的 BaseMapper 为什么能自动生成 SQL？                                       
+ MyBatis-Plus 的 BaseMapper 为什么能自动生成 SQL？                                       
      
   先回到没有 MyBatis-Plus 的时代
 
@@ -299,3 +297,69 @@
   1. 从 Repository 拿到对象
   2. 调对象自己的方法（业务逻辑在对象身上）
   3. 通过 Repository 存回去
+
+
+
+
+
+------
+#ddd四层架构的目录结构
+  
+```  
+seckill/                              # 父工程（pom 类型）  
+├── pom.xml                           # 父 POM，管理公共依赖版本  
+│  
+├── seckill-domain/                   # 领域层（不依赖任何其他模块）  
+│   └── src/main/java/seckill/domain/  
+│       ├── entity/                        # 领域实体  
+│       │   ├── User.java                       ✅ 已完成  
+│       │   ├── Goods.java                      ✅ 已完成  
+│       │   ├── SeckillGoods.java               ✅ 已完成  
+│       │   └── SeckillOrder.java               ✅ 已完成  
+│       └── repository/                    # 仓储接口（只定义接口）  
+│           ├── UserRepository.java             ✅ 已完成  
+│           ├── GoodsRepository.java            ✅ 已完成  
+│           ├── SeckillGoodsRepository.java     ✅ 已完成  
+│           └── SeckillOrderRepository.java     ✅ 已完成  
+│  
+├── seckill-infrastructure/           # 基础设施层（依赖 domain 层）  
+│   └── src/main/java/seckill/  
+│       ├── mapper/                         # MyBatis-Plus Mapper  
+│       │   ├── UserMapper.java                 ✅ 已完成  
+│       │   ├── GoodsMapper.java                ✅ 已完成  
+│       │   ├── SeckillGoodsMapper.java         ✅ 已完成  
+│       │   └── SeckillOrderMapper.java         ✅ 已完成  
+│       └── repository/                     # 仓储接口实现  
+│           ├── UserRepositoryImpl.java         ✅ 已完成  
+│           ├── GoodsRepositoryImpl.java        ✅ 已完成  
+│           ├── SeckillGoodsRepositoryImpl.java ✅ 已完成（reduceStock 待实现）  
+│           └── SeckillOrderRepositoryImpl.java ✅ 已完成  
+│  
+├── seckill-application/              # 应用层（依赖 domain 层）  
+│   └── src/main/java/seckill/service/  
+│       ├── GoodsApplicationService.java         ✅ 已完成（商品列表+详情）  
+│       ├── SeckillApplicationService.java       🔲 空类，待实现  
+│       ├── OrderApplicationService.java         🔲 空类，待实现  
+│       └── vo/                                  # 视图对象（放在 application 层）  
+│           ├── GoodsVO.java                       ✅ 已完成  
+│           ├── SeckillGoodsVO.java                ✅ 已完成  
+│           └── OrderVO.java                       ✅ 已完成  
+│  
+├── seckill-interface/                # 接口层（依赖 application 层）  
+│   └── src/main/java/seckill/  
+│       ├── controller/                     # REST Controller  
+│       │   ├── GoodsController.java            ✅ 已完成（/goods/list, /goods/detail）  
+│       │   ├── SeckillController.java          🔲 空类，待实现  
+│       │   └── OrderController.java            🔲 空类，待实现  
+│       └── dto/                            # 数据传输对象  
+│           ├── request/  
+│           │   ├── LoginRequest.java             ✅ 已完成  
+│           │   └── SeckillRequest.java           ✅ 已完成  
+│           └── response/  
+│               └── Result.java                   ✅ 已完成（泛型统一响应）  
+│  
+└── seckill-starter/                  # 启动模块（聚合所有模块）  
+    └── src/main/        ├── java/seckill/SeckillApplication.java    ✅ 已完成  
+        └── resources/            ├── application.yml                      ✅ 已完成  
+            └── db/schema.sql                        ✅ 已完成（4张表+索引）  
+```
