@@ -1,6 +1,6 @@
 
  ---
- ##  MyBatis-Plus 的 BaseMapper 为什么能自动生成 SQL？                                       
+ # MyBatis-Plus 的 BaseMapper 为什么能自动生成 SQL？                                       
      
   先回到没有 MyBatis-Plus 的时代
 
@@ -135,8 +135,8 @@
 
 
 
-
 ## ddd四层架构和传统三层架构在开发上的区别
+ 
   其实有两种开发顺序：
      
   │   方式   │    顺序  │         特点         │
@@ -145,4 +145,22 @@
 
   │ 自顶向下 │ controller → service → repository → mapper    │ 先定好接口，再填实现 │
   
-  
+
+ ---
+  QueryWrapper 是什么？
+
+  简单理解：用 Java 代码拼 SQL 的 WHERE 条件。
+
+  // 等价于 SQL：SELECT * FROM t_user WHERE phone = '13800138000'
+  QueryWrapper<User> wrapper = new QueryWrapper<>();
+  wrapper.eq("phone", phone);             // eq = equal（等于）
+  userMapper.selectOne(wrapper);          // selectOne = 只查一条
+
+  // 多条件：
+  // 等价于 SQL：WHERE user_id = 1 AND goods_id = 2
+  QueryWrapper<SeckillOrder> wrapper = new QueryWrapper<>();
+  wrapper.eq("user_id", userId);
+  wrapper.eq("goods_id", goodsId);
+
+  为什么用 QueryWrapper 不直接写 SQL？ 简单查询用 QueryWrapper 更快更安全（自动防 SQL 注入），复杂查询才需要自己写 SQL。
+
