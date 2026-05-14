@@ -166,3 +166,136 @@
 
   为什么用 QueryWrapper 不直接写 SQL？ 简单查询用 QueryWrapper 更快更安全（自动防 SQL 注入），复杂查询才需要自己写 SQL。
 
+-----
+
+❯ ddd充血模型是什么？？？
+
+● 这是 DDD（领域驱动设计）里非常核心的一个概念。我用对比的方式讲清楚。
+
+  ---
+  先理解反面：贫血模型
+
+  你现在写的代码大概率就是贫血模型，长这样：
+
+  // Entity：只有字段和 getter/setter，没有任何业务逻辑
+  public class User {
+      private Long id;
+      private String name;
+      private Integer status;
+      // 纯数据容器，是个"哑对象"
+      // getter / setter ...
+  }
+
+  // Service：所有业务逻辑都在这里
+  public class UserService {
+      public void activateUser(User user) {
+          user.setStatus(1);           // 业务逻辑在 Service 里
+          user.setUpdatedAt(LocalDateTime.now());
+      }
+
+      public boolean canLogin(User user) {
+          return user.getStatus() == 1;  // 判断逻辑也在 Service 里
+      }
+  }
+
+  问题在哪？ Entity 只是个数据袋子，所有"行为"都散落在 Service 里。Entity
+  自己不知道自己能干什么、不能干什么。这就是"贫血"——有数据没行为。
+
+  ---
+  充血模型：数据 + 行为放在一起
+
+  充血模型的核心思想：谁拥有数据，谁就应该拥有操作这些数据的行为。
+
+  // Entity：既有数据，也有业务逻辑
+  public class User {
+      private Long id;
+      private String name;
+      private Integer status;
+
+      // 自己的状态，自己负责改变
+      public void activate() {
+          if (this.status == 1) {
+              throw new RuntimeException("用户已激活，不要重复操作");
+          }
+          this.status = 1;
+          this.updatedAt = LocalDateTime.now();
+      }
+
+      // 自己的规则，自己来判断
+      public boolean canLogin() {
+          return this.status == 1;
+      }
+  }
+
+  然后 Service 变得很薄：
+
+  public class UserService {
+      public void activateUser(Long userId) {
+          User user = userRepository.findById(userId);
+          user.activate();    // 只是"协调"，逻辑在 User 自己身上
+          userRepository.save(user);
+      }
+  }
+
+  ---
+  一张图看懂区别
+
+  贫血模型：
+  ┌──────────┐       ┌──────────────────┐
+  │  Entity   │       │     Service       │
+  │ (纯数据)  │ ←─── │ (所有业务逻辑都在这) │
+  └──────────┘       └──────────────────┘
+
+  充血模型：
+  ┌──────────────────┐       ┌────────────┐
+  │     Entity        │       │   Service   │
+  │ (数据 + 业务逻辑)  │ ←─── │ (薄协调层)   │
+  └──────────────────┘       └────────────┘
+
+  ---
+  判断标准很简单
+
+  问自己一个问题："这段逻辑放到别的 Service 里还能不能复用？"
+
+  - 如果能 → 说明逻辑应该下沉到 Entity（充血）
+  - 如果涉及多个 Entity 协作 → 放在 Service（Service 本来就是干协调的）
+
+  ---
+  对你的秒杀项目的意义
+
+  你现在做的是 Repository 层改造。充血模型和 Repository 的关系是：
+
+  ▎ Repository 是基础设施层，只负责存取。Entity
+  ▎ 是领域层，负责业务规则。两者职责要分开。
+
+  所以你现在改 Repository
+  的返回值类型、参数类型，就是在为后面充血模型打基础——Repository
+  返回一个有行为的 Entity，Service 调用 Entity 的方法完成业务。
+
+  有不清楚的地方继续问。
+
+✻ Baked for 30s
+
+❯ 说白了，充血模型就是在尸体里面放增删改查这些，在server层里面条用其他的函数
+
+● 对，方向是对的，但表述上稍微纠正一下：
+
+  你说的"增删改查"
+
+  不完全是增删改查，准确说是业务规则。比如：
+
+  - "秒杀商品库存够不够" → 这是 SeckillProduct 自己该判断的
+  - "用户能不能参与秒杀" → 这是 User 自己该知道的
+  - "订单状态能不能取消" → 这是 Order 自己该管的
+
+  不是 save、delete、select 这些，这些还是 Repository 的事。
+
+  用一句话总结
+
+  充血模型 = Entity 里放业务方法（判断、计算、状态变更），Service
+  里只做协调（取对象 → 调对象的方法 → 存回去）。
+
+  Service 的套路永远是三步：
+  1. 从 Repository 拿到对象
+  2. 调对象自己的方法（业务逻辑在对象身上）
+  3. 通过 Repository 存回去
