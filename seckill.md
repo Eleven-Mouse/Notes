@@ -145,6 +145,8 @@
 
   │ 自顶向下 │ controller → service → repository → mapper    │ 先定好接口，再填实现 │
   
+  正确的调用链：
+    Controller → Service → Repository → Mapper → DB
 
  ---
   QueryWrapper 是什么？
