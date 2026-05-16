@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Seckill-经验总结.md",
+                "file": "java知识图谱/Part1-Java基础/01-数据类型与string.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Seckill-经验总结"
+              "title": "01-数据类型与string"
             }
           }
         ],
@@ -272,8 +272,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "90dbec69ad203466",
   "lastOpenFiles": [
+    "java知识图谱/Part1-Java基础/02-面向对象.md",
+    "java知识图谱/Part1-Java基础/01-数据类型与string.md",
+    "java知识图谱/Part1-Java基础/03-泛型与反射.md",
+    "java知识图谱/Part1-Java基础/01-数据类型与String.md",
+    "Seckill-经验总结.md",
     "java快速复习大纲/Stage6-图谱融合/全链路技术图谱.md",
     "java快速复习大纲/Stage3-项目映射/博客AI系统-技术映射.md",
     "java快速复习大纲/Stage2-核心深度/M7-MySQL深度.md",
@@ -281,7 +286,6 @@
     "java快速复习大纲/Stage2-核心深度/M3-并发与锁深度.md",
     "java快速复习大纲/Stage1-体系重构/00-工程级Java技术地图.md",
     "AI时代互联网岗位变革与大学生应对.md",
-    "Seckill-经验总结.md",
     "java知识图谱/Part7-中间件/Rabbitmq.md",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "conflict-files-obsidian-git.md",
@@ -305,10 +309,6 @@
     "java知识图谱/00-java.md",
     "java知识图谱/42-知识图谱融合.md",
     "java知识图谱/Part8-架构/41-系统设计.md",
-    "java知识图谱/Part8-架构/39-限流熔断降级.md",
-    "java知识图谱/Part8-架构/40-分布式理论与事务.md",
-    "java知识图谱/Part8-架构/38-微服务组件.md",
-    "java知识图谱/Part7-中间件/37-IO与NIO.md",
     "未命名.canvas",
     "~$库系统与应用实验报告（2025-2026-2）.doc"
   ]
