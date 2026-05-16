@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java知识图谱/Part1-Java基础/01-数据类型与string.md",
+                "file": "java知识图谱/Part1-Java基础/01-数据类型与String.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-数据类型与string"
+              "title": "01-数据类型与String"
             }
           }
         ],
@@ -275,9 +275,10 @@
   "active": "90dbec69ad203466",
   "lastOpenFiles": [
     "java知识图谱/Part1-Java基础/02-面向对象.md",
-    "java知识图谱/Part1-Java基础/01-数据类型与string.md",
-    "java知识图谱/Part1-Java基础/03-泛型与反射.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md",
+    "java知识图谱/Part1-Java基础/01-数据类型与string.md",
+    "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
+    "java知识图谱/Part1-Java基础/03-泛型与反射.md",
     "Seckill-经验总结.md",
     "java快速复习大纲/Stage6-图谱融合/全链路技术图谱.md",
     "java快速复习大纲/Stage3-项目映射/博客AI系统-技术映射.md",
@@ -308,8 +309,6 @@
     "java快速复习大纲/Stage2-核心深度/M2-JVM深度.md",
     "java知识图谱/00-java.md",
     "java知识图谱/42-知识图谱融合.md",
-    "java知识图谱/Part8-架构/41-系统设计.md",
-    "未命名.canvas",
-    "~$库系统与应用实验报告（2025-2026-2）.doc"
+    "未命名.canvas"
   ]
 }
