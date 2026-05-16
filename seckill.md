@@ -377,13 +377,10 @@ public class UserService {
 
 ---
 
-## 五、核心概念速查表
 
-| 概念 | 一句话解释 |
-|------|-----------|
-| BaseMapper | 通过泛型自动生成单表 CRUD 的 SQL |
-| QueryWrapper | 用 Java 代码代替手写 WHERE 条件 |
-| DDD 四层架构 | 把业务逻辑从 Service 下沉到 Domain 层 |
-| 贫血模型 | Entity 只有数据，业务逻辑全在 Service |
-| 充血模型 | Entity 同时拥有数据和业务行为 |
-| Repository 接口 | Domain 层定义接口，Infrastructure 层实现，实现依赖倒置 |
+
+
+
+
+
+
