@@ -377,6 +377,356 @@ public class UserService {
 
 ---
 
+## 五、RabbitMQ 死信队列（DLQ）
+
+### 5.1 什么是死信队列
+
+死信队列（Dead Letter Queue）是 RabbitMQ 的内置机制：**当消息无法被正常消费时，自动转发到一个专门的队列**，而不是丢弃或无限重试。
+
+消息变成"死信"的三种情况：
+1. 消费者调用 `basicNack(requeue=false)` 拒绝消息
+2. 消息在队列中存活时间超过 TTL（过期）
+3. 队列满了，新消息进不来
+
+### 5.2 为什么需要死信队列
+
+秒杀场景下，消费失败的常见原因：
+
+```
+数据库连接池耗尽 → 短暂性故障，重试可能成功
+库存不足抛异常 → 持久性故障，重试永远失败
+代码 bug（NPE 等）→ 必须修复代码才能恢复
+```
+
+**没有死信队列时**：`basicNack(requeue=true)` 把消息放回原队列，消费者立刻又消费，又失败，又放回……形成死循环。后果：
+- CPU 空转，日志刷屏
+- 原队列被失败消息占满，正常消息排不上
+- 无法区分"正在重试"和"彻底失败"
+
+**有死信队列时**：`basicNack(requeue=false)` 消息不再回到原队列，而是路由到死信队列。正常队列不受影响，死信队列可以单独监控、告警、人工排查。
+
+### 5.3 配置方法
+
+核心：**在声明主队列时通过 arguments 指定死信目的地**。
+
+```java
+// 1. 主队列：声明时绑定 DLX 参数
+@Bean
+public Queue seckillQueue() {
+    Map<String, Object> args = new HashMap<>();
+    args.put("x-dead-letter-exchange", "seckill.dlx.exchange");    // 死信去哪个交换机
+    args.put("x-dead-letter-routing-key", "seckill.dlx");          // 用什么 routing key
+    return new Queue("seckill.queue", true, false, false, args);
+}
+
+// 2. 死信交换机（类型和主交换机无关，可以不同）
+@Bean
+public DirectExchange dlxExchange() {
+    return new DirectExchange("seckill.dlx.exchange", true, false);
+}
+
+// 3. 死信队列
+@Bean
+public Queue dlxQueue() {
+    return new Queue("seckill.dlx.queue", true);
+}
+
+// 4. 绑定
+@Bean
+public Binding dlxBinding() {
+    return BindingBuilder.bind(dlxQueue()).to(dlxExchange()).with("seckill.dlx");
+}
+```
+
+### 5.4 消息流转全景
+
+```
+Producer → seckill.exchange → seckill.queue → Consumer
+                                           ├─ ACK → 消息删除
+                                           └─ NACK(requeue=false)
+                                                ↓ x-dead-letter-exchange 路由
+                                          seckill.dlx.exchange
+                                                ↓ routing key
+                                          seckill.dlx.queue
+                                                ↓ 人工处理 / 自动补偿
+```
+
+> **关键点**：死信队列不是额外的代码逻辑，而是 RabbitMQ 的内置行为。你只需要在声明队列时配好参数，拒绝消息时用 `requeue=false`，RabbitMQ 自动帮你转发。
+
+---
+
+## 六、Redis 原子操作在秒杀中的应用
+
+### 6.1 为什么秒杀库存要放 Redis
+
+秒杀的瞬时并发极高（万级 QPS），如果直接打到数据库：
+- 每个请求都执行 `UPDATE ... SET stock = stock - 1`，数据库扛不住
+- 行锁竞争严重，响应时间飙升
+
+Redis 的核心优势：**单线程 + 内存操作，天然保证原子性，且性能是数据库的 100 倍以上**。
+
+### 6.2 DECR 和 INCR 的原子性
+
+Redis 的 `DECR`/`INCR` 是单条命令，执行过程中不会被其他命令打断：
+
+```
+时刻 T1: 线程 A 执行 DECR → Redis 从 100 变成 99（原子完成）
+时刻 T2: 线程 B 执行 DECR → Redis 从 99 变成 98（原子完成）
+```
+
+不需要加锁，不存在"两个线程同时读到 100，都减成 99"的问题。
+
+### 6.3 Lua 脚本：多步操作的原子化
+
+`DECR` 只能减 1，但秒杀需要"先判断库存 > 0，再减"。两步操作之间如果有并发，可能出问题：
+
+```
+线程 A: GET stock → 1（还有库存）
+线程 B: GET stock → 1（还有库存）
+线程 A: DECR stock → 0（扣减成功）
+线程 B: DECR stock → -1（超卖了！）
+```
+
+Lua 脚本把多步操作合并为一次原子执行：
+
+```lua
+local stock = tonumber(redis.call('get', KEYS[1]))
+if stock and stock > 0 then
+    redis.call('decr', KEYS[1])
+    return 1   -- 成功
+end
+return 0       -- 库存不足
+```
+
+Redis 执行 Lua 脚本时是**单线程阻塞**的，整个脚本作为一个不可分割的原子操作，不会被其他命令插入。
+
+### 6.4 库存回滚：消费失败时的 INCR
+
+秒杀流程是"Redis 先扣 → MQ → 消费者再扣 DB"，两步之间存在时间差。如果消费者处理失败（DB 库存不足、代码异常），Redis 的库存已经被扣了，不会自动恢复。
+
+解决方案：消费失败时调用 `INCR` 回补。
+
+```java
+// 消费者 catch 块
+catch (Exception e) {
+    cacheService.increment("seckill:stock:" + goodsId);  // 回补
+    channel.basicNack(tag, false, false);                 // 进死信队列
+}
+```
+
+> **注意**：`INCR` 是简单的 +1，不需要判断边界。因为只有之前 `DECR` 成功（库存 > 0）才会发 MQ，所以回补一定是在一个已扣减的值上加回去，不会溢出。
+
+---
+
+## 七、动态秒杀路径防刷
+
+### 7.1 问题：固定接口路径 = 裸奔
+
+`POST /seckill?userId=1&goodsId=1` 路径固定，攻击者可以：
+- 提前写好脚本，活动开始时瞬间批量调用
+- 不需要任何前端交互，直接 HTTP 请求
+- 一个脚本每秒打几千次
+
+### 7.2 解决思路：动态 Token 路径
+
+核心思想：**秒杀接口不直接暴露，而是需要一个一次性的随机 Token 才能访问**。
+
+```
+正常用户流程：
+  1. 前端调 GET /seckill/path?userId=1&goodsId=1
+  2. 后端生成 UUID，存入 Redis（TTL=60s），返回给前端
+  3. 前端用这个 UUID 调 POST /seckill?userId=1&goodsId=1&path=UUID
+  4. 后端验证：Redis 中是否存在这个 UUID → 验证通过后立即删除（一次性）
+
+机器人视角：
+  必须先调一次 GET 拿 UUID
+  拿到后必须在 60s 内用掉
+  每个 UUID 只能用一次
+  增加了一次网络往返 + 路径不可预测 → 攻击成本大幅提升
+```
+
+### 7.3 实现要点
+
+```java
+// 1. 生成路径（GET 接口）
+@GetMapping("/seckill/path")
+public Result getSeckillPath(Long userId, Long goodsId) {
+    String uuid = UUID.randomUUID().toString().replace("-", "");
+    // 存入 Redis，60s 过期
+    cacheService.setCache("seckill:path:" + userId + ":" + goodsId, uuid, 60, TimeUnit.SECONDS);
+    return Result.success(uuid);
+}
+
+// 2. 验证路径（POST 接口，第一步）
+Object cachedPath = cacheService.getCache("seckill:path:" + userId + ":" + goodsId);
+if (cachedPath == null || !cachedPath.equals(path)) {
+    return Result.error("无效的秒杀路径");    // null = 过期或没申请，不匹配 = 伪造
+}
+cacheService.deleteCache("seckill:path:" + userId + ":" + goodsId);  // 一次性，用完即删
+```
+
+### 7.4 防刷体系层次
+
+秒杀项目中用到了三层防刷，层层递进：
+
+| 层次 | 手段 | 防什么 |
+|------|------|--------|
+| 第一层 | 动态路径（UUID 一次性） | 防机器人直接脚本调用 |
+| 第二层 | SETNX 限流（60s TTL） | 防同一用户重复下单 |
+| 第三层 | Redis 预扣库存 | 防超卖，库存为 0 直接拒绝 |
+
+> **面试要点**：动态路径不是万能的，它防的是"直接脚本调用"。真正的高级攻击（模拟浏览器、分布式 IP）还需要配合验证码、IP 限流等手段。
+
+---
+
+## 八、MQ 消费失败的补偿策略
+
+### 8.1 问题：消费者处理失败了怎么办
+
+MQ 的设计目标是"异步削峰"，但异步意味着生产者已经返回"排队中"了，消费者失败时生产者不知道。
+
+秒杀场景下失败的影响：
+- Redis 库存被扣了但没下单成功 → 库存虚耗
+- 用户轮询结果永远是"排队中" → 体验差
+- 消息丢了 → 订单丢失
+
+### 8.2 补偿三件套
+
+消费者 catch 块中按顺序完成三件事：
+
+```java
+catch (Exception e) {
+    // ① 写失败标记 → 前端轮询能立刻返回"失败"
+    cacheService.setCache("seckill:user:" + userId + ":" + goodsId, "-1", 60, SECONDS);
+
+    // ② 回补 Redis 库存 → 恢复库存数字
+    cacheService.increment("seckill:stock:" + goodsId);
+
+    // ③ 清除限流标记 → 允许用户重新参与
+    cacheService.deleteCache("seckill:limit:" + userId + ":" + goodsId);
+
+    // ④ 消息进死信队列 → 不丢失，可后续人工排查
+    channel.basicNack(tag, false, false);
+}
+```
+
+**执行顺序很重要**：
+1. 先写 `-1` → 用户最关心的是"我到底成功没"，这个要最先响应
+2. 再回补库存 → 恢复系统状态
+3. 再清限流 → 给用户重新参与的机会
+4. 最后 NACK → 消息安全进入 DLQ
+
+### 8.3 DB 扣库存的返回值检查
+
+`reduceStock` 的 SQL 使用了 `WHERE stock_count > 0` 条件：
+
+```sql
+UPDATE t_seckill_goods SET stock_count = stock_count - 1
+WHERE id = ? AND stock_count > 0
+```
+
+当库存为 0 时，这条 SQL 影响 0 行。如果代码不检查返回值，会继续创建订单，造成超卖：
+
+```java
+// 错误写法：忽略返回值
+seckillGoodsRepository.reduceStock(goodsId);  // 返回 0 也继续
+seckillOrderRepository.save(order);            // 超卖订单被创建
+
+// 正确写法：检查返回值
+int affected = seckillGoodsRepository.reduceStock(goodsId);
+if (affected == 0) {
+    throw new RuntimeException("库存不足");  // 抛异常 → 进 catch 补偿流程
+}
+```
+
+> **经验总结**：任何 UPDATE/DELETE 操作都应该检查返回的影响行数，它是数据库给你最直接的反馈。
+
+---
+
+## 九、MQ 消息可靠性三件套
+
+### 9.1 三个环节，三道防线
+
+消息从生产到消费的完整链路中，每个环节都可能丢消息：
+
+```
+Producer → [Broker: Exchange → Queue] → Consumer
+   ①           ②                          ③
+```
+
+| 环节 | 可能丢消息的场景 | 防线 |
+|------|-----------------|------|
+| ① Producer → Broker | 网络抖动、Broker 宕机 | Publisher Confirm |
+| ② Broker 内部 | Broker 重启，内存中的消息全丢 | 消息持久化（durable queue + persistent message） |
+| ③ Broker → Consumer | Consumer 处理到一半挂了 | 手动 ACK |
+
+### 9.2 Publisher Confirm（生产者确认）
+
+**原理**：消息到达 Broker 后，Broker 异步回调 ACK/NACK 告诉生产者结果。
+
+```yaml
+# application.yml
+spring:
+  rabbitmq:
+    publisher-confirm-type: correlated   # 开启 confirm
+    publisher-returns: true              # 消息不可路由时触发 return 回调
+```
+
+```java
+// RabbitTemplate 回调
+rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
+    if (!ack) {
+        log.error("消息确认失败: {}", cause);
+        // 重发 or 记录到数据库做补偿
+    }
+});
+```
+
+### 9.3 消息持久化
+
+两步缺一不可：
+- **队列持久化**：`new Queue("seckill.queue", true)` — `durable=true`
+- **消息持久化**：Spring AMQP 默认 `deliveryMode=2`（persistent），不需要额外配置
+
+### 9.4 手动 ACK
+
+```yaml
+spring:
+  rabbitmq:
+    listener:
+      simple:
+        acknowledge-mode: manual
+```
+
+```java
+// 消费成功
+channel.basicAck(deliveryTag, false);
+
+// 消费失败，重新入队
+channel.basicNack(deliveryTag, false, true);
+
+// 消费失败，不重新入队（进死信队列）
+channel.basicNack(deliveryTag, false, false);
+```
+
+> **面试总结**：三道防线全配上，才能做到消息**至少投递一次（at-least-once）**。配合消费者的幂等性检查，实现"Exactly-Once"的效果。
+
+---
+
+## 十、秒杀系统的 Redis Key 设计总结
+
+完成 Phase 5-6 后，系统中所有 Redis Key 的全景：
+
+| Key 模式 | 操作 | 生命周期 | 用途 |
+|----------|------|----------|------|
+| `seckill:stock:{goodsId}` | 启动时 SET，秒杀时 DECR，失败时 INCR | 活动期间持久 | 库存预扣减 |
+| `seckill:limit:{userId}:{goodsId}` | SETNX，60s TTL | 每次秒杀 60s | 防重复下单 |
+| `seckill:path:{userId}:{goodsId}` | SET，60s TTL，验证后 DELETE | 一次性 | 动态路径防刷 |
+| `seckill:user:{userId}:{goodsId}` | 消费成功写 orderId，失败写 "-1 | 60s | 结果轮询 |
+| `seckill:goods:list` | 缓存 60s | 商品列表缓存 |
+| `seckill:goods:{id}` | 缓存 60s | 商品详情缓存 |
+
+> **设计原则**：每个 Key 的命名遵循 `业务:模块:维度` 的层级结构，方便排查和监控。TTL 一定要设置，避免内存泄漏。
 
 
 
