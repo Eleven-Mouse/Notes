@@ -1,7 +1,7 @@
 # Java 全栈知识图谱 v2 — 目录总览
 
 > 面向 2026 互联网大厂 Java 后端招聘标准
-> 共 53 个细化文档 / 8 大模块（含微服务专项与 DDD 分层专项）
+> 共 56 个细化文档 / 8 大模块（含微服务专项与 DDD 分层专项）
 
 ---
 
@@ -83,13 +83,15 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
 | 33 | [MyBatis-核心](33-MyBatis-核心.md) | 完整执行流程/MapperProxy/{} vs ${}/resultMap/关联映射/N+1问题/MyBatis-Plus | ⭐⭐ |
 | 34 | [MyBatis-动态SQL与缓存](34-MyBatis-动态SQL与缓存.md) | 7个动态SQL标签/批量操作/一级二级缓存对比/插件机制/PageHelper原理 | ⭐⭐ |
 
-### Part 7：中间件（3 个文档）
+### Part 7：中间件（5 个文档）
 
 | # | 文档 | 核心内容 | 优先级 |
 |---|------|---------|--------|
-| 35 | [Kafka架构](35-Kafka架构.md) | MQ三大作用/Broker-Topic-Partition-ConsumerGroup/6大性能原因/零拷贝/vs RabbitMQ | ⭐⭐ |
-| 36 | [Kafka可靠性与消息问题](36-Kafka可靠性与消息问题.md) | 三端保证/acks=all/幂等生产者/事务/消息顺序/重复消费幂等/消息积压/Rebalance | ⭐⭐ |
-| 37 | [IO与NIO](37-IO与NIO.md) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
+| 35 | [消息队列整体](Part7-中间件/35-消息队列整体.md) | MQ价值与代价/消息语义/可靠性链路/选型对比/Kafka-RabbitMQ-RocketMQ定位 | ⭐⭐⭐ |
+| 36 | [Kafka板块](Part7-中间件/36-Kafka.md) | 分区模型/高吞吐原理/三端可靠性/顺序幂等/Rebalance/积压治理 | ⭐⭐⭐ |
+| 37 | [IO与NIO](Part7-中间件/37-IO与NIO.md) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
+| 38 | [RabbitMQ板块](Part7-中间件/38-RabbitMQ.md) | Exchange-Queue模型/Confirm-ACK-持久化/死信延迟/Quorum Queue/消费治理 | ⭐⭐⭐ |
+| 54 | [RocketMQ板块](Part7-中间件/RocketMQ.md) | NameServer-Broker模型/事务消息/顺序消息/延时消息/交易链路一致性 | ⭐⭐⭐ |
 
 ### Part 8：架构（15 个文档 + 融合）
 
@@ -151,8 +153,10 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
   🔸 17-并发工具类
   🔸 19-各类锁对比
   🔸 31-Redis持久化与集群
-  🔸 35-Kafka架构
-  🔸 36-Kafka可靠性
+  🔸 35-消息队列整体
+  🔸 36-Kafka板块
+  🔸 38-RabbitMQ板块
+  🔸 54-RocketMQ板块
   🔸 40-分布式理论与事务
 
 面试加分（30%）:
