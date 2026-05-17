@@ -1,11 +1,11 @@
-> 面试定位：RocketMQ 常见于交易与最终一致性场景，重点是事务消息、顺序消息、延时消息与高可用设计。
+﻿> 面试定位：39-RocketMQ 常见于交易与最终一致性场景，重点是事务消息、顺序消息、延时消息与高可用设计。
 
 ---
 
 ## 一、你要先讲出的结论
 
-1. RocketMQ 在国内电商与交易链路落地广，业务语义能力强。
-2. 事务消息是 RocketMQ 的面试高频，必须讲清“半消息 + 本地事务 + 回查”。
+1. 39-RocketMQ 在国内电商与交易链路落地广，业务语义能力强。
+2. 事务消息是 39-RocketMQ 的面试高频，必须讲清“半消息 + 本地事务 + 回查”。
 3. 生产治理核心同样是：可靠投递、幂等消费、积压监控、失败补偿。
 
 ---
@@ -23,7 +23,7 @@ Producer -> NameServer -> Broker -> Consumer
 
 ---
 
-## 三、RocketMQ 关键能力
+## 三、39-RocketMQ 关键能力
 
 ### 3.1 事务消息（高频）
 
@@ -66,9 +66,9 @@ Producer -> NameServer -> Broker -> Consumer
 
 ---
 
-## 六、RocketMQ 与 Kafka/RabbitMQ 对比
+## 六、39-RocketMQ 与 Kafka/RabbitMQ 对比
 
-| 维度 | RocketMQ | Kafka | RabbitMQ |
+| 维度 | 39-RocketMQ | Kafka | RabbitMQ |
 |---|---|---|---|
 | 强项 | 事务消息、业务语义 | 高吞吐、可回放 | 路由灵活、低延迟 |
 | 常见场景 | 交易链路、最终一致性 | 日志流、大数据 | 业务异步、任务分发 |
@@ -79,11 +79,11 @@ Producer -> NameServer -> Broker -> Consumer
 
 ## 七、面试追问速答
 
-### Q1：RocketMQ 事务消息怎么保证一致性？
+### Q1：39-RocketMQ 事务消息怎么保证一致性？
 
 - 半消息先落 Broker，本地事务成功后提交；异常时通过回查机制确认最终状态。
 
-### Q2：RocketMQ 会重复消费吗？
+### Q2：39-RocketMQ 会重复消费吗？
 
 - 会，至少一次语义下重复是常态，必须用业务幂等兜底。
 
@@ -91,7 +91,7 @@ Producer -> NameServer -> Broker -> Consumer
 
 - 扩消费者、增加队列并行度、排查慢消费依赖，并对失败消息分流到重试/DLQ。
 
-### Q4：为什么交易系统常用 RocketMQ？
+### Q4：为什么交易系统常用 39-RocketMQ？
 
 - 因为事务消息能力对“订单-支付-库存”最终一致性链路更友好。
 
