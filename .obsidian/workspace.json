@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java知识图谱/Part7-中间件/Rabbitmq.md",
+                "file": "java知识图谱/Part7-中间件/35-Kafka架构.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Rabbitmq"
+              "title": "35-Kafka架构"
             }
           }
         ],
@@ -274,8 +274,11 @@
   },
   "active": "90dbec69ad203466",
   "lastOpenFiles": [
+    "java知识图谱/Part7-中间件/38-Rabbitmq.md",
+    "java知识图谱/Part7-中间件/35-Kafka架构.md",
+    "java知识图谱/Part7-中间件/36-Kafka可靠性与消息问题.md",
+    "java知识图谱/Part7-中间件/37-IO与NIO.md",
     "java知识图谱/Part2-JVM/06-内存结构.md",
-    "java知识图谱/Part7-中间件/Rabbitmq.md",
     "java知识图谱/Part1-Java基础/04-集合框架.md",
     "java知识图谱/Part1-Java基础/03-泛型与反射.md",
     "java知识图谱/Part1-Java基础/05-异常体系与注解.md",
@@ -299,10 +302,7 @@
     "AI时代互联网岗位变革与大学生应对.md",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "conflict-files-obsidian-git.md",
-    "upload/6_个人简历.pdf.md",
-    "upload/ai-ppt-20260510.html.md",
     "upload",
-    "6_个人简历.pdf.md",
     "_pdf2_b64.txt",
     "_pdf1_b64.txt",
     "ai-ppt-20260510.html",
