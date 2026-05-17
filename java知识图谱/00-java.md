@@ -1,7 +1,7 @@
 # Java 全栈知识图谱 v2 — 目录总览
 
 > 面向 2026 互联网大厂 Java 后端招聘标准
-> 共 42 个细化文档 / 约 13000 行 / 8 大模块
+> 共 53 个细化文档 / 8 大模块（含微服务专项与 DDD 分层专项）
 
 ---
 
@@ -91,7 +91,7 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
 | 36 | [Kafka可靠性与消息问题](36-Kafka可靠性与消息问题.md) | 三端保证/acks=all/幂等生产者/事务/消息顺序/重复消费幂等/消息积压/Rebalance | ⭐⭐ |
 | 37 | [IO与NIO](37-IO与NIO.md) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
 
-### Part 8：架构（4 个文档 + 融合）
+### Part 8：架构（15 个文档 + 融合）
 
 | # | 文档 | 核心内容 | 优先级 |
 |---|------|---------|--------|
@@ -99,6 +99,17 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
 | 39 | [限流熔断降级](39-限流熔断降级.md) | 4种限流算法图解/Sentinel/熔断状态机/降级策略/组件对比/接口幂等5种方案 | ⭐⭐ |
 | 40 | [分布式理论与事务](40-分布式理论与事务.md) | CAP/BASE/一致性哈希/雪花算法/2PC/TCC/Saga/消息最终一致性/Seata四种模式 | ⭐⭐ |
 | 41 | [系统设计](41-系统设计.md) | 答题框架/秒杀系统(含Lua脚本)/短链系统(Base62)/Feed/IM/搜索建议 | ⭐ |
+| 43 | [Nacos注册与配置中心](Part8-架构/43-Nacos注册与配置中心.md) | 注册发现流程/namespace-group-dataId/动态刷新/AP与CP取舍/高可用 | ⭐⭐⭐ |
+| 44 | [OpenFeign声明式服务调用](Part8-架构/44-OpenFeign声明式服务调用.md) | 动态代理机制/超时重试/负载均衡/降级策略/调用链治理 | ⭐⭐⭐ |
+| 45 | [SpringCloudGateway网关](Part8-架构/45-SpringCloudGateway网关.md) | 路由与过滤器/统一鉴权/网关限流/灰度路由/网关稳定性 | ⭐⭐⭐ |
+| 46 | [Seata分布式事务](Part8-架构/46-Seata分布式事务.md) | TC/TM/RM/AT模式原理/undo_log/冲突与性能取舍/适用边界 | ⭐⭐⭐ |
+| 47 | [Sentinel限流熔断降级](Part8-架构/47-Sentinel限流熔断降级.md) | 流控规则/熔断规则/热点参数/Feign与Gateway协同/规则治理 | ⭐⭐⭐ |
+| 48 | [DDD四层与启动层总览](Part8-架构/48-DDD四层与启动层总览.md) | application/domain/adapter/infrastructure/start 全局边界 | ⭐⭐⭐ |
+| 49 | [DDD-Application层](Part8-架构/49-DDD-Application层.md) | 用例编排/事务边界/命令查询模型/与Controller职责分离 | ⭐⭐⭐ |
+| 50 | [DDD-Domain层](Part8-架构/50-DDD-Domain层.md) | 实体值对象聚合/领域服务/不变量/反贫血模型 | ⭐⭐⭐ |
+| 51 | [DDD-Adapter层](Part8-架构/51-DDD-Adapter层.md) | 入站出站适配/协议转换/异常映射/DTO装配 | ⭐⭐ |
+| 52 | [DDD-Infrastructure层](Part8-架构/52-DDD-Infrastructure层.md) | 仓储实现/中间件集成/技术可替换性/可观测治理 | ⭐⭐ |
+| 53 | [DDD-Start启动层](Part8-架构/53-DDD-Start启动层.md) | 启动装配/配置管理/模块装配/运行时拓扑 | ⭐⭐ |
 | 42 | [知识图谱融合](42-知识图谱融合.md) | 完整技术地图/调用链分析/面试路线图/频率热力图/答题模板/项目补强/文件索引 | ⭐⭐⭐ |
 
 ---
