@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java知识图谱/Part1-Java基础/02-面向对象.md",
+                "file": "java知识图谱/Part7-中间件/Rabbitmq.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02-面向对象"
+              "title": "Rabbitmq"
             }
           }
         ],
@@ -274,11 +274,21 @@
   },
   "active": "90dbec69ad203466",
   "lastOpenFiles": [
+    "java知识图谱/Part2-JVM/06-内存结构.md",
+    "java知识图谱/Part7-中间件/Rabbitmq.md",
+    "java知识图谱/Part1-Java基础/04-集合框架.md",
+    "java知识图谱/Part1-Java基础/03-泛型与反射.md",
+    "java知识图谱/Part1-Java基础/05-异常体系与注解.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md",
+    "java知识图谱/Part8-架构/38-微服务组件.md",
+    "java知识图谱/00-java.md",
+    "java知识图谱/Part8-架构/53-DDD-Start启动层.md",
+    "java知识图谱/Part8-架构/50-DDD-Domain层.md",
+    "java知识图谱/Part8-架构/49-DDD-Application层.md",
+    "java知识图谱/Part8-架构/48-DDD四层与启动层总览.md",
     "java知识图谱/Part1-Java基础/02-面向对象.md",
     "java知识图谱/Part1-Java基础/01-数据类型与string.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
-    "java知识图谱/Part1-Java基础/03-泛型与反射.md",
     "Seckill-经验总结.md",
     "java快速复习大纲/Stage6-图谱融合/全链路技术图谱.md",
     "java快速复习大纲/Stage3-项目映射/博客AI系统-技术映射.md",
@@ -287,14 +297,12 @@
     "java快速复习大纲/Stage2-核心深度/M3-并发与锁深度.md",
     "java快速复习大纲/Stage1-体系重构/00-工程级Java技术地图.md",
     "AI时代互联网岗位变革与大学生应对.md",
-    "java知识图谱/Part7-中间件/Rabbitmq.md",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "conflict-files-obsidian-git.md",
     "upload/6_个人简历.pdf.md",
     "upload/ai-ppt-20260510.html.md",
     "upload",
     "6_个人简历.pdf.md",
-    "Agent/0-AI基础知识详解.md",
     "_pdf2_b64.txt",
     "_pdf1_b64.txt",
     "ai-ppt-20260510.html",
@@ -302,13 +310,6 @@
     "6_个人简历.pdf",
     "我的简历-nY7U5H (7).pdf",
     "AI时代互联网岗位变革与大学生应对-PPT.html",
-    "AI时代互联网岗位变革与大学生应对-PPT设计方案.md",
-    "AI时代互联网岗位变革与大学生应对-PPT.md",
-    "java快速复习大纲/Stage5-面试体系/面试题库-结构化.md",
-    "java快速复习大纲/Stage4-源码补强/四大核心源码流程.md",
-    "java快速复习大纲/Stage2-核心深度/M2-JVM深度.md",
-    "java知识图谱/00-java.md",
-    "java知识图谱/42-知识图谱融合.md",
     "未命名.canvas"
   ]
 }
