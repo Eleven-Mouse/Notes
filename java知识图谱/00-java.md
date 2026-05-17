@@ -90,7 +90,7 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
 | 35 | [消息队列整体](Part7-中间件/35-消息队列整体.md) | MQ价值与代价/消息语义/可靠性链路/选型对比/Kafka-RabbitMQ-RocketMQ定位 | ⭐⭐⭐ |
 | 36 | [Kafka板块](Part7-中间件/36-Kafka.md) | 分区模型/高吞吐原理/三端可靠性/顺序幂等/Rebalance/积压治理 | ⭐⭐⭐ |
 | 37 | [IO与NIO](Part7-中间件/37-IO与NIO.md) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
-| 38 | [RabbitMQ板块](Part7-中间件/38-RabbitMQ.md) | Exchange-Queue模型/Confirm-ACK-持久化/死信延迟/Quorum Queue/消费治理 | ⭐⭐⭐ |
+| 38 | [RabbitMQ板块](Part7-中间件/38-Rabbitmq.md) | Exchange-Queue模型/Confirm-ACK-持久化/死信延迟/Quorum Queue/消费治理 | ⭐⭐⭐ |
 | 54 | [RocketMQ板块](Part7-中间件/RocketMQ.md) | NameServer-Broker模型/事务消息/顺序消息/延时消息/交易链路一致性 | ⭐⭐⭐ |
 
 ### Part 8：架构（15 个文档 + 融合）
