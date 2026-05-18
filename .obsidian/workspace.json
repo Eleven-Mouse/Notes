@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8-其他/习思想演讲稿.md",
+                "file": "3-存储层/Redis/Redis概念和基础.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "习思想演讲稿"
+              "title": "Redis概念和基础"
             }
           }
         ],
@@ -289,13 +289,13 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
+    "0-首页/首页.md",
+    "8-其他/习思想演讲稿.md",
     "waste-city-practice-path.pptx",
     "《生活垃圾资源化利用与“无废城市”建设的实践路径研究》(2).pptx",
     "8-其他/AI时代互联网岗位变革与大学生应对.md",
     "8-其他/waste-city-practice-path 1.pptx",
     "8-其他/waste-city-practice-path.pptx",
-    "0-首页/首页.md",
-    "8-其他/习思想演讲稿.md",
     "0-首页/小伙伴.gif",
     "3-存储层/Redis/Redis概念和基础.md",
     "0-首页/(1).png",
@@ -309,7 +309,6 @@
     "5-架构/微服务",
     "3-存储层/MySQL",
     "3-存储层",
-    "3-存储层/Redis",
     "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
     "Redis-知识体系-文章导航.md",
     "java知识图谱/Part6-存储层/33-MyBatis-核心.md",
