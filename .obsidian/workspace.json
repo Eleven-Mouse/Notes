@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "首页/首页.md",
+                "file": "3-存储层/Redis/Redis概念和基础.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "首页"
+              "title": "Redis概念和基础"
             }
           }
         ],
@@ -286,13 +286,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f20573a728e6e372",
+  "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
-    "首页/(1).png",
-    "首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
-    "首页/首页.md",
+    "0-首页/(1).png",
+    "0-首页/首页.md",
+    "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "3-存储层/Redis/Redis概念和基础.md",
-    "首页",
+    "0-首页",
     "1-java/55-知识图谱融合.md",
     "8-其他",
     "1-java/00-java.md",
