@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "习思想演讲稿.md",
+                "file": "java知识图谱/Part6-存储层/Redis/未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "习思想演讲稿"
+              "title": "未命名"
             }
           }
         ],
@@ -272,8 +272,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "c141ee3c97213525",
+  "active": "90dbec69ad203466",
   "lastOpenFiles": [
+    "java知识图谱/Part6-存储层/Redis/未命名.md",
+    "java知识图谱/Part6-存储层/Redis",
     "习思想演讲稿.md",
     "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
     "Redis-知识体系-文章导航.md",
@@ -302,14 +304,12 @@
     "java知识图谱/Part7-中间件/RocketMQ.md",
     "java知识图谱/Part7-中间件/37-IO与NIO.md",
     "java知识图谱/Part6-存储层/28-MySQL-事务与MVCC.md",
-    "java知识图谱/Part5-Spring/26-循环依赖.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "_pdf2_b64.txt",
     "_pdf1_b64.txt",
     "ai-ppt-20260510.html",
     "AI时代互联网岗位变革与大学生应对-PPT.html.tmp.28300.bc61db1c77a7",
-    "6_个人简历.pdf",
     "未命名.canvas"
   ]
 }
