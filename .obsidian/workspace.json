@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "存储层/Redis/Redis概念和基础.md",
+                "file": "首页/首页.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Redis概念和基础"
+              "title": "首页"
             }
           }
         ],
@@ -288,12 +288,13 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "java/55-知识图谱融合.md",
     "存储层/Redis/Redis概念和基础.md",
+    "首页",
+    "java/55-知识图谱融合.md",
     "其他",
     "java/00-java.md",
     "存储层/Redis/Redis知识体系详解：.md",
-    "首页.md",
+    "首页/首页.md",
     "架构/DDD",
     "架构/微服务",
     "存储层/MySQL",
@@ -322,8 +323,6 @@
     "中间件/39-RocketMQ.md",
     "新建 文本文档.txt",
     "中间件/38-RabbitMQ.md",
-    "java知识图谱/Part7-中间件/RocketMQ.md",
-    "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
     "未命名.canvas"
   ]
 }
