@@ -1,4 +1,4 @@
-﻿## Redis 概念
+## Redis 概念
 
 Redis（Remote Dictionary Server）是一个开源的**内存数据结构存储系统**，常被归类为 NoSQL。  
 它支持字符串（String）、哈希（Hash）、列表（List）、集合（Set）、有序集合（ZSet）、流（Stream）等多种数据结构。  
@@ -78,17 +78,3 @@ Redis 主要用 C 语言开发，典型特点是：**快、功能多、可持久
 
 ---
 
-## 常用客户端
-
-按语言看常用选择：
-
-- Java：`Lettuce`（Spring Data Redis 默认常用）、`Redisson`（分布式锁与高级功能丰富）
-- Python：`redis-py`
-- Node.js：`ioredis`、`node-redis`
-- Go：`go-redis`
-- .NET：`StackExchange.Redis`
-
-选型建议：
-1. 先看生态和社区活跃度。
-2. 再看是否需要连接池、集群、自动重连、序列化等能力。
-3. 能用成熟客户端就别自己“手搓协议”，除非你准备把自己也优化成 Redis。
