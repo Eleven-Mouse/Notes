@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java/55-知识图谱融合.md",
+                "file": "存储层/Redis/Redis基础认识.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "55-知识图谱融合"
+              "title": "Redis基础认识"
             }
           }
         ],
@@ -286,10 +286,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "其他",
     "java/55-知识图谱融合.md",
+    "存储层/Redis/Redis基础认识.md",
+    "其他",
     "java/00-java.md",
     "存储层/Redis/Redis知识体系详解：.md",
     "首页.md",
@@ -323,7 +324,6 @@
     "中间件/38-RabbitMQ.md",
     "java知识图谱/Part7-中间件/RocketMQ.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
-    "seckill.md.tmp.20200.d6fa294fc29b",
     "未命名.canvas"
   ]
 }
