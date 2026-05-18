@@ -70,12 +70,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
+                "file": "习思想演讲稿.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "34-MyBatis-动态SQL与缓存"
+              "title": "习思想演讲稿"
             }
           }
         ],
@@ -274,8 +274,8 @@
   },
   "active": "90dbec69ad203466",
   "lastOpenFiles": [
-    "Redis-知识体系-文章导航.md",
     "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
+    "Redis-知识体系-文章导航.md",
     "java知识图谱/Part6-存储层/33-MyBatis-核心.md",
     "java知识图谱/Part6-存储层/27-MySQL-存储引擎与索引.md",
     "java知识图谱/Part6-存储层/32-Redis-缓存问题.md",
