@@ -84,12 +84,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "存储层/Redis/Redis基础认识.md",
+                "file": "存储层/Redis/Redis概念和基础.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Redis基础认识"
+              "title": "Redis概念和基础"
             }
           }
         ],
@@ -289,7 +289,7 @@
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
     "java/55-知识图谱融合.md",
-    "存储层/Redis/Redis基础认识.md",
+    "存储层/Redis/Redis概念和基础.md",
     "其他",
     "java/00-java.md",
     "存储层/Redis/Redis知识体系详解：.md",
