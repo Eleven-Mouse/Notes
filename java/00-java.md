@@ -87,31 +87,31 @@ Phase 5（进阶，2-3 周）: Part7 中间件 → Part8 架构
 
 | # | 文档 | 核心内容 | 优先级 |
 |---|------|---------|--------|
-| 35 | [消息队列整体](Part7-中间件/35-消息队列整体.md) | MQ价值与代价/消息语义/可靠性链路/选型对比/Kafka-RabbitMQ-RocketMQ定位 | ⭐⭐⭐ |
-| 36 | [Kafka板块](Part7-中间件/36-Kafka.md) | 分区模型/高吞吐原理/三端可靠性/顺序幂等/Rebalance/积压治理 | ⭐⭐⭐ |
-| 37 | [IO与NIO](Part7-中间件/37-IO与NIO.md) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
-| 38 | [RabbitMQ板块](Part7-中间件/38-RabbitMQ.md) | Exchange-Queue模型/Confirm-ACK-持久化/死信延迟/Quorum Queue/消费治理 | ⭐⭐⭐ |
-| 39 | [RocketMQ板块](Part7-中间件/39-RocketMQ.md) | NameServer-Broker模型/事务消息/顺序消息/延时消息/交易链路一致性 | ⭐⭐⭐ |
+| 35 |[消息队列整体](35-消息队列整体.md)) | MQ价值与代价/消息语义/可靠性链路/选型对比/Kafka-RabbitMQ-RocketMQ定位 | ⭐⭐⭐ |
+| 36 |[Kafka板块](36-Kafka.md)) | 分区模型/高吞吐原理/三端可靠性/顺序幂等/Rebalance/积压治理 | ⭐⭐⭐ |
+| 37 |[IO与NIO](37-IO与NIO.md)) | BIO/NIO/AIO对比/Buffer-Channel-Selector/select-poll-epoll/Reactor模式/Netty基础 | ⭐⭐ |
+| 38 |[RabbitMQ板块](38-RabbitMQ.md)) | Exchange-Queue模型/Confirm-ACK-持久化/死信延迟/Quorum Queue/消费治理 | ⭐⭐⭐ |
+| 39 |[RocketMQ板块](39-RocketMQ.md)) | NameServer-Broker模型/事务消息/顺序消息/延时消息/交易链路一致性 | ⭐⭐⭐ |
 
 ### Part 8：架构（15 个文档 + 融合）
 
 | # | 文档 | 核心内容 | 优先级 |
 |---|------|---------|--------|
-| 40 | [微服务组件](Part8-架构/40-微服务组件.md) | 注册中心对比/Nacos/Eureka/ZK/配置中心/OpenFeign/Dubbo/Gateway/负载均衡策略 | ⭐ |
-| 41 | [限流熔断降级](Part8-架构/41-限流熔断降级.md) | 4种限流算法图解/Sentinel/熔断状态机/降级策略/组件对比/接口幂等5种方案 | ⭐⭐ |
-| 42 | [分布式理论与事务](Part8-架构/42-分布式理论与事务.md) | CAP/BASE/一致性哈希/雪花算法/2PC/TCC/Saga/消息最终一致性/Seata四种模式 | ⭐⭐ |
-| 43 | [系统设计](Part8-架构/43-系统设计.md) | 答题框架/秒杀系统(含Lua脚本)/短链系统(Base62)/Feed/IM/搜索建议 | ⭐ |
-| 44 | [Nacos注册与配置中心](Part8-架构/44-Nacos注册与配置中心.md) | 注册发现流程/namespace-group-dataId/动态刷新/AP与CP取舍/高可用 | ⭐⭐⭐ |
-| 45 | [OpenFeign声明式服务调用](Part8-架构/45-OpenFeign声明式服务调用.md) | 动态代理机制/超时重试/负载均衡/降级策略/调用链治理 | ⭐⭐⭐ |
-| 46 | [SpringCloudGateway网关](Part8-架构/46-SpringCloudGateway网关.md) | 路由与过滤器/统一鉴权/网关限流/灰度路由/网关稳定性 | ⭐⭐⭐ |
-| 47 | [Seata分布式事务](Part8-架构/47-Seata分布式事务.md) | TC/TM/RM/AT模式原理/undo_log/冲突与性能取舍/适用边界 | ⭐⭐⭐ |
-| 48 | [Sentinel限流熔断降级](Part8-架构/48-Sentinel限流熔断降级.md) | 流控规则/熔断规则/热点参数/Feign与Gateway协同/规则治理 | ⭐⭐⭐ |
-| 49 | [DDD四层与启动层总览](Part8-架构/49-DDD四层与启动层总览.md) | application/domain/adapter/infrastructure/start 全局边界 | ⭐⭐⭐ |
-| 50 | [DDD-Application层](Part8-架构/50-DDD-Application层.md) | 用例编排/事务边界/命令查询模型/与Controller职责分离 | ⭐⭐⭐ |
-| 51 | [DDD-Domain层](Part8-架构/51-DDD-Domain层.md) | 实体值对象聚合/领域服务/不变量/反贫血模型 | ⭐⭐⭐ |
-| 52 | [DDD-Adapter层](Part8-架构/52-DDD-Adapter层.md) | 入站出站适配/协议转换/异常映射/DTO装配 | ⭐⭐ |
-| 53 | [DDD-Infrastructure层](Part8-架构/53-DDD-Infrastructure层.md) | 仓储实现/中间件集成/技术可替换性/可观测治理 | ⭐⭐ |
-| 54 | [DDD-Start启动层](Part8-架构/54-DDD-Start启动层.md) | 启动装配/配置管理/模块装配/运行时拓扑 | ⭐⭐ |
+| 40 |[微服务组件](40-微服务组件.md)) | 注册中心对比/Nacos/Eureka/ZK/配置中心/OpenFeign/Dubbo/Gateway/负载均衡策略 | ⭐ |
+| 41 |[限流熔断降级](41-限流熔断降级.md)) | 4种限流算法图解/Sentinel/熔断状态机/降级策略/组件对比/接口幂等5种方案 | ⭐⭐ |
+| 42 |[分布式理论与事务](42-分布式理论与事务.md)) | CAP/BASE/一致性哈希/雪花算法/2PC/TCC/Saga/消息最终一致性/Seata四种模式 | ⭐⭐ |
+| 43 |[系统设计](43-系统设计.md)) | 答题框架/秒杀系统(含Lua脚本)/短链系统(Base62)/Feed/IM/搜索建议 | ⭐ |
+| 44 |[Nacos注册与配置中心](44-Nacos注册与配置中心.md)) | 注册发现流程/namespace-group-dataId/动态刷新/AP与CP取舍/高可用 | ⭐⭐⭐ |
+| 45 |[OpenFeign声明式服务调用](45-OpenFeign声明式服务调用.md)) | 动态代理机制/超时重试/负载均衡/降级策略/调用链治理 | ⭐⭐⭐ |
+| 46 |[SpringCloudGateway网关](46-SpringCloudGateway网关.md)) | 路由与过滤器/统一鉴权/网关限流/灰度路由/网关稳定性 | ⭐⭐⭐ |
+| 47 |[Seata分布式事务](47-Seata分布式事务.md)) | TC/TM/RM/AT模式原理/undo_log/冲突与性能取舍/适用边界 | ⭐⭐⭐ |
+| 48 |[Sentinel限流熔断降级](48-Sentinel限流熔断降级.md)) | 流控规则/熔断规则/热点参数/Feign与Gateway协同/规则治理 | ⭐⭐⭐ |
+| 49 |[DDD四层与启动层总览](49-DDD四层与启动层总览.md)) | application/domain/adapter/infrastructure/start 全局边界 | ⭐⭐⭐ |
+| 50 |[DDD-Application层](50-DDD-Application层.md)) | 用例编排/事务边界/命令查询模型/与Controller职责分离 | ⭐⭐⭐ |
+| 51 |[DDD-Domain层](51-DDD-Domain层.md)) | 实体值对象聚合/领域服务/不变量/反贫血模型 | ⭐⭐⭐ |
+| 52 |[DDD-Adapter层](52-DDD-Adapter层.md)) | 入站出站适配/协议转换/异常映射/DTO装配 | ⭐⭐ |
+| 53 |[DDD-Infrastructure层](53-DDD-Infrastructure层.md)) | 仓储实现/中间件集成/技术可替换性/可观测治理 | ⭐⭐ |
+| 54 |[DDD-Start启动层](54-DDD-Start启动层.md)) | 启动装配/配置管理/模块装配/运行时拓扑 | ⭐⭐ |
 | 55 | [知识图谱融合](55-知识图谱融合.md) | 完整技术地图/调用链分析/面试路线图/频率热力图/答题模板/项目补强/文件索引 | ⭐⭐⭐ |
 
 ---
