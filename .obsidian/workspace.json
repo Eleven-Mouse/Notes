@@ -70,7 +70,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java知识图谱/Part6-存储层/Redis/Redis知识体系详解：.md",
+                "file": "存储层/Part6-存储层/Redis/Redis知识体系详解：.md",
                 "mode": "source",
                 "source": false
               },
@@ -272,10 +272,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "90dbec69ad203466",
+  "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
-    "java知识图谱/Part6-存储层/Redis/Redis知识体系详解：.md",
-    "java知识图谱/Part6-存储层/Redis",
+    "存储层",
+    "存储层/Part6-存储层/Redis/Redis知识体系详解：.md",
+    "存储层/Part6-存储层/Redis",
     "习思想演讲稿.md",
     "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
     "Redis-知识体系-文章导航.md",
@@ -303,7 +304,6 @@
     "java知识图谱/Part7-中间件/38-RabbitMQ.md",
     "java知识图谱/Part7-中间件/RocketMQ.md",
     "java知识图谱/Part7-中间件/37-IO与NIO.md",
-    "java知识图谱/Part6-存储层/28-MySQL-事务与MVCC.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "_pdf2_b64.txt",
