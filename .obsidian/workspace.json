@@ -274,6 +274,7 @@
   },
   "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
+    "存储层/MySql",
     "存储层",
     "存储层/Redis/Redis知识体系详解：.md",
     "存储层/Redis",
@@ -298,18 +299,17 @@
     "架构/43-系统设计.md",
     "架构/40-微服务组件.md",
     "java/Part1-Java基础/01-数据类型与String.md",
-    "Part7-中间件/35-消息队列整体.md",
-    "Part7-中间件/39-RocketMQ.md",
+    "中间件/35-消息队列整体.md",
+    "中间件/39-RocketMQ.md",
     "新建 文本文档.txt",
-    "Part7-中间件/38-RabbitMQ.md",
+    "中间件/38-RabbitMQ.md",
     "java知识图谱/Part7-中间件/RocketMQ.md",
-    "Part7-中间件/37-IO与NIO.md",
+    "中间件/37-IO与NIO.md",
     "java知识图谱/Part1-Java基础/01-数据类型与String.md.tmp.25516.48558056424e",
     "seckill.md.tmp.20200.d6fa294fc29b",
     "_pdf2_b64.txt",
     "_pdf1_b64.txt",
     "ai-ppt-20260510.html",
-    "AI时代互联网岗位变革与大学生应对-PPT.html.tmp.28300.bc61db1c77a7",
     "未命名.canvas"
   ]
 }
