@@ -246,3 +246,49 @@ SADD mySet2 value2 value3
 -----
 ## ZSET 有序集合
 Redis 有序集合类似于 Redis 集合，也是一组非重复的字符串集合。但是，排序集的每个成员都与一个分数相关联，该分数用于获取从最小到最高分数的有序排序集。虽然成员是独特的，但可以重复分数。 
+
+---
+有序集合使用过两种数据结构实现的：
+	1，压缩列表（ziplist）：ziplist是为了提高存储效率而设计的一种特殊编码双向链表，它可以存储字符串或者整数，存储整数是采用整数二进制，而不是字符串形式存储，他能在O(1)的时间复杂度下完成list两端的push和pop操作，但因为每次操作都需要重新分配ziplist的内存，所以实际复杂度和ziplist的内存使用量相关
+	2，跳跃表（zSkiplist）：跳跃表的性能可以保证在查找，删除，添加等操作的时候在对数的期望内完成，这个性能是可以和平衡树想比较的，而且在实现方面比平衡树要优雅，这是采用跳跃表的主要原因。跳跃表的世家复杂度是O（log(n)）。
+	
+-------
+
+- 命令使用
+
+|命令|介绍|
+|---|---|
+|ZADD key score1 member1 score2 member2 ...|向指定有序集合添加一个或多个元素|
+|ZCARD KEY|获取指定有序集合的元素数量|
+|ZSCORE key member|获取指定有序集合中指定元素的 score 值|
+|ZINTERSTORE destination numkeys key1 key2 ...|将给定所有有序集合的交集存储在 destination 中，对相同元素对应的 score 值进行 SUM 聚合操作，numkeys 为集合数量|
+|ZUNIONSTORE destination numkeys key1 key2 ...|求并集，其它和 ZINTERSTORE 类似|
+|ZDIFFSTORE destination numkeys key1 key2 ...|求差集，其它和 ZINTERSTORE 类似|
+|ZRANGE key start end|获取指定有序集合 start 和 end 之间的元素（score 从低到高）|
+|ZREVRANGE key start end|获取指定有序集合 start 和 end 之间的元素（score 从高到底）|
+|ZREVRANK key member|获取指定有序集合中指定元素的排名(score 从大到小排序)|
+
+----
+- 命令执行
+	```
+ZADD myZset 2.0 value1 1.0 value2
+(integer) 2
+ZCARD myZset
+2
+ZSCORE myZset value1
+2.0
+ZRANGE myZset 0 1
+1) "value2"
+2) "value1"
+ZREVRANGE myZset 0 1
+3) "value1"
+4) "value2"
+ZADD myZset2 4.0 value2 3.0 value3
+(integer) 2
+	```
+
+----
+
+- 适用场景：
+	1，**需要随机获取数据源中的元素根据某个权重进行排序的场景**
+	例如：排行榜，相关命令：`ZRANGE` (从小到大排序)、 `ZREVRANGE` （从大到小排序）、`ZREVRANK` (指定元素排名)。
