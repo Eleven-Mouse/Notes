@@ -5,8 +5,10 @@
 ## String 字符串
 
 Redis string字符串存储**字节序列**，包括文本，序列化对象和二进制数组，它常用于缓存但也支持其他功能，例如实现计数器和执行位运算
+Redis 数据库中，字符串是二进制安全的
+由于redis 的 key 是字符串类型，当我们使用字符串类型作为 value 时，实际上是将一个字符串 映射到另一个字符串上
 
-由于redis 的 key 是字符串类型，当我们使用字符串类型作为 value 时，实际上是将一个字符串 映射到另一个字符串上，string 数据类型在许多场景非常有用，例如缓存 HTML 片段或页面
+---
 
 - 命令使用
 
@@ -58,6 +60,36 @@ OK
 
 ## List 列表
 
-Redis 列表是字符串值的链表。Redis 列表常用于：
+Redis 列表是字符串值的链表。按插入顺序排序。可以将元素添加到 Redis 列表的头部或尾部
+Redis 列表常用于：
 - 实现栈和队列。
 - 为后台工作系统构建队列管理。
+----
+
+- 命令使用
+
+
+- 命令执行
+```
+lpush rediscomcn java  
+(integer) 1  
+lpush rediscomcn sql 
+(integer) 1  
+lpush rediscomcn mongodb 
+(integer) 1  
+lpush rediscomcn cassandra 
+(integer) 1  
+lrange rediscomcn 0 10  
+"cassandra"  
+"mongodb"  
+"sql"  
+"java"
+```
+
+----
+- 应用场景
+	1，记住社交网络上用户发布的最新动态。
+	2，进程间的通信采用生产者-消费者模式，其中生产者将数据项添加到列表中，消费者（通常是_工作进程_）消费这些数据项并执行相应的操作。Redis 提供了特殊的列表命令，使这种使用场景更加可靠高效。
+
+----
+
