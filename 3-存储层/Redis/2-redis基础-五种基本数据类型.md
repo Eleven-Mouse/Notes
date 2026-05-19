@@ -14,12 +14,12 @@ Redis 数据库中，字符串是二进制安全的
 
 | 命令     | 简述                    | 使用                |
 | ------ | --------------------- | ----------------- |
-| GET    | 获取存储在给定 key 中的 vualue | GET name          |
+| GET    | 获取存储在给定 key 中的 value | GET name          |
 | SET    | 设置存储在给定 key 中的 value  | SET name value    |
 | DEL    | 删除存储在给定 key 中的 value  | DEL name          |
 | INCR   | 将 key 存储的值加1(原子性)     | INCR key          |
 | DECR   | 将 key 存储的值减1(原子性)     | DECR key          |
-| INCRBY | 将 key 存储的值加上amount    | INCR key amount   |
+| INCRBY | 将 key 存储的值加上amount    | INCRBY key amount |
 | DECRBY | 将 key 存储的值减去amount    | DECRBY key amount |
 
 -----
@@ -37,7 +37,7 @@ OK
 2) "Ares"
 3) "Vanth"
 ```
-> Tips: [`SET`]如果键已存在，即使该键关联的是非字符串值，`and` 命令也会替换键中已存储的任何值。因此，`and`  [`SET`]执行的是赋值操作。
+> Tips: [`SET`]如果键已存在，即使该键当前关联的是非字符串值，`SET` 也会覆盖旧值并完成重新赋值。
 
 -----
 - 字符串应用
@@ -50,17 +50,19 @@ OK
 > INCRBY total_crashes 10
 (integer) 11
 ```
->该[`INCR`]命令将字符串值解析为整数，将其加一，最后将得到的值设置为新值。还有其他类似的命令，例如[`INCRBY`]和 [`DECR`] [`DECRBY`]。它们的内部执行过程始终相同，只是方式略有不同。
+>该[`INCR`]命令将字符串值解析为整数，将其加一，最后将结果写回。类似命令还有 [`INCRBY`]、[`DECR`]、[`DECRBY`]，核心逻辑一致，差别只是增减幅度不同。
 
 - 补充
- >   1，Redis 的单个 string 最大可到 512MB
-    2，大多数字符串命令像 GET、SET，基本是 O(1)，也就是耗时几乎不随字符串长度增加 但 SUBSTR / GETRANGE / SETRANGE 这类“按位置随机读写一段内容”的命令，可能是 O(n)，也就是字符串越大、操作范围越大，越慢
+ 1，Redis 的单个 string 最大可到 512MB。  
+ 2，大多数字符串命令如 `GET`、`SET` 为 O(1)。  
+ 3，`GETRANGE`、`SETRANGE` 这类按偏移读取/写入子串的命令复杂度与操作长度相关，处理超大字符串时要谨慎。  
+ 4，`SUBSTR` 是历史命令，官方标记为 deprecated，新代码建议使用 `GETRANGE`。
 
 -----
 
 ## List 列表
 
-Redis 列表是字符串值的链表。按插入顺序排序。可以将元素添加到 Redis 列表的头部或尾部
+Redis 列表是按插入顺序排序的字符串序列。可以将元素添加到头部或尾部。
 Redis 列表常用于：
 - 实现栈和队列。
 - 为后台工作系统构建队列管理。
@@ -101,13 +103,15 @@ lrange rediscomcn 0 10
 - 应用场景
 	1，记住社交网络上用户发布的最新动态。
 	2，进程间的通信采用生产者-消费者模式，其中生产者将数据项添加到列表中，消费者（通常是_工作进程_）消费这些数据项并执行相应的操作。Redis 提供了特殊的列表命令，使这种使用场景更加可靠高效。
-	3，`List` 可以用来做消息队列，只是功能过于简单且存在很多缺陷，不建议这样做。
+	3，`List` 可以实现简单消息队列，但能力有限（例如消费组、重放、复杂路由等能力不足）。
 
-相对来说，Redis 5.0 新增加的一个数据结构 `Stream` 更适合做消息队列一些，只是功能依然非常简陋。和专业的消息队列相比，还是有很多欠缺的地方比如消息丢失和堆积问题不好解决
+相对来说，Redis 5.0 引入的 `Stream` 更适合消息队列场景（支持消费组、`XACK` 等机制）；但在大规模堆积治理、跨机房容灾、复杂投递语义等方面，通常仍不如专业 MQ 产品完善。
 
 ----
 - 补充
 >列表的最大长度为 2的32次方 – 1 个元素（超过 40 亿个元素）
+>常见复杂度：`LPUSH/RPUSH/LPOP/RPOP/LLEN` 通常为 O(1)；`LRANGE` 为 O(S+N)（S 为起始偏移），`LSET` 为 O(N)。
+>实现细节上，现代 Redis 的 list 底层采用 quicklist（由多个 listpack 组成），不再是早期文档常见的“纯双向链表”描述。
 
 
 
@@ -116,13 +120,14 @@ lrange rediscomcn 0 10
 
 哈希是键值对的集合。在 Redis 中，哈希是字符串字段和字符串值之间的映射。因此，它们适合表示对象。
 
+----
 - 命令使用
 
 | 命令                                        | 介绍                                   |
 | ----------------------------------------- | ------------------------------------ |
 | HSET key field value                      | 设置指定哈希表中指定字段的值                       |
 | HSETNX key field value                    | 只有指定字段不存在时设置指定字段的值                   |
-| HMSET key field1 value1 field2 value2 ... | 同时将一个或多个 field-value (域-值)对设置到指定哈希表中 |
+| HSET key field1 value1 field2 value2 ...  | 同时将一个或多个 field-value (域-值)对设置到指定哈希表中 |
 | HGET key field                            | 获取指定哈希表中指定字段的值                       |
 | HMGET key field1 field2 ...               | 获取指定哈希表中一个或者多个指定字段的值                 |
 | HGETALL key                               | 获取指定哈希表中所有的键值对                       |
@@ -134,7 +139,7 @@ lrange rediscomcn 0 10
 ----
 - 命令执行
 ```
-HMSET userInfoKey name "guide" description "dev" age 24
+HSET userInfoKey name "guide" description "dev" age 24
 OK
 HEXISTS userInfoKey name # 查看 key 对应的 value中指定的字段是否存在。
 (integer) 1
@@ -189,14 +194,15 @@ Redis 8.0 引入了以下命令：
 
 ---
 - 补充
->1，每个哈希可以存储多达 232 - 1 个键-值对。实际上，哈希表的大小仅受限于托管 Redis 部署的虚拟机上的总内存。
+>1，每个哈希可以存储多达 2的32次方 - 1 个键-值对。实际上，哈希表的大小仅受限于托管 Redis 部署的虚拟机上的总内存。
 >2，大多数 Redis 哈希命令的时间复杂度为 O(1)。
->少数命令，如[`HKEYS`]，[`HVALS`]以及[`HGETALL`]大多数与过期相关的命令，都是 O(n)，其中_n_是字段值对的数量。
+>少数命令如 [`HKEYS`]、[`HVALS`]、[`HGETALL`] 为 O(n)，其中 _n_ 是字段数量。
+>`HMSET` 自 Redis 4.0 起标记为 deprecated，建议统一使用可一次写入多个 field-value 的 `HSET`。
 
 -----
 ## SET 集合
 
-集合（set）是 Redis 数据库中的无序字符串集合。在 Redis 中，添加，删除和查找的时间复杂度是 O(1)。
+集合（set）是 Redis 中的无序字符串集合。`SADD`、`SREM`、`SISMEMBER` 这类单元素操作通常是 O(1)，但集合运算和全量读取不是 O(1)。
 
 ----
 - 命令使用
@@ -240,7 +246,8 @@ SADD mySet2 value2 value3
 
 - 补充
 >1，集合中的最大成员数为 2的32次方 -1 个元素（超过 40 亿个元素）。
->2，大多数集合操作，包括添加、删除和检查元素是否为集合成员，其时间复杂度均为 O(1)。这意味着它们效率很高。但是，对于包含数十万个或更多元素的大型集合，运行该[`SMEMBERS`](https://redis.io/docs/latest/commands/smembers/)命令时应格外谨慎。该命令的时间复杂度为 O(n)，并且会在一次响应中返回整个集合。作为替代方案，[`SSCAN`](https://redis.io/docs/latest/commands/sscan/)可以考虑使用 `get_all_set ...
+>2，大多数单元素操作（添加、删除、成员判断）时间复杂度为 O(1)。
+>3，`SMEMBERS` 为 O(n)，会一次性返回全集合；大 Key 场景建议使用 [`SSCAN`](https://redis.io/docs/latest/commands/sscan/) 分批遍历，避免单次响应过大。
 
 
 -----
@@ -248,9 +255,10 @@ SADD mySet2 value2 value3
 Redis 有序集合类似于 Redis 集合，也是一组非重复的字符串集合。但是，排序集的每个成员都与一个分数相关联，该分数用于获取从最小到最高分数的有序排序集。虽然成员是独特的，但可以重复分数。 
 
 ---
-有序集合使用过两种数据结构实现的：
-	1，压缩列表（ziplist）：ziplist是为了提高存储效率而设计的一种特殊编码双向链表，它可以存储字符串或者整数，存储整数是采用整数二进制，而不是字符串形式存储，他能在O(1)的时间复杂度下完成list两端的push和pop操作，但因为每次操作都需要重新分配ziplist的内存，所以实际复杂度和ziplist的内存使用量相关
-	2，跳跃表（zSkiplist）：跳跃表的性能可以保证在查找，删除，添加等操作的时候在对数的期望内完成，这个性能是可以和平衡树想比较的，而且在实现方面比平衡树要优雅，这是采用跳跃表的主要原因。跳跃表的世家复杂度是O（log(n)）。
+有序集合（ZSET）在 Redis 中的核心实现是：
+	1，哈希表：用于 `member -> score` 的快速定位。  
+	2，跳跃表（skiplist）：用于按 score 有序维护，支持范围查询和排名。  
+对于较小的 ZSET，Redis 会使用更紧凑的 `listpack` 编码以节省内存（早期版本常见 `ziplist` 说法，现已被 `listpack` 取代）。
 	
 -------
 
@@ -281,8 +289,8 @@ ZRANGE myZset 0 1
 1) "value2"
 2) "value1"
 ZREVRANGE myZset 0 1
-3) "value1"
-4) "value2"
+1) "value1"
+2) "value2"
 ZADD myZset2 4.0 value2 3.0 value3
 (integer) 2
 	```
@@ -290,5 +298,6 @@ ZADD myZset2 4.0 value2 3.0 value3
 ----
 
 - 适用场景：
-	1，**需要随机获取数据源中的元素根据某个权重进行排序的场景**
-	例如：排行榜，相关命令：`ZRANGE` (从小到大排序)、 `ZREVRANGE` （从大到小排序）、`ZREVRANK` (指定元素排名)。
+	1，**需要根据权重/分数进行排序并快速查询排名的场景**
+	例如：排行榜，相关命令：`ZRANGE` (从小到大排序)、`ZREVRANGE`（从大到小排序）、`ZREVRANK` (指定元素排名)。
+	2，常见复杂度：`ZADD`、`ZREM`、`ZRANK` 通常为 O(logN)；`ZRANGE` 为 O(logN + M)（M 为返回元素数量）。
