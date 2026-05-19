@@ -290,6 +290,7 @@
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
     "1-java/0-java基础/java基础.md",
+    "0-首页/小伙伴.gif",
     "2-spring/spring.md",
     "3-存储层/Redis/0-Redis知识体系详解：.md",
     "0-首页/首页.md",
@@ -306,7 +307,6 @@
     "8-其他/AI时代互联网岗位变革与大学生应对.md",
     "8-其他/waste-city-practice-path 1.pptx",
     "8-其他/waste-city-practice-path.pptx",
-    "0-首页/小伙伴.gif",
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "0-首页",
@@ -327,7 +327,6 @@
     "upload/waste-city-practice-path.pptx.md",
     "7-Project/Seckill-经验总结.md",
     "5-架构/微服务/42-分布式理论与事务.md",
-    "5-架构/微服务/41-限流熔断降级.md",
     "未命名.canvas"
   ]
 }
