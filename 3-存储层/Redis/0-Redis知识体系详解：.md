@@ -1,12 +1,12 @@
 
-Redis 知识体系
->    1. 基础认知
+# Redis 知识体系
+1. 基础认知
         Redis 定位
         典型场景
         单线程 + I/O 多路复用
         Key / DB / TTL
         常用客户端 
-	  2. 数据类型
+2. 数据类型
         基础类型
           String
           Hash
@@ -23,7 +23,7 @@ Redis 知识体系
           内存占用
           访问模式
           可维护性
-      3. 命令与交互
+3. 命令与交互
         常用命令
         Scan 系列
         Pipeline
@@ -36,7 +36,7 @@ Redis 知识体系
         Keyspace Notifications
         Client-side Caching
         RESP3
-      4. 内部原理
+4. 内部原理
         对象模型
           redisObject
           SDS
@@ -56,28 +56,28 @@ Redis 知识体系
         内存治理
           内存碎片
           active defrag
-      5. 持久化
+5. 持久化
         RDB
         AOF
         混合持久化
         Rewrite
         Fsync 策略
         故障恢复
-      6. 复制与高可用
+6. 复制与高可用
         主从复制
         PSYNC
         复制积压缓冲区
         Sentinel 哨兵
         故障转移
         Replica 只读
-      7. 集群与扩容
+7. 集群与扩容
         Cluster 分片集群
         16384 槽
         Hash Tag
         MOVED / ASK
         迁移与重分片
         读写分离
-      8. 编程与扩展
+ 8. 编程与扩展
         Redis Functions
         Lua 脚本
         Modules
@@ -87,7 +87,7 @@ Redis 知识体系
           Vector Search
           TimeSeries
           Bloom
-      9. 消息与事件
+ 9. 消息与事件
         Pub/Sub 订阅
         Sharded Pub/Sub
         Streams
@@ -95,13 +95,13 @@ Redis 知识体系
         PEL
         XPENDING
         消息恢复
-      10. 安全
+ 10. 安全
         ACL
         AUTH
         TLS
         Protected Mode
         网络隔离
-      11. 可观测性与运维
+ 11. 可观测性与运维
         INFO
         SLOWLOG
         LATENCY
@@ -111,7 +111,7 @@ Redis 知识体系
         监控告警
         容量规划
         备份恢复
-      12. 性能与治理
+ 12. 性能与治理
         BigKey
         HotKey
         缓存穿透
