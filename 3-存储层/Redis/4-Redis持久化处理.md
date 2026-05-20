@@ -55,7 +55,10 @@ appendfsync no
 ------
 ### 二，AOF重写机制
 因为AOF是追加日志的形式记录，所以AOF文件会因为记录的积累而变得“臃肿”，这其中AOF会记录对同一个key的多次写操作，但事实上只有最后一次写才有效，AOF提供了一种命令专门用来处理无意义的操作
-bgrewriteaof，可以用最少的命令达到相同的效果
+bgrewriteaof，可以用最少的命令达到相同的效果，它的后台重写过程和RDB bgsave过程类似
 ```
-auto-aof-rewrite-
+//AOF文件比上次文件增长超过多少百分比则触发重写
+auto-aof-rewrite-percentage 100
+//AOF文件体积最小多大以上才出发重写
+auto-aof-rewrite-min-size 64mb
 ```
