@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-存储层/Redis/0-Redis知识体系详解：.md",
+                "file": "3-存储层/Redis/4-Redis持久化处理.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-Redis知识体系详解："
+              "title": "4-Redis持久化处理"
             }
           }
         ],
@@ -269,16 +269,17 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "3-存储层/Redis/1-Redis概念和基础.md",
+    "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
+    "3-存储层/Redis/4-Redis持久化处理.md",
+    "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
     "0-首页/首页.md",
     "3-存储层/Redis/0-Redis知识体系详解：.md",
+    "3-存储层/Redis/1-Redis概念和基础.md",
     "8-其他/习思想演讲稿.md",
     "8-其他/AI时代互联网岗位变革与大学生应对.md",
     "upload/ai-ppt-20260510.html.md",
     "upload",
     "8-其他/~$waste-city-practice-path.pptx",
-    "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
-    "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
     "0-首页/小伙伴.gif",
     "2-spring/spring.md",
     "1-java/0-java基础/java基础.md",
@@ -307,7 +308,6 @@
     "java知识图谱/Part6-存储层/31-Redis-持久化与集群.md",
     "java知识图谱/Part6-存储层/30-Redis-数据类型.md",
     "java知识图谱/Part6-存储层/27-MySQL-存储引擎与索引 1.md",
-    "upload/waste-city-practice-path.pptx.md",
     "未命名.canvas"
   ]
 }
