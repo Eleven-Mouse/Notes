@@ -71,7 +71,7 @@ Redis 知识体系
         故障转移
         Replica 只读
       7. 集群与扩容
-        Cluster 集群
+        Cluster 分片集群
         16384 槽
         Hash Tag
         MOVED / ASK
