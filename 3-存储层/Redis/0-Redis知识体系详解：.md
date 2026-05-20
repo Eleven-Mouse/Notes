@@ -15,7 +15,6 @@ Redis 知识体系
           ZSet
         扩展类型
           Bitmap
-          Bitfield
           HyperLogLog
           Geo
           Stream
@@ -68,11 +67,11 @@ Redis 知识体系
         主从复制
         PSYNC
         复制积压缓冲区
-        Sentinel
+        Sentinel 哨兵
         故障转移
         Replica 只读
       7. 集群与扩容
-        Cluster
+        Cluster 集群
         16384 槽
         Hash Tag
         MOVED / ASK
@@ -80,7 +79,7 @@ Redis 知识体系
         读写分离
       8. 编程与扩展
         Redis Functions
-        Lua Script
+        Lua 脚本
         Modules
         Redis Stack
           Search
@@ -89,7 +88,7 @@ Redis 知识体系
           TimeSeries
           Bloom
       9. 消息与事件
-        Pub/Sub
+        Pub/Sub 订阅
         Sharded Pub/Sub
         Streams
         Consumer Group
