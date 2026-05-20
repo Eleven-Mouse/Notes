@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-存储层/Redis/7-Redis-分片集群.md",
+                "file": "3-存储层/Redis/10-Redis-分布式锁.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7-Redis-分片集群"
+              "title": "10-Redis-分布式锁"
             }
           }
         ],
@@ -269,13 +269,13 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
+    "3-存储层/Redis/7-Redis-分片集群.md",
     "0-首页/首页.md",
     "3-存储层/Redis/4-Redis持久化处理.md",
     "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
     "3-存储层/Redis/10-Redis-分布式锁.md",
     "3-存储层/Redis/9-Redis-内存淘汰策略.md",
     "3-存储层/Redis/8-Redis-过期策略.md",
-    "3-存储层/Redis/7-Redis-分片集群.md",
     "3-存储层/Redis/5-Redis-主从复制.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
     "0-首页/小伙伴.gif",
