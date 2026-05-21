@@ -79,12 +79,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5-架构/DDD/DDD四层架构.md",
+                "file": "4-中间件/消息队列.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "DDD四层架构"
+              "title": "消息队列"
             }
           }
         ],
@@ -265,8 +265,15 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "5-架构/微服务/微服务基础.md",
+    "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
+    "3-存储层/Redis/9-Redis-内存淘汰策略.md",
+    "3-存储层/Redis/8-Redis-过期策略.md",
+    "3-存储层/Redis/7-Redis-分片集群.md",
+    "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
+    "3-存储层/Redis/5-Redis-主从复制.md",
+    "3-存储层/Redis/4-Redis持久化处理.md",
     "5-架构/DDD/DDD四层架构.md",
+    "5-架构/微服务/微服务基础.md",
     "4-中间件/消息队列.md",
     "6-Agent/5-RAG与Memory.md",
     "8-友链/小伙伴们.md",
@@ -277,17 +284,10 @@
     "9-其他/AI时代互联网岗位变革与大学生应对.md",
     "0-首页/首页.md",
     "8-友链",
-    "3-存储层/Redis/9-Redis-内存淘汰策略.md",
-    "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
     "3-存储层/Redis/0-Redis知识体系：.md",
     "3-存储层/Redis/1-Redis概念和基础.md",
     "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
     "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
-    "3-存储层/Redis/4-Redis持久化处理.md",
-    "3-存储层/Redis/5-Redis-主从复制.md",
-    "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
-    "3-存储层/Redis/7-Redis-分片集群.md",
-    "3-存储层/Redis/8-Redis-过期策略.md",
     "8-其他/习思想演讲稿.md",
     "0-首页/小伙伴.gif",
     "upload/ai-ppt-20260510.html.md",
