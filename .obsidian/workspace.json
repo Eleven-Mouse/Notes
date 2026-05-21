@@ -79,12 +79,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "8-友链/小伙伴们.md",
+                "file": "6-Agent/5-RAG与Memory.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "小伙伴们"
+              "title": "5-RAG与Memory"
             }
           }
         ],
@@ -263,10 +263,14 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "9-其他/AI时代互联网岗位变革与大学生应对.md",
     "8-友链/小伙伴们.md",
+    "5-架构/DDD/54-DDD-Start启动层.md",
+    "5-架构/DDD/53-DDD-Infrastructure层.md",
+    "5-架构/DDD/52-DDD-Adapter层.md",
+    "5-架构/微服务/44-Nacos注册与配置中心.md",
+    "9-其他/AI时代互联网岗位变革与大学生应对.md",
     "0-首页/首页.md",
     "8-友链",
     "3-存储层/Redis/9-Redis-内存淘汰策略.md",
@@ -292,7 +296,6 @@
     "2-spring/24-SpringBoot.md",
     "2-spring/23-SpringMVC.md",
     "2-spring/22-AOP.md",
-    "2-spring/21-IOC与Bean.md",
     "waste-city-practice-path.pptx",
     "《生活垃圾资源化利用与“无废城市”建设的实践路径研究》(2).pptx",
     "9-其他/waste-city-practice-path 1.pptx",
@@ -300,10 +303,7 @@
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "0-首页",
-    "1-java/55-知识图谱融合.md",
     "9-其他",
-    "1-java/00-java.md",
-    "java知识图谱/Part6-存储层/34-MyBatis-动态SQL与缓存.md",
     "未命名.canvas"
   ]
 }
