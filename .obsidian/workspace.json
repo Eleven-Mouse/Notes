@@ -22,16 +22,6 @@
             }
           },
           {
-            "id": "bbba0d66cf5a77c9",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
             "id": "2fbad8f6594b0045",
             "type": "leaf",
             "state": {
@@ -88,7 +78,7 @@
             }
           }
         ],
-        "currentTab": 5
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -239,8 +229,8 @@
             "state": {
               "type": "git-view",
               "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
+              "icon": "lucide-ghost",
+              "title": "git-view"
             }
           }
         ],
@@ -263,7 +253,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f20573a728e6e372",
+  "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
     "99c2a2c82473faa11033262d6294fe3d.png",
     "6-Agent/6-Agent进阶.md",
