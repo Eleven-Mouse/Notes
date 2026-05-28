@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-java/2-锁机制.md",
+                "file": "9-简历/面试.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2-锁机制"
+              "title": "面试"
             }
           }
         ],
@@ -255,8 +255,8 @@
   },
   "active": "f20573a728e6e372",
   "lastOpenFiles": [
-    "9-简历/面试.md",
     "1-java/2-锁机制.md",
+    "9-简历/面试.md",
     "9-简历/个人简历.md",
     "9-简历/个人简历 (2).pdf",
     "0-首页/首页.md",
