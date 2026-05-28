@@ -8,31 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "86bbc7a08397ca09",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AI时代互联网岗位变革与大学生应对.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "AI时代互联网岗位变革与大学生应对"
-            }
-          },
-          {
             "id": "2fbad8f6594b0045",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "AI时代互联网岗位变革与大学生应对.md",
+                "file": "1-java/2-锁机制.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "AI时代互联网岗位变革与大学生应对"
+              "title": "2-锁机制"
             }
           },
           {
@@ -77,8 +63,7 @@
               "title": "2-锁机制"
             }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -91,16 +76,6 @@
         "id": "3d3934ae697a0546",
         "type": "tabs",
         "children": [
-          {
-            "id": "666f8a90341338fa",
-            "type": "leaf",
-            "state": {
-              "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "书签"
-            }
-          },
           {
             "id": "26dab8c4498f9323",
             "type": "leaf",
@@ -132,7 +107,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -253,15 +228,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "f20573a728e6e372",
+  "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
+    "1-java/0-java基础/java基础.md",
+    "1-java/2-锁机制.md",
     "9-简历/面试.md",
     "6-Agent/7-agent面筋.md",
     "6-Agent/Agent知识图谱.md",
     "9-简历/个人简历.md",
     "9-简历/个人简历 (2).pdf",
     "5-架构/DDD/DDD四层架构.md",
-    "1-java/2-锁机制.md",
     "0-首页/首页.md",
     "9-简历",
     "99c2a2c82473faa11033262d6294fe3d.png",
