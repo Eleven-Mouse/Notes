@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-java/2-锁机制.md",
+                "file": "1-java/0-java基础/2-锁机制.md",
                 "mode": "source",
                 "source": false
               },
@@ -55,7 +55,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-java/2-锁机制.md",
+                "file": "1-java/0-java基础/2-锁机制.md",
                 "mode": "source",
                 "source": false
               },
@@ -228,10 +228,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
-    "1-java/0-java基础/java基础.md",
-    "1-java/2-锁机制.md",
+    "1-java/0-java基础/1-java基础.md",
+    "1-java/0-java基础/2-锁机制.md",
     "9-简历/面试.md",
     "6-Agent/7-agent面筋.md",
     "6-Agent/Agent知识图谱.md",
