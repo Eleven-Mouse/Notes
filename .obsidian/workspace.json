@@ -69,12 +69,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6-Agent/7-agent面筋.md",
+                "file": "9-简历/个人简历.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7-agent面筋"
+              "title": "个人简历"
             }
           }
         ],
@@ -253,13 +253,16 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "f20573a728e6e372",
   "lastOpenFiles": [
+    "个人简历 (2).pdf",
+    "6-Agent/7-agent面筋.md",
+    "9-简历/个人简历.md",
+    "9-简历",
     "99c2a2c82473faa11033262d6294fe3d.png",
     "6-Agent/6-Agent进阶.md",
     "6-Agent/6-Agent项目实战.md",
     "6-Agent/7-避坑与架构思维.md",
-    "6-Agent/7-agent面筋.md",
     "7-Project/Seckill-经验总结.md",
     "6-Agent/Agent知识图谱.md",
     "6-Agent/5-RAG与Memory.md",
@@ -280,7 +283,6 @@
     "5-架构/DDD/54-DDD-Start启动层.md",
     "5-架构/DDD/53-DDD-Infrastructure层.md",
     "5-架构/DDD/52-DDD-Adapter层.md",
-    "5-架构/微服务/44-Nacos注册与配置中心.md",
     "8-友链",
     "0-首页/小伙伴.gif",
     "upload",
@@ -293,7 +295,6 @@
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "0-首页",
-    "9-其他",
     "未命名.canvas"
   ]
 }
