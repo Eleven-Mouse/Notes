@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-java/0-java基础/1-java基础.md",
+                "file": "1-java/0-java基础/7-ThreadLocal.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1-java基础"
+              "title": "7-ThreadLocal"
             }
           },
           {
@@ -240,8 +240,11 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
-    "1-java/0-java基础/4-多线程.md",
+    "1-java/0-java基础/6-线程池.md",
+    "1-java/0-java基础/7-ThreadLocal.md",
+    "1-java/0-java基础/5-JMM.md",
     "1-java/0-java基础/1-java基础.md",
+    "1-java/0-java基础/4-多线程.md",
     "0-首页/首页.md",
     "9-简历/个人简历.md",
     "9-简历/个人简历 (2).pdf",
@@ -266,9 +269,6 @@
     "6-Agent/6-Agent项目实战.md",
     "6-Agent/7-避坑与架构思维.md",
     "7-Project/Seckill-经验总结.md",
-    "6-Agent/5-RAG与Memory.md",
-    "6-Agent/5-多Agent系统.md",
-    "6-Agent/1-Agent基础认知.md",
     "8-友链",
     "0-首页/小伙伴.gif",
     "upload",
