@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-java/0-java基础/7-ThreadLocal.md",
+                "file": "9-简历/Diffguard面试准备.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "7-ThreadLocal"
+              "title": "Diffguard面试准备"
             }
           },
           {
@@ -240,8 +240,9 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
-    "9-简历/面试.md",
     "1-java/0-java基础/7-ThreadLocal.md",
+    "9-简历/Diffguard面试准备.md",
+    "9-简历/面试.md",
     "1-java/0-java基础/6-线程池.md",
     "1-java/0-java基础/5-JMM.md",
     "1-java/0-java基础/1-java基础.md",
@@ -268,7 +269,6 @@
     "6-Agent/6-Agent进阶.md",
     "6-Agent/6-Agent项目实战.md",
     "6-Agent/7-避坑与架构思维.md",
-    "7-Project/Seckill-经验总结.md",
     "8-友链",
     "0-首页/小伙伴.gif",
     "upload",
