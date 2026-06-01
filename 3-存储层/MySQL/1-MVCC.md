@@ -23,10 +23,12 @@ innoDB 每一行数据除了我们自己建表时定义的字段，内部还会�
 ## 三，read view
 >事务在某一时间点生成的可见性快照，类似于RDB
 
-m_ids
+m_ids：表示我生成快照时，还有哪些事务没有提交
 
-min_tex_id
+min_trx_id：这些未提交事务里面，最小的是谁
 
-max_trx_id
+max_trx_id：我生成快照那一刻，系统事务id已经分配到哪了
 
-creator_trx_id
+creator_trx_id：当前事务自己是谁
+
+版本可见性规则
