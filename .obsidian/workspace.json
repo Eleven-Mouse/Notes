@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-存储层/MySQL/1-MVCC.md",
+                "file": "随笔/给自己的一封信.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1-MVCC"
+              "title": "给自己的一封信"
             }
           },
           {
@@ -240,8 +240,10 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
-    "3-存储层/MySQL/2-事务.md",
     "3-存储层/MySQL/1-MVCC.md",
+    "随笔/给自己的一封信.md",
+    "随笔",
+    "3-存储层/MySQL/2-事务.md",
     "3-存储层/Redis/5-Redis-主从复制.md",
     "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
     "1-java/0-java基础/7-ThreadLocal.md",
@@ -266,7 +268,6 @@
     "3-存储层/Redis/8-Redis-过期策略.md",
     "3-存储层/Redis/7-Redis-分片集群.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
-    "3-存储层/Redis/4-Redis持久化处理.md",
     "9-简历",
     "99c2a2c82473faa11033262d6294fe3d.png",
     "8-友链",
@@ -277,7 +278,6 @@
     "waste-city-practice-path.pptx",
     "《生活垃圾资源化利用与“无废城市”建设的实践路径研究》(2).pptx",
     "9-其他/waste-city-practice-path 1.pptx",
-    "9-其他/waste-city-practice-path.pptx",
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "未命名.canvas"
