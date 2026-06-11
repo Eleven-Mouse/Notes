@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-面筋/agent总结.md",
+                "file": "10-面筋/MySQL面筋总结.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "agent总结"
+              "title": "MySQL面筋总结"
             }
           },
           {
@@ -240,9 +240,10 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
+    "10-面筋/agent总结.md",
+    "10-面筋/MySQL面筋总结.md",
     "随笔/给自己的一封信.md",
     "10-面筋",
-    "10-面筋/agent总结.md",
     "9-简历/个人简历.md",
     "3-存储层/MySQL/1-MVCC.md",
     "随笔",
