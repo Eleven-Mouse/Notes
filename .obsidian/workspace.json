@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-存储层/MySQL/1-MVCC.md",
+                "file": "1-java/0-java基础/3-接口和抽象类的区别.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1-MVCC"
+              "title": "3-接口和抽象类的区别"
             }
           },
           {
@@ -240,13 +240,16 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
+    "1-java/0-java基础/2-锁机制.md",
+    "1-java/0-java基础/1-java基础.md",
+    "9-简历/个人简历.md",
+    "9-简历/个人简历.pdf",
+    "3-存储层/MySQL/1-MVCC.md",
     "10-面筋/MySQL面筋总结.md",
     "10-面筋/agent总结.md",
     "10-面筋/字节二面-后端.md",
     "随笔/给自己的一封信.md",
     "10-面筋",
-    "9-简历/个人简历.md",
-    "3-存储层/MySQL/1-MVCC.md",
     "随笔",
     "3-存储层/MySQL/2-事务.md",
     "3-存储层/Redis/5-Redis-主从复制.md",
@@ -255,8 +258,6 @@
     "1-java/0-java基础/6-线程池.md",
     "1-java/0-java基础/5-JMM.md",
     "1-java/0-java基础/4-多线程.md",
-    "1-java/0-java基础/1-java基础.md",
-    "1-java/0-java基础/2-锁机制.md",
     "1-java/0-java基础/3-接口和抽象类的区别.md",
     "3-存储层/Redis/1-Redis概念和基础.md",
     "3-存储层/Redis/0-Redis知识体系：.md",
@@ -268,7 +269,6 @@
     "0-首页/首页.md",
     "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
     "3-存储层/Redis/9-Redis-内存淘汰策略.md",
-    "3-存储层/Redis/8-Redis-过期策略.md",
     "9-简历",
     "99c2a2c82473faa11033262d6294fe3d.png",
     "8-友链",
@@ -277,7 +277,6 @@
     "8-其他/~$waste-city-practice-path.pptx",
     "1-java/0-java基础",
     "waste-city-practice-path.pptx",
-    "《生活垃圾资源化利用与“无废城市”建设的实践路径研究》(2).pptx",
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "未命名.canvas"
