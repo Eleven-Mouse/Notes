@@ -1,10 +1,45 @@
-# Scala 学习路线：从小白到 Spark 开发
+# Scala 学习路线：以博客日志分析为主
 
 ## 结论
 
 Scala 是一门运行在 JVM 上的编程语言。学习大数据时，Scala 的核心价值是：**很多 Spark 代码、API 和源码都和 Scala 关系很深。**
 
 如果目标是大数据开发，不需要一开始把 Scala 学成语言专家。先学够写 Spark 作业，再逐步深入函数式和类型系统。
+
+在博客项目里，Scala 的主要用途是：**编写 Spark 任务，解析博客访问日志，统计 PV、UV、热门文章、访问来源和慢请求。**
+
+## 博客项目主线
+
+你学 Scala 时，不要从复杂语言特性开始，而是围绕日志处理建模：
+
+```scala
+case class BlogAccessLog(
+  requestId: String,
+  userId: Option[Long],
+  articleId: Option[Long],
+  path: String,
+  eventTime: String,
+  status: Int,
+  costMs: Long
+)
+```
+
+学习重点对应博客场景：
+
+| Scala 知识 | 博客里的用途 |
+| --- | --- |
+| case class | 表示访问日志、统计结果 |
+| Option | 处理未登录用户、缺失文章 ID、脏数据 |
+| 集合操作 | 本地练习过滤、转换、聚合 |
+| 模式匹配 | 处理不同访问事件和异常数据 |
+| 高阶函数 | 写清晰的数据转换逻辑 |
+| trait | 抽象日志解析器、指标计算器 |
+
+优先级：
+
+```text
+先会写清洗逻辑，再学复杂类型系统。
+```
 
 ## 它是什么
 
@@ -220,28 +255,28 @@ userOption match {
 - 知道它可能自动补参数或增强方法。
 - 能在 IDE 里找到隐式来源。
 
-## 实战项目
+## 博客项目实战
 
-做一个 Scala 日志清洗程序：
+做一个博客访问日志清洗程序：
 
 输入：
 
 ```text
-1001,/home,2026-07-23 10:00:00,view
-1002,/product,2026-07-23 10:01:00,click
+req-1,1001,2001,/article/2001,2026-07-23 10:00:00,200,35
+req-2,,2002,/article/2002,2026-07-23 10:01:00,200,42
 bad_line
 ```
 
 输出：
 
 ```text
-AccessLog(userId=1001, page=/home, eventType=view)
-AccessLog(userId=1002, page=/product, eventType=click)
+BlogAccessLog(requestId=req-1, userId=Some(1001), articleId=Some(2001))
+BlogAccessLog(requestId=req-2, userId=None, articleId=Some(2002))
 ```
 
 要求：
 
-- 使用 case class 表示日志。
+- 使用 case class 表示博客访问日志。
 - 使用 Option 处理脏数据。
 - 使用集合操作完成过滤和转换。
 - 写单元测试验证解析逻辑。
@@ -251,6 +286,7 @@ AccessLog(userId=1002, page=/product, eventType=click)
 - 正常行能解析成功。
 - 脏数据不会导致程序崩溃。
 - 解析逻辑清晰可测试。
+- 能为 Spark 作业复用这套解析逻辑。
 
 ## 学习路线
 
@@ -279,4 +315,3 @@ AccessLog(userId=1002, page=/product, eventType=click)
 ## 一句话总结
 
 学习 Scala 的正确姿势是：**先用它写清楚 Spark 数据处理逻辑，再根据需要深入函数式和类型系统。**
-
