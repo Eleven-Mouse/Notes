@@ -1,0 +1,285 @@
+{
+  "main": {
+    "id": "14a27ffcea404291",
+    "type": "split",
+    "children": [
+      {
+        "id": "81a137d94c9223cb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2fbad8f6594b0045",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "08-博客项目整合实战"
+            }
+          },
+          {
+            "id": "910ccc9a1e0c72e1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "AI时代互联网岗位变革与大学生应对.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "AI时代互联网岗位变革与大学生应对"
+            }
+          },
+          {
+            "id": "90dbec69ad203466",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "存储层/Redis/Redis知识体系详解：.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Redis知识体系详解："
+            }
+          },
+          {
+            "id": "f20573a728e6e372",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1-java/0-java基础/2-锁机制.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2-锁机制"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6853ad9bf3dea096",
+    "type": "split",
+    "children": [
+      {
+        "id": "3d3934ae697a0546",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "26dab8c4498f9323",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "b4d1a89786461ecf",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "89ec80a7772aa5ab",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 339.5
+  },
+  "right": {
+    "id": "098b4bc6812c5b3e",
+    "type": "split",
+    "children": [
+      {
+        "id": "d4d68dcff071d734",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "90bdd0d32b081626",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part2-JVM/06-内存结构.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "06-内存结构 的反向链接列表"
+            }
+          },
+          {
+            "id": "b7711579826f3eda",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "02-面向对象 的出链列表"
+            }
+          },
+          {
+            "id": "a9b33545876cc7f5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "fa7ecbc2e475dc8d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "72f72cab331866bf",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "java-knowledge-graph-v2/Part1-Java基础/02-面向对象.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "02-面向对象 的大纲"
+            }
+          },
+          {
+            "id": "66ef87a07de52dd5",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "git-view"
+            }
+          }
+        ],
+        "currentTab": 5
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "2fbad8f6594b0045",
+  "lastOpenFiles": [
+    "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
+    "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
+    "5-架构/大数据技术栈系统学习/00-总览.md",
+    "5-架构/大数据技术栈系统学习/07-K8s学习路线.md",
+    "5-架构/大数据技术栈系统学习/06-Jenkins学习路线.md",
+    "5-架构/大数据技术栈系统学习/05-Doris学习路线.md",
+    "5-架构/大数据技术栈系统学习/04-Spark学习路线.md",
+    "5-架构/大数据技术栈系统学习/03-Scala学习路线.md",
+    "5-架构/大数据技术栈系统学习/02-HDFS学习路线.md",
+    "5-架构/大数据技术栈系统学习/01-分布式系统学习路线.md",
+    "5-架构/大数据技术栈系统学习",
+    "5-架构/DDD/DDD四层架构.md",
+    "3-存储层/MySQL/2-事务.md",
+    "3-存储层/MySQL/1-MVCC.md",
+    "3-存储层/Redis/7-Redis-分片集群.md",
+    "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
+    "3-存储层/Redis/9-Redis-内存淘汰策略.md",
+    "3-存储层/Redis/8-Redis-过期策略.md",
+    "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
+    "3-存储层/Redis/5-Redis-主从复制.md",
+    "3-存储层/Redis/4-Redis持久化处理.md",
+    "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
+    "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
+    "3-存储层/Redis/1-Redis概念和基础.md",
+    "1-java/3-接口和抽象类的区别.md",
+    "1-java/1-java基础.md",
+    "9-简历/个人简历.md",
+    "9-简历/个人简历.pdf",
+    "9-面筋",
+    "随笔",
+    "9-简历/个人简历 (2).pdf",
+    "9-简历",
+    "99c2a2c82473faa11033262d6294fe3d.png",
+    "8-友链",
+    "0-首页/小伙伴.gif",
+    "upload",
+    "8-其他/~$waste-city-practice-path.pptx",
+    "1-java/0-java基础",
+    "0-首页/(1).png",
+    "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
+    "未命名.canvas"
+  ]
+}
