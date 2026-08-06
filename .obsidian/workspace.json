@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
+                "file": "6-Agent/0-AI基础知识详解.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "08-博客项目整合实战"
+              "title": "0-AI基础知识详解"
             }
           },
           {
@@ -100,7 +100,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -238,13 +240,20 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2fbad8f6594b0045",
+  "active": "b4d1a89786461ecf",
   "lastOpenFiles": [
-    "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
+    "9-面筋/字节二面-后端.md",
+    "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
+    "4-中间件/14-mq-reliability-and-consistency.md",
+    "4-中间件/13-mq-message-model-delivery-semantics.md",
+    "4-中间件/12-mq-basics.md",
+    "9-面筋/agent总结.md",
+    "9-面筋/MySQL面筋总结.md",
     "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
+    "5-架构/大数据技术栈系统学习/06-Jenkins学习路线.md",
+    "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
     "5-架构/大数据技术栈系统学习/00-总览.md",
     "5-架构/大数据技术栈系统学习/07-K8s学习路线.md",
-    "5-架构/大数据技术栈系统学习/06-Jenkins学习路线.md",
     "5-架构/大数据技术栈系统学习/05-Doris学习路线.md",
     "5-架构/大数据技术栈系统学习/04-Spark学习路线.md",
     "5-架构/大数据技术栈系统学习/03-Scala学习路线.md",
@@ -260,13 +269,6 @@
     "3-存储层/Redis/8-Redis-过期策略.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
     "3-存储层/Redis/5-Redis-主从复制.md",
-    "3-存储层/Redis/4-Redis持久化处理.md",
-    "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
-    "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
-    "3-存储层/Redis/1-Redis概念和基础.md",
-    "1-java/3-接口和抽象类的区别.md",
-    "1-java/1-java基础.md",
-    "9-简历/个人简历.md",
     "9-简历/个人简历.pdf",
     "9-面筋",
     "随笔",
