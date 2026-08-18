@@ -73,7 +73,7 @@
     "type": "split",
     "children": [
       {
-        "id": "3d3934ae697a0546",
+        "id": "4f36fa2f7b2387d5",
         "type": "tabs",
         "children": [
           {
@@ -92,7 +92,13 @@
               "icon": "lucide-search",
               "title": "搜索"
             }
-          },
+          }
+        ]
+      },
+      {
+        "id": "3d3934ae697a0546",
+        "type": "tabs",
+        "children": [
           {
             "id": "b4d1a89786461ecf",
             "type": "leaf",
@@ -118,8 +124,7 @@
               "title": "书签"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -240,7 +245,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b4d1a89786461ecf",
+  "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
     "9-面筋/字节二面-后端.md",
     "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
