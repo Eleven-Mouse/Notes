@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "6-Agent/0-AI基础知识详解.md",
+                "file": "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "0-AI基础知识详解"
+              "title": "6-Redis-sentinel 哨兵机制"
             }
           },
           {
@@ -73,9 +73,22 @@
     "type": "split",
     "children": [
       {
-        "id": "4f36fa2f7b2387d5",
+        "id": "fe0380b238974280",
         "type": "tabs",
         "children": [
+          {
+            "id": "89ec80a7772aa5ab",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          },
           {
             "id": "26dab8c4498f9323",
             "type": "leaf",
@@ -92,13 +105,7 @@
               "icon": "lucide-search",
               "title": "搜索"
             }
-          }
-        ]
-      },
-      {
-        "id": "3d3934ae697a0546",
-        "type": "tabs",
-        "children": [
+          },
           {
             "id": "b4d1a89786461ecf",
             "type": "leaf",
@@ -113,18 +120,9 @@
               "icon": "lucide-folder-closed",
               "title": "文件列表"
             }
-          },
-          {
-            "id": "89ec80a7772aa5ab",
-            "type": "leaf",
-            "state": {
-              "type": "bookmarks",
-              "state": {},
-              "icon": "lucide-bookmark",
-              "title": "书签"
-            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -247,6 +245,8 @@
   },
   "active": "2fbad8f6594b0045",
   "lastOpenFiles": [
+    "3-存储层/MySQL/1-MVCC.md",
+    "6-Agent/0-AI基础知识详解.md",
     "9-面筋/字节二面-后端.md",
     "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
     "4-中间件/14-mq-reliability-and-consistency.md",
@@ -267,13 +267,11 @@
     "5-架构/大数据技术栈系统学习",
     "5-架构/DDD/DDD四层架构.md",
     "3-存储层/MySQL/2-事务.md",
-    "3-存储层/MySQL/1-MVCC.md",
     "3-存储层/Redis/7-Redis-分片集群.md",
     "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
     "3-存储层/Redis/9-Redis-内存淘汰策略.md",
     "3-存储层/Redis/8-Redis-过期策略.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
-    "3-存储层/Redis/5-Redis-主从复制.md",
     "9-简历/个人简历.pdf",
     "9-面筋",
     "随笔",
