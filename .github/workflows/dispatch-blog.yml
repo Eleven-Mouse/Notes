@@ -11,7 +11,7 @@ jobs:
       - name: Notify Eleven-blog to sync submodule
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.BLOG_TOKEN }}
+          github-token: ${{ secrets.BLOG_TOEKN }}
           script: |
             await github.rest.repos.createDispatchEvent({
               owner: 'Eleven-Mouse',

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd *)",
+      "Bash(git mv *)",
+      "Bash(mkdir -p \"4-存储层\")",
+      "Bash(mkdir -p \"4-存储层/MySQL\")",
+      "Bash(echo \"exit=$?\")",
+      "Bash(cd D:\\\\Project\\\\Eleven-blog\\\\blog-view\\\\notes *)",
+      "PowerShell(git push *)",
+      "PowerShell(git config *)",
+      "PowerShell(git *)"
+    ]
+  }
+}
