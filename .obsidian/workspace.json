@@ -11,10 +11,14 @@
             "id": "90dbec69ad203466",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "split-diff-view",
+              "state": {
+                "aFile": ".obsidian/workspace.json",
+                "bFile": ".obsidian/workspace.json",
+                "aRef": ""
+              },
+              "icon": "diff",
+              "title": "Diff: workspace.json  (Working Tree)"
             }
           }
         ]
@@ -196,9 +200,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "66ef87a07de52dd5",
+  "active": "90dbec69ad203466",
   "lastOpenFiles": [
-    "4-存储层/Redis/0-Redis知识体系：.md",
+    "4-存储层/Redis/0-Redis知识体系.md",
+    "4-存储层/Redis/1-Redis概念和基础.md",
     "8-友链/小伙伴们.md",
     "0-首页/小伙伴.mp4",
     "0-首页/小伙伴-poster.webp",
@@ -226,7 +231,6 @@
     "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
     "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
     "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
-    "5-架构/Python后端工程化学习/00-Python后端工程化学习路线.md",
     "5-架构/大数据技术栈系统学习",
     "9-简历/个人简历.pdf",
     "9-面筋",
