@@ -1,0 +1,20 @@
+name: Trigger blog sync
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Eleven-blog to sync submodule
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.BLOG_SYNC_TOKEN }}
+          script: |
+            await github.rest.repos.createDispatchEvent({
+              owner: 'Eleven-Mouse',
+              repo: 'Eleven-blog',
+              event_type: 'notes-updated'
+            })
