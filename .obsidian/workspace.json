@@ -8,45 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2fbad8f6594b0045",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "6-Redis-sentinel 哨兵机制"
-            }
-          },
-          {
-            "id": "910ccc9a1e0c72e1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "AI时代互联网岗位变革与大学生应对.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "AI时代互联网岗位变革与大学生应对"
-            }
-          },
-          {
             "id": "90dbec69ad203466",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "存储层/Redis/Redis知识体系详解：.md",
+                "file": "8-友链/小伙伴们.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Redis知识体系详解："
+              "title": "小伙伴们"
             }
           },
           {
@@ -243,35 +215,37 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2fbad8f6594b0045",
+  "active": "90dbec69ad203466",
   "lastOpenFiles": [
-    "3-存储层/MySQL/1-MVCC.md",
-    "6-Agent/0-AI基础知识详解.md",
-    "9-面筋/字节二面-后端.md",
-    "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
-    "4-中间件/14-mq-reliability-and-consistency.md",
-    "4-中间件/13-mq-message-model-delivery-semantics.md",
-    "4-中间件/12-mq-basics.md",
-    "9-面筋/agent总结.md",
-    "9-面筋/MySQL面筋总结.md",
-    "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
-    "5-架构/大数据技术栈系统学习/06-Jenkins学习路线.md",
-    "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
-    "5-架构/大数据技术栈系统学习/00-总览.md",
-    "5-架构/大数据技术栈系统学习/07-K8s学习路线.md",
-    "5-架构/大数据技术栈系统学习/05-Doris学习路线.md",
-    "5-架构/大数据技术栈系统学习/04-Spark学习路线.md",
-    "5-架构/大数据技术栈系统学习/03-Scala学习路线.md",
-    "5-架构/大数据技术栈系统学习/02-HDFS学习路线.md",
-    "5-架构/大数据技术栈系统学习/01-分布式系统学习路线.md",
-    "5-架构/大数据技术栈系统学习",
-    "5-架构/DDD/DDD四层架构.md",
+    "0-首页/小伙伴.mp4",
+    "0-首页/小伙伴-poster.webp",
+    "0-首页/小伙伴.gif",
+    "8-友链/小伙伴们.md",
+    "1-java/2-锁机制.md",
+    "6-Agent/3-LangChain全链路.md",
     "3-存储层/MySQL/2-事务.md",
-    "3-存储层/Redis/7-Redis-分片集群.md",
     "3-存储层/Redis/10-Redis-典型实战-分布式锁.md",
-    "3-存储层/Redis/9-Redis-内存淘汰策略.md",
-    "3-存储层/Redis/8-Redis-过期策略.md",
+    "3-存储层/Redis/0-Redis知识体系：.md",
+    "3-存储层/Redis/1-Redis概念和基础.md",
+    "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
+    "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
+    "3-存储层/Redis/4-Redis持久化处理.md",
+    "9-面筋/agent总结.md",
+    "3-存储层/Redis/5-Redis-主从复制.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
+    "3-存储层/Redis/7-Redis-分片集群.md",
+    "3-存储层/Redis/8-Redis-过期策略.md",
+    "3-存储层/Redis/9-Redis-内存淘汰策略.md",
+    "9-面筋/MySQL面筋总结.md",
+    "6-Agent/Agent知识图谱.md",
+    "9-面筋/字节二面-后端.md",
+    "6-Agent/6-Agent项目实战.md",
+    "6-Agent/6-Agent进阶.md",
+    "5-架构/大数据技术栈系统学习/大数据技术栈系统学习路线.md",
+    "5-架构/大数据技术栈系统学习/11-k8s-session-learning-notes.md",
+    "5-架构/大数据技术栈系统学习/08-博客项目整合实战.md",
+    "5-架构/Python后端工程化学习/00-Python后端工程化学习路线.md",
+    "5-架构/大数据技术栈系统学习",
     "9-简历/个人简历.pdf",
     "9-面筋",
     "随笔",
@@ -279,10 +253,8 @@
     "9-简历",
     "99c2a2c82473faa11033262d6294fe3d.png",
     "8-友链",
-    "0-首页/小伙伴.gif",
     "upload",
     "8-其他/~$waste-city-practice-path.pptx",
-    "1-java/0-java基础",
     "0-首页/(1).png",
     "0-首页/462d2f73-e9ca-4654-9bab-d4cc94de674a.png",
     "未命名.canvas"
