@@ -1,3 +1,7 @@
+---
+publishTime: 2026-05-18T20:21:44+08:00
+---
+
 ## Redis 概念
 
 Redis（Remote Dictionary Server）是一个开源的**内存数据结构存储系统**，常被归类为 NoSQL。  

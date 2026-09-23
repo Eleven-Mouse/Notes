@@ -1,3 +1,7 @@
+---
+publishTime: 2026-05-29T20:10:40+08:00
+---
+
 >MVCC的底层实现是依靠：隐藏字段，undo log，read view
 
 >一句话概括：
