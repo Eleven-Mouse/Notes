@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "9-面筋/agent总结.md",
+                "file": "9-面筋/agent面筋总结.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "agent总结"
+              "title": "agent面筋总结"
             }
           }
         ]
@@ -202,6 +202,8 @@
   },
   "active": "90dbec69ad203466",
   "lastOpenFiles": [
+    "9-面筋/MySQL面筋总结.md",
+    "9-面筋/agent面筋总结.md",
     "4-存储层/Redis/0-Redis知识体系.md",
     "4-存储层/Redis/1-Redis概念和基础.md",
     "8-友链/小伙伴们.md",
@@ -217,13 +219,11 @@
     "3-存储层/Redis/2-redis基础-五种基本数据类型.md",
     "3-存储层/Redis/3-Redis基础-扩展数据类型.md",
     "3-存储层/Redis/4-Redis持久化处理.md",
-    "9-面筋/agent总结.md",
     "3-存储层/Redis/5-Redis-主从复制.md",
     "3-存储层/Redis/6-Redis-sentinel 哨兵机制.md",
     "3-存储层/Redis/7-Redis-分片集群.md",
     "3-存储层/Redis/8-Redis-过期策略.md",
     "3-存储层/Redis/9-Redis-内存淘汰策略.md",
-    "9-面筋/MySQL面筋总结.md",
     "6-Agent/Agent知识图谱.md",
     "9-面筋/字节二面-后端.md",
     "6-Agent/6-Agent项目实战.md",
