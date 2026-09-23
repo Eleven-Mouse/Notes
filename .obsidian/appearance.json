@@ -1,6 +1,6 @@
 {
-  "cssTheme": "Baseline",
-  "theme": "system",
+  "cssTheme": "",
+  "theme": "obsidian",
   "accentColor": "#439d60",
   "textFontFamily": "Inter",
   "interfaceFontFamily": ""
